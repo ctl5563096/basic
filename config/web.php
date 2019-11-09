@@ -43,6 +43,10 @@ $config = [
             ],
         ],
         'db' => $db,
+	'wechat' => [
+        	'class' => 'EasyWeChat\Factory',
+    	],
+
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

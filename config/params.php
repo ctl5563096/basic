@@ -4,4 +4,10 @@ return [
     'adminEmail' => 'admin@example.com',
     'senderEmail' => 'noreply@example.com',
     'senderName' => 'Example.com mailer',
+    'WECHAT' => [
+		'app_id' => 'wxc439cbfe9ee8140e', // AppID
+        	'secret' => 'b2bf1b59f797e4c0cea4c44b4bfe81f9', // AppSecret
+        	'token' => 'chentulin', // Token
+		'response_type' => 'array',//返回类型
+    ]
 ];
