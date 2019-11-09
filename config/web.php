@@ -1,7 +1,10 @@
 <?php
 
+use EasyWeChat\Factory;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+require_once __DIR__.'/di.php';
 
 $config = [
     'id' => 'basic',
@@ -44,7 +47,7 @@ $config = [
         ],
         'db' => $db,
 	'wechat' => [
-        	'class' => 'EasyWeChat\Factory',
+        	'class' => Factory::class,
     	],
 
         /*

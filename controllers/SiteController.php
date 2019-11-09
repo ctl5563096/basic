@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use EasyWeChat\Factory;
 
 class SiteController extends Controller
 {
@@ -143,5 +144,20 @@ class SiteController extends Controller
    public function actionCom(){
 	$app = Yii::$app->MyClass;
 	var_dump($app);
+   }
+
+   public function actionDi()
+   {
+      $config = [
+                'app_id' => 'wxc439cbfe9ee8140e',
+                'secret' => 'b2bf1b59f797e4c0cea4c44b4bfe81f9',
+                'token' => 'chentulin',
+                'response_type' => 'array',
+                //...
+        ];
+      $obj = Factory::make('officialAccount',$config);
+      var_dump($obj);die;
+      $app =  Yii::$container->get(Factory::class);
+      var_dump($app);
    }
 }
