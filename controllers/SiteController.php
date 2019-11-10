@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use EasyWeChat\Factory;
+use app\components\facade\JssdkFacade;
 
 class SiteController extends Controller
 {
@@ -159,5 +160,12 @@ class SiteController extends Controller
       var_dump($obj);die;
       $app =  Yii::$container->get(Factory::class);
       var_dump($app);
+   }
+
+   public function actionFacade()
+   {
+       var_dump(11111111);die();
+        $obj = JssdkFacade::getSdkConfig(['hideOptionMenu','showOptionMenu','onMenuShareAppMessage','chooseImage']);
+        var_dump($obj);die();
    }
 }

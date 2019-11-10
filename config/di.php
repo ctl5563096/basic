@@ -1,7 +1,16 @@
 <?php declare(strict_types=1);
 
 use EasyWeChat\Factory;
+use app\components\infrastructure\service\JssdkService;
+use app\components\infrastructure\service\impl\JssdkServiceImpl;
 
+
+$containerList = [
+//    GlobalScenario::class => GlobalScenarioImpl::class,         //需全局最先加载
+    JssdkService::class  => JssdkServiceImpl::class,
+//    Pipeline::class => PipelineImpl::class,
+];
+Yii::$container->set(JssdkService::class,JssdkServiceImpl::class);
 Yii::$container->set(
     Factory::class,[
         'app_id' => 'wxc439cbfe9ee8140e',
