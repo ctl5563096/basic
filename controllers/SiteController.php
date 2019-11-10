@@ -164,7 +164,6 @@ class SiteController extends Controller
 
    public function actionFacade()
    {
-       var_dump(11111111);die();
         $obj = JssdkFacade::getSdkConfig(['hideOptionMenu','showOptionMenu','onMenuShareAppMessage','chooseImage']);
         var_dump($obj);die();
    }
