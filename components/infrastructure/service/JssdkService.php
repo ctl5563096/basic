@@ -10,5 +10,5 @@ interface JssdkService
      * @return array
      * @author zhuozhen
      */
-    public function getSdkConfig(array $apis) : array ;
+    public function getSdkConfig(array $apis) ;
 }

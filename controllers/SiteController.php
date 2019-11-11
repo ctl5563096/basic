@@ -164,7 +164,34 @@ class SiteController extends Controller
 
    public function actionFacade()
    {
-        $obj = JssdkFacade::getSdkConfig(['hideOptionMenu','showOptionMenu','onMenuShareAppMessage','chooseImage']);
+        $obj = JssdkFacade::getSdkConfig();
         var_dump($obj);die();
    }
+
+    /**
+     * 获取access_token
+     * Date: 2019/11/10
+     * Author: ctl
+     */
+   public function actionToken()
+   {
+       $app = JssdkFacade::getSdkConfig();
+       $accessToken = $app->access_token;
+       $token = $accessToken->getToken();
+       var_dump($token);die();
+   }
+
+   public function actionRes()
+   {
+       $app = JssdkFacade::getSdkConfig();
+       $app->server->push(function ($message) {
+           // $message['FromUserName'] // 用户的 openid
+           // $message['MsgType'] // 消息类型：event, text....
+           return "您好！欢迎使用 EasyWeChat";
+       });
+       $response = $app->server->serve();
+       $response->send();
+       return $response;
+   }
+
 }

@@ -6,9 +6,7 @@ use app\components\infrastructure\service\impl\JssdkServiceImpl;
 
 
 $containerList = [
-//    GlobalScenario::class => GlobalScenarioImpl::class,         //需全局最先加载
     JssdkService::class  => JssdkServiceImpl::class,
-//    Pipeline::class => PipelineImpl::class,
 ];
 Yii::$container->set(JssdkService::class,JssdkServiceImpl::class);
 Yii::$container->set(

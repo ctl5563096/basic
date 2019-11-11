@@ -27,10 +27,10 @@ class JssdkServiceImpl extends BaseObject implements JssdkService
         'response_type' => 'array',
     ];
 
-    public function getSdkConfig(array $apis) : array
+    public function getSdkConfig(array $apis=[])
     {
         try {
-            return EasyWechat::getEasyWeChatOfficialAccount($this->config)->jssdk->buildConfig($apis,YII_DEBUG,false,false);
+            return EasyWechat::getEasyWeChatOfficialAccount($this->config);
         } catch (InvalidConfigException $e) {
             Yii::info($e->getMessage());
         } catch (RuntimeException $e) {
