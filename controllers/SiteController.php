@@ -138,9 +138,9 @@ class SiteController extends Controller
     		//...
 	];
 	$app = Yii::$app->wechat::officialAccount($config);
-    $app->server->push(function ($message) {
+        $app->server->push(function ($message) {
         // $message['FromUserName'] // 用户的 openid
-        // $message['MsgType'] // 消息类型：event, text....
+        // $message['MsgType'] // 消息类型：event, text....i
         return "您好！欢迎使用 EasyWeChat";
     });
 	$response = $app->server->serve();
@@ -197,7 +197,6 @@ class SiteController extends Controller
        });
        $response = $app->server->serve();
        $response->send();
-       return $response;
    }
 
 
