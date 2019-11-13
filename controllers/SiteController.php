@@ -191,7 +191,9 @@ class SiteController extends Controller
    public function actionRes()
    {
        $app = JssdkFacade::getSdkConfig();
+       $var = 1;
        $app->server->push(function ($message) {
+           Yii::info(1111111);
            // $message['FromUserName'] // 用户的 openid
            // $message['MsgType'] // 消息类型：event, text....
            return "您好！欢迎使用 EasyWeChat";
