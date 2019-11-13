@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use EasyWeChat\Factory;
 use app\components\facade\JssdkFacade;
+use app\components\until\WechatUntil;
 
 class SiteController extends Controller
 {
@@ -198,6 +199,4 @@ class SiteController extends Controller
        $response = $app->server->serve();
        $response->send();
    }
-
-
 }
