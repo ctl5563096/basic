@@ -27,7 +27,7 @@ class WechatUntil
     }
 
     /**
-     * 获取寄出客户端
+     * 获取基础客户端
      * Date: 2019/11/13
      * Author: ctl
      */

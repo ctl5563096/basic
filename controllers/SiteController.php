@@ -5,13 +5,13 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use EasyWeChat\Factory;
 use app\components\facade\JssdkFacade;
 use app\components\until\WechatUntil;
+use Symfony\Component\HttpFoundation\Response;
 
 class SiteController extends Controller
 {
@@ -192,10 +192,70 @@ class SiteController extends Controller
    {
        $app = JssdkFacade::getSdkConfig();
        $var = 1;
+       var_dump($app->server);die();
        $app->server->push(function ($message) {
            Yii::info(1111111);
            // $message['FromUserName'] // 用户的 openid
            // $message['MsgType'] // 消息类型：event, text....
+           return "您好！欢迎使用 EasyWeChat";
+       });
+       $response = $app->server->serve();
+       $response->send();
+   }
+
+    /**
+     * 校验通信
+     * Date: 2019/11/19
+     * Author: ctl
+     */
+   public function checkSignature()
+   {
+       $signature = $_GET["signature"];
+       $timestamp = $_GET["timestamp"];
+       $nonce = $_GET["nonce"];
+       $tmpArr = array(TOKEN, $timestamp, $nonce);
+       //对索引数组进行升序排序，并返回由数组元素组合成的字符串
+       sort($tmpArr,SORT_STRING);
+       $tmpStr = implode($tmpArr);
+       //进行shal加密
+       $tmpStr = sha1($tmpStr);
+       if($tmpStr == $signature){
+           return true;
+       }else{
+           return false;
+       }
+   }
+
+    /**
+     * 验证
+     * Date: 2019/11/19
+     * Author: ctl
+     */
+   public function actionGo()
+   {
+       //设定通讯令牌，token为服务号的唯一标识
+       define('TOKEN', $_GET['token']);
+       //判断是不是第一次通讯，如果是就直接校验
+       if (isset($_GET['echostr'])) {
+           $echoStr = $_GET['echostr'];
+           if ($this->checkSignature()) {
+               echo $echoStr;
+               exit;
+           }
+       } else {
+           $this->responseMsg();
+       }
+   }
+
+    /**
+     * 响应并返回消息
+     * Date: 2019/11/19
+     * Author: ctl
+     */
+   public function responseMsg()
+   {
+       $app = JssdkFacade::getSdkConfig();
+       $app->server->push(function ($msg){
            return "您好！欢迎使用 EasyWeChat";
        });
        $response = $app->server->serve();
