@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
+use Symfony\Component\HttpFoundation\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
@@ -193,12 +193,13 @@ class SiteController extends Controller
        $app = JssdkFacade::getSdkConfig();
        $var = 1;
        $app->server->push(function ($message) {
-           Yii::info(1111111);
+           Yii::info($message);
            // $message['FromUserName'] // 用户的 openid
            // $message['MsgType'] // 消息类型：event, text....
            return "您好！欢迎使用 EasyWeChat";
        });
        $response = $app->server->serve();
        $response->send();
+       return $response;	
    }
 }
