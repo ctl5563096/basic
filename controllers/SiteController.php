@@ -194,13 +194,14 @@ class SiteController extends Controller
        $var = 1;
        var_dump($app->server);die();
        $app->server->push(function ($message) {
-           Yii::info(1111111);
+           Yii::info($message);
            // $message['FromUserName'] // 用户的 openid
            // $message['MsgType'] // 消息类型：event, text....
            return "您好！欢迎使用 EasyWeChat";
        });
        $response = $app->server->serve();
        $response->send();
+       return $response;	
    }
 
     /**
