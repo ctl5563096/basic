@@ -54,18 +54,16 @@ $config = [
             ],
         ],
         'db' => $db,
-	'wechat' => [
+	    'wechat' => [
         	'class' => Factory::class,
-    	],
-
-        /*
+    	    ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
