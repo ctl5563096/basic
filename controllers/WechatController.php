@@ -8,12 +8,14 @@ use yii\web\Controller;
 
 class WechatController extends Controller
 {
+    public $enableCsrfValidation = false;
+
     public function actionTest()
     {
         var_dump(111111111111);
     }
 
-    public function valid(){
+    public function actionValid(){
         //获取随机字符串
 //        $echoStr = input("echostr");
         //获取随机字符串
@@ -54,6 +56,8 @@ class WechatController extends Controller
     {
         //get post data, May be due to the different environments
         $postStr = file_get_contents('php://input');
+	Yii::info($postStr);
+	Yii::info('测试链接');
         //extract post data
         if (!empty($postStr)){
             /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
@@ -75,7 +79,7 @@ class WechatController extends Controller
             if(!empty( $keyword ))
             {
                 $msgType = "text";
-                $contentStr = "Welcome to wechat world!";
+                $contentStr = "sb!";
                 $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                 echo $resultStr;
             }else{
