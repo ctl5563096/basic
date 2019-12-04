@@ -22,7 +22,8 @@ class LoginController extends Controller
         if ($request->isGet){
             return $this->render('login');
         }else{
-
+            $username = Yii::$app->request->post('username');
+            $password = Yii::$app->request->post('password');
         }
     }
 }

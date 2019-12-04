@@ -38,7 +38,7 @@
                 <span class="fa fa-eercast"></span>
             </div>
             <div class="header-left-bottom">
-                <form action="#" method="post">
+                <form action="<?php echo $this->createUrl('login/login') ?>?>" method="post">
                     <div class="icon1">
                         <span class="fa fa-user"></span>
                         <input type="email" placeholder="Email Address" required=""/>
@@ -48,7 +48,7 @@
                         <input type="password" placeholder="Password" required=""/>
                     </div>
                     <div class="login-check">
-                        <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Kee/home/ctl/Desktop/201902054/html/fontsp me logged in</label>
+                        <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Keep me logged in</label>
                     </div>
                     <div class="bottom">
                         <button class="btn">Log In</button>
