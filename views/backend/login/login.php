@@ -38,7 +38,7 @@
                 <span class="fa fa-eercast"></span>
             </div>
             <div class="header-left-bottom">
-                <form action="<?php echo $this->createUrl('login/login') ?>?>" method="post">
+                <form action="<?php yii\helpers\Url::to(['site/index']); ?>" method="post">
                     <div class="icon1">
                         <span class="fa fa-user"></span>
                         <input type="email" placeholder="Email Address" required=""/>

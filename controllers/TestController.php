@@ -18,7 +18,7 @@ class TestController extends Controller
             //...
         ];
         $app = Yii::$app->wechat::officialAccount($config);
-        $users = $app->user->list;
+        $users = $app->user->list();
         var_dump($users);
     }
 }
