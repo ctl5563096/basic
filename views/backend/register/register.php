@@ -1,0 +1,1 @@
+<?phpuse yii\helpers\Html;?><?=Html::jsFile('@web/js/jq.js')?><!DOCTYPE html><html><head>    <meta charset="utf-8">    <title>注册页面</title></head><body></body></html>
