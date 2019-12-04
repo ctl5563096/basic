@@ -16,6 +16,11 @@ use Symfony\Component\HttpFoundation\Response;
 class SiteController extends Controller
 {
     /**
+     * 让微信返回消息跨过yii2的csrf拦截
+     * @var bool
+     */
+    public $enableCsrfValidation = false;
+    /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -164,15 +169,7 @@ class SiteController extends Controller
                 //...
         ];
       $obj = Factory::make('officialAccount',$config);
-      var_dump($obj);die;
       $app =  Yii::$container->get(Factory::class);
-      var_dump($app);
-   }
-
-   public function actionFacade()
-   {
-        $obj = JssdkFacade::getSdkConfig();
-        var_dump($obj);die();
    }
 
     /**
@@ -185,18 +182,12 @@ class SiteController extends Controller
        $app = JssdkFacade::getSdkConfig();
        $accessToken = $app->access_token;
        $token = $accessToken->getToken();
-       var_dump($token);die();
    }
 
    public function actionRes()
    {
        $app = JssdkFacade::getSdkConfig();
-       $var = 1;
-       var_dump($app->server);die();
        $app->server->push(function ($message) {
-           Yii::info($message);
-           // $message['FromUserName'] // 用户的 openid
-           // $message['MsgType'] // 消息类型：event, text....
            return "您好！欢迎使用 EasyWeChat";
        });
        $response = $app->server->serve();
