@@ -8,6 +8,8 @@ use app\models\AdminUser;
 
 class LoginController extends Controller
 {
+   public $enableCsrfValidation = false;
+
     /**
      * 登陆模块
      * Date: 2019/12/4
@@ -22,6 +24,7 @@ class LoginController extends Controller
         if ($request->isGet){
             return $this->render('login');
         }else{
+	    var_dump(1111111111111);
             $username = Yii::$app->request->post('username');
             $password = Yii::$app->request->post('password');
         }
