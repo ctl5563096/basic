@@ -3,7 +3,7 @@
 
 namespace app\controllers;
 
-
+use Yii;
 use yii\web\Controller;
 
 class WechatController extends Controller
@@ -15,7 +15,9 @@ class WechatController extends Controller
 
     public function valid(){
         //获取随机字符串
-        $echoStr = input("echostr");
+//        $echoStr = input("echostr");
+        //获取随机字符串
+        $echoStr = Yii::$app->request->get("echostr");
 
         if($echoStr){
             // 验证接口的有效性，由于接口有效性的验证必定会传递echostr 参数
@@ -30,9 +32,12 @@ class WechatController extends Controller
 
     protected function checkSignature()
     {
-        $signature = input("signature");
-        $timestamp = input("timestamp");//时间戳
-        $nonce =input("nonce");//随机数
+//        $signature = input("signature");
+        $signature = Yii::$app->request->get("signature");
+//        $timestamp = input("timestamp");//时间戳
+        $timestamp = Yii::$app->request->get("timestamp");
+//        $nonce = input("nonce");//随机数
+        $nonce = Yii::$app->request->get("nonce");
         $token = "weixin";  //token值，必须和你设置的一样
         $tmpArr =array($token,$timestamp,$nonce);
         sort($tmpArr,SORT_STRING);
