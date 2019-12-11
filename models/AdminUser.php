@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $username 用户名
  * @property string $password 密码
+ * @property string $phonenumber 密码
  * @property string $is_delete 是否删除
  * @property string $is_use 是否启用
  */
@@ -45,6 +46,7 @@ class AdminUser extends \yii\db\ActiveRecord
             'password' => 'Password',
             'is_delete' => 'Is Delete',
             'is_use' => 'Is Use',
+            'phonenumber' => 'phonenumber'
         ];
     }
 }
