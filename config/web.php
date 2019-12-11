@@ -9,6 +9,8 @@ require_once __DIR__.'/di.php';
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
+    // 修改默认路由
+    'defaultRoute'=>'backend/login',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -24,7 +26,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\AdminUser',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -36,6 +38,10 @@ $config = [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+        ],
+        'session' => [
+            'class' => 'yii\web\Session',
+            'cookieParams' => ['lifetime' => 6000]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -82,7 +88,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 

@@ -2,22 +2,23 @@
 
 namespace app\controllers\backend;
 
-use yii\web\Controller;
+use Yii;
+use app\commands\BaseController;
 
 /**
  * 后台主页
  * Class AdminController
  * @package app\controllers\backend
  */
-class AdminController extends Controller
+class AdminController extends BaseController
 {
     /**
-     * 列表展示
+     * 菜单展示
      * Date: 2019/12/11
      * @author chentulin
      */
     public function actionIndex()
     {
-        var_dump(33333333);
+
     }
 }

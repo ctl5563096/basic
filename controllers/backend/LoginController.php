@@ -8,6 +8,7 @@ use yii\db\Query;
 use yii\web\Controller;
 use app\models\AdminUser;
 use yii\web\Response;
+use yii\web\Session;
 
 /**
  * 登陆模块
@@ -17,6 +18,13 @@ use yii\web\Response;
 class LoginController extends Controller
 {
     /**
+     * 修改默认访问的方法
+     * @var string
+     */
+    public $defaultAction = 'login';
+
+    /**
+     * 登陆方法
      * Date: 2019/12/4
      * Author: ctl
      * @return string
@@ -35,6 +43,7 @@ class LoginController extends Controller
             $password = Yii::$app->request->post('password');
             $row = (new Query())->select('*')->from('admin_user')->where('username = :username')->addParams([':username' => $username])->one();
             if (password_verify($password ,$row['password'])){
+                Yii::$app->session->set('user' , $row['username']);
                 $response->data = ['code' => 200 ,'msg' => '登陆成功'];
             }else{
                 $response->data = ['code' => 500 ,'msg' => '密码错误'];
