@@ -19,6 +19,16 @@ class AdminController extends BaseController
      */
     public function actionIndex()
     {
+        return $this->render('index');
+    }
 
+    /**
+     * 测试模块
+     * Date: 2019/12/12
+     * @author chentulin
+     */
+    public function actionTest()
+    {
+        return $this->render('test');
     }
 }

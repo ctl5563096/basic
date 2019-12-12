@@ -44,7 +44,11 @@ class RegisterController extends Controller
                     $response->data = ['msg' => '注册成功' , 'code' => 200];
                 }
             }catch (\Exception $e){
-                $response->data = ['msg' => $e->getMessage(), 'code' => 200];
+                $msg = $e->getMessage();
+                if (strpos($e->getMessage(), 'Duplicate entry')){
+                    $msg = '用户名或者手机已经被注册';
+                }
+                $response->data = ['msg' => $msg, 'code' => 500];
             }
         }
     }

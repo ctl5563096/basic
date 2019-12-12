@@ -3,12 +3,9 @@
 namespace app\controllers\backend;
 
 use Yii;
-use yii\bootstrap\NavBar;
 use yii\db\Query;
 use yii\web\Controller;
-use app\models\AdminUser;
 use yii\web\Response;
-use yii\web\Session;
 
 /**
  * 登陆模块
@@ -49,5 +46,16 @@ class LoginController extends Controller
                 $response->data = ['code' => 500 ,'msg' => '密码错误'];
             }
         }
+    }
+
+    /**
+     * 登出方法
+     * Date: 2019/12/12
+     * @author chentulin
+     */
+    public function actionLogout()
+    {
+        Yii::$app->session->removeAll();
+        $this->redirect('login');
     }
 }

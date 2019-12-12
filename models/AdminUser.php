@@ -13,6 +13,7 @@ use Yii;
  * @property string $phonenumber 密码
  * @property string $is_delete 是否删除
  * @property string $is_use 是否启用
+ * @property int $role_id 角色id
  */
 class AdminUser extends \yii\db\ActiveRecord
 {
@@ -46,7 +47,18 @@ class AdminUser extends \yii\db\ActiveRecord
             'password' => 'Password',
             'is_delete' => 'Is Delete',
             'is_use' => 'Is Use',
-            'phonenumber' => 'phonenumber'
+            'phonenumber' => 'phonenumber',
+            'role_id' => 'Role Id'
         ];
+    }
+
+    /**
+     * 根据用户名查找用户角色id
+     * Date: 2019/12/12
+     * @author chentulin
+     */
+    public static function findRole($userId)
+    {
+        return self::find()->where('username = :username' ,array(':username' => $userId))->one()->role_id;
     }
 }

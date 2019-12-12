@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m191211_142755_add_culomn_admin_user_role
+ * Class m191212_054750_create_username_index_to_admin_user
  */
-class m191211_142755_add_culomn_admin_user_role extends Migration
+class m191212_054750_create_username_index_to_admin_user extends Migration
 {
     /**
      * @var string
@@ -16,7 +16,8 @@ class m191211_142755_add_culomn_admin_user_role extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn($this->tableName, 'role_id' , $this->integer(11)->notNull()->defaultValue(1)->comment('角色Id'));
+        $this->alterColumn($this->tableName ,'username' ,$this->string(256));
+        $this->createIndex('unq_username', $this->tableName,['username'], true);
     }
 
     /**
@@ -24,7 +25,7 @@ class m191211_142755_add_culomn_admin_user_role extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn($this->tableName ,'role_id');
+        $this->dropIndex('unq_username' ,$this->tableName);
     }
 
     /*
@@ -36,7 +37,7 @@ class m191211_142755_add_culomn_admin_user_role extends Migration
 
     public function down()
     {
-        echo "m191211_142755_add_culomn_admin_user_role cannot be reverted.\n";
+        echo "m191212_054750_create_username_index_to_admin_user cannot be reverted.\n";
 
         return false;
     }
