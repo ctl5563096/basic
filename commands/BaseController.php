@@ -18,7 +18,7 @@ class BaseController extends Controller
     {
         $userId = Yii::$app->session->get('user');
         if ( !$userId ){
-            $this->redirect('/backend/login/login');
+           return $this->redirect('/backend/login/login');
         }
         // 检查用户是否有这个权限 我的权限直接跳过权限认证
         if ($userId !== 'chentulinys@163.com' ){
