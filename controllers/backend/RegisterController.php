@@ -34,7 +34,6 @@ class RegisterController extends Controller
                 // 确认密码
                 if ((int)$data['password'] !== (int)$data['enter_password']){
                     return $response->data = ['msg' => '两次密码不一致' , 'code' => 500];
-
                 }
                 $model->username = $data['username'];
                 $model->password = password_hash($data['password'] ,PASSWORD_DEFAULT);

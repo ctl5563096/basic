@@ -3,7 +3,5 @@
     © www.ctllys.com - YYCTL个人博客
 </div>
 </div>
-<script src="../src/layui.js"></script>
-
 </body>
 </html>

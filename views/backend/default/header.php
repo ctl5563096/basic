@@ -4,6 +4,7 @@ use yii\helpers\Html;
 <?=Html::jsFile('@web/js/jq.js')?>
 <?=Html::jsFile('@web/css/layui/layui.js')?>
 <?=Html::cssFile('@web/css/layui/css/layui.css')?>
+<?=Html::jsFile('@web/css/layui/layui.js')?>
 <?//=Html::jsFile('@web/js/bg.js')?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,6 @@ use yii\helpers\Html;
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>YYCTL博客后台</title>
-    <link rel="stylesheet" href="../src/css/layui.css">
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin layui-bg-blue">
