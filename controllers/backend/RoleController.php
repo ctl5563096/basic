@@ -45,4 +45,14 @@ class RoleController extends BaseController
             return $this->render('add' );
         }
     }
+
+    /**
+     * 删除角色
+     * Date: 2019/12/13
+     * @author chentulin
+     */
+    public function actionDetele()
+    {
+
+    }
 }
