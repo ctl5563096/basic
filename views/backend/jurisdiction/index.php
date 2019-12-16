@@ -26,10 +26,11 @@
                     <td><?php echo $k ?></td>
                     <td><?php echo $v ?></td>
                     <td>
-                        <button type="button" class="layui-btn" lay-filter="demo" data-id="" id="id" onclick="test(this)">
-                            <input type="hidden" id="" value="">
-                            <i class="layui-icon" lay-filter="demo">&#xe640;</i>
-                        </button>
+                        <a href=" <?php echo yii\helpers\Url::toRoute(['backend/jurisdiction/edit' ,'role_name'=>$k]); ?>">
+                            <button type="button" class="layui-btn" lay-filter="demo" data-id="" id="id" onclick="test(this)">
+                                <i class="layui-icon" lay-filter="demo">&#xe642;</i>
+                            </button>
+                        </a>
                     </td>
                 </tr>
             <?php $i++; ?>

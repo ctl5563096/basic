@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Query;
+use app\models\Role;
 
 /**
  * This is the model class for table "role_jurisdiction".
@@ -51,18 +52,40 @@ class RoleJurisdiction extends ActiveRecord
     }
 
     /**
-     * 根据角色Id找出所有权限
-     * Date: 2019/12/12
-     * @param $roleId
+     * 找出所有权限
+     * DATE : 2019/12/16 22:46
+     * @author chentulin
+     * @return array
+     */
+    public static function findJurisdictionAll() :array
+    {
+        return  (new Query())->select('*')->from('role_jurisdiction')->all();
+    }
+
+    /**
+     * 根据用户名查找角色拥有的权限
+     * DATE : 2019/12/16 22:50
+     * @param $roleName
      * @return array
      * @author chentulin
      */
-    public static function findArrByRoleId($roleId):array
+    public static function findByRole($roleName) :array
     {
-        $row = (new Query())->select('controller,action,role_name')->from('role_jurisdiction')->where('role_id = :role_id')->addParams(array(':role_id' => $roleId))->all();
-        if (!$row){
-            return [];
-        }
-        return $row;
+        $roleId = Role::find()->select('id')->where('role_name = :role_name', [':role_name' => $roleName])->one()->id;
+        // 根据角色Id查出所有的权限
+        $role_list = (new Query())->select('*')->from('role_jurisdiction')->where('role_id = :id' ,[':id' => $roleId])->all();
+        return $role_list;
+    }
+
+    /**
+     * 根据ID查出对应的权限细节
+     * @param $id
+     * DATE : 2019/12/17 1:11
+     * @return array
+     * @author chentulin
+     */
+    public static function findById($id) :array
+    {
+        return (new Query())->select('*')->from(self::tableName())->where('id = :id', [':id' => $id])->one();
     }
 }

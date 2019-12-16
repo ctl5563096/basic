@@ -2,6 +2,7 @@
 
 namespace app\commands;
 
+use app\models\Role;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -40,10 +41,11 @@ class BaseController extends Controller
             $route = $controllerName.'/'.$actionName;
             $roleId = AdminUser::findRole($userId);
             // 根据角色id找出所有id
-            $roleArr = RoleJurisdiction::findArrByRoleId($roleId);
+            $roleArr = Role::findArrByRoleId($roleId);
             $roleRead = [];
             foreach ($roleArr as $key => $value){
-                $roleRead[$key] = $value['controller'].'/'.$value['action'];
+                $one = RoleJurisdiction::findById($value);
+                $roleRead[$key] = $one['controller'].'/'.$one['action'];
             }
             if (!in_array($route, $roleRead, true)){
                 echo '你没有权限访问,请向管理员申请权限';
