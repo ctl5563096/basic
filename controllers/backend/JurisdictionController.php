@@ -30,6 +30,14 @@ class JurisdictionController extends BaseController
         foreach ($roleList as $key => $value){
             $roleIds[$value['role_name']] = RoleJurisdiction::findArrByRoleId($value['id']);
         }
-        return $this->render('index' ,array('lists' => $roleIds));
+        foreach ($roleIds as  $key => $value){
+            $str = '';
+            foreach ($value as $k => $v){
+                $str .= $v['role_name'].',';
+            }
+            $lists[$key] = $str;
+        }
+        $lists = array_reverse($lists);
+        return $this->render('index' ,array('lists' => $lists));
     }
 }

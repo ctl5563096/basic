@@ -13,6 +13,7 @@ use yii\db\Query;
  * @property int $role_id 权限对应的角色id
  * @property string $controller 控制器名
  * @property string $action 方法名
+ * @property string $role_name 方法名
  */
 class RoleJurisdiction extends ActiveRecord
 {
@@ -45,6 +46,7 @@ class RoleJurisdiction extends ActiveRecord
             'role_id' => 'Role ID',
             'controller' => 'Controller',
             'action' => 'Action',
+            'role_name' => 'role_name',
         ];
     }
 
@@ -57,7 +59,7 @@ class RoleJurisdiction extends ActiveRecord
      */
     public static function findArrByRoleId($roleId):array
     {
-        $row = (new Query())->select('controller,action')->from('role_jurisdiction')->where('role_id = :role_id')->addParams(array(':role_id' => $roleId))->all();
+        $row = (new Query())->select('controller,action,role_name')->from('role_jurisdiction')->where('role_id = :role_id')->addParams(array(':role_id' => $roleId))->all();
         if (!$row){
             return [];
         }

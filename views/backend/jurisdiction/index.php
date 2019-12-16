@@ -14,23 +14,25 @@
             <tr>
                 <th>序号</th>
                 <th>角色名</th>
-                <th>角色下面的权限</th>
+                <th>角色权限</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($list as $k => $v): ?>
+            <?php $i = 1; foreach ($lists as $k => $v): ?>
+
                 <tr>
-                    <td><?php echo $k+1 ?></td>
-                    <td><?php echo $v['role_name'] ?></td>
-                    <td><?php echo $v['role_name'] ?></td>
+                    <td><?php echo $i ?></td>
+                    <td><?php echo $k ?></td>
+                    <td><?php echo $v ?></td>
                     <td>
-                        <button type="button" class="layui-btn" lay-filter="demo" data-id="<?php echo $v['id']?>" id="id" onclick="test(this)">
-                            <input type="hidden" id="<?php echo $v['id']?>" value="<?php echo $v['id']?>">
+                        <button type="button" class="layui-btn" lay-filter="demo" data-id="" id="id" onclick="test(this)">
+                            <input type="hidden" id="" value="">
                             <i class="layui-icon" lay-filter="demo">&#xe640;</i>
                         </button>
                     </td>
                 </tr>
+            <?php $i++; ?>
             <?php endforeach; ?>
             </tbody>
         </table>
