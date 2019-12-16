@@ -65,4 +65,17 @@ class Role extends \yii\db\ActiveRecord
         $model->role_name = $roleName;
         return $model->save();
     }
+
+    /**
+     * Date: 2019/12/16
+     * @author chentulin
+     */
+    public function roleList() :array
+    {
+        $list = (new Query())
+            ->select('*')
+            ->from(self::tableName())
+            ->all();
+        return  $list;
+    }
 }

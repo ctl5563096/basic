@@ -8,7 +8,7 @@ use app\models\Role;
 use yii\web\Response;
 
 /**
- * 权限模块
+ * 角色模块
  * Class RoleController
  * @package app\controllers\backend
  */
@@ -51,8 +51,19 @@ class RoleController extends BaseController
      * Date: 2019/12/13
      * @author chentulin
      */
-    public function actionDetele()
+    public function actionDelete()
     {
-
+        $id = $this->request->post('id');
+        $this->response->format = \yii\web\Response::FORMAT_JSON;
+        if ($id){
+            $res = Role::deleteAll('id = :id' ,[':id' => $id]);
+        }else{
+            $this->response->data = ['msg' => '删除失败,角色不存在' , 'code' => 500];
+        }
+        if ($res){
+            $this->response->data = ['msg' => '删除成功' , 'code' => 200];
+        }else{
+            $this->response->data = ['msg' => '删除失败,请联系管理员' , 'code' => 500];
+        }
     }
 }
