@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "menu_list".
@@ -53,5 +54,17 @@ class Menu extends \yii\db\ActiveRecord
             'is_delete' => 'Is Delete',
             'is_use' => 'Is Use',
         ];
+    }
+
+    /**
+     * 找出某个等级的菜单
+     * DATE : 2019/12/17 20:25
+     * @param $level
+     * @return array
+     * @author chentulin
+     */
+    public static function findAllMenu($level)
+    {
+        return (new Query())->select('*')->from(self::tableName())->where('level = :level', [':level' => $level])->all();
     }
 }
