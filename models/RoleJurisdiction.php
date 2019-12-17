@@ -88,4 +88,20 @@ class RoleJurisdiction extends ActiveRecord
     {
         return (new Query())->select('*')->from(self::tableName())->where('id = :id', [':id' => $id])->one();
     }
+
+    /**
+     * 新增权限
+     * Date: 2019/12/17
+     * @author chentulin
+     * @param $data
+     * @return bool
+     */
+    public static function addJurisdiction($data) :bool
+    {
+        $model = new self();
+        $model->controller = $data['controller_name'];
+        $model->action = $data['action_name'];
+        $model->role_name = $data['jurisdiction_name'];
+        return $model->save();
+    }
 }

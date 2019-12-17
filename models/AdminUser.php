@@ -61,4 +61,36 @@ class AdminUser extends \yii\db\ActiveRecord
     {
         return self::find()->where('username = :username' ,array(':username' => $userId))->one()->role_id;
     }
+
+    /**
+     * 检查用户名是否存在
+     * Date: 2019/12/17
+     * @param $username
+     * @return bool
+     * @author chentulin
+     */
+    public static function findByUserName($username) :bool
+    {
+        $row =  self::find()->where('username = :username' ,array(':username' => $username))->one();
+        if ($row !== null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 更新用户权限
+     * Date: 2019/12/17
+     * @param $username
+     * @param $roleId
+     * @return bool
+     * @author chentulin
+     */
+    public static function updateRole($username ,$roleId):bool
+    {
+        $model = self::find()->where('username = :username' ,array(':username' => $username))->one();
+        $model->role_id = $roleId;
+        return  $model->save();
+    }
 }

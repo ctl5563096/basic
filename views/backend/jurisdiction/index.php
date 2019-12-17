@@ -3,6 +3,11 @@
 <div class="layui-body" style="color: #0C0C0C">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;color: #0C0C0C">
+        <a href=" <?php echo yii\helpers\Url::to(['backend/jurisdiction/add']); ?> ">
+            <button type="button" class="layui-btn layui-btn-lg"">
+            <i class="layui-icon">&#xe654;</i>
+            </button>
+        </a>
         <table class="layui-table" lay-filter='table'>
             <colgroup>
                 <col width="200">
