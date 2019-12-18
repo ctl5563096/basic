@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\base\Action;
 use yii\db\Query;
 
 /**
@@ -60,11 +61,49 @@ class Menu extends \yii\db\ActiveRecord
      * 找出某个等级的菜单
      * DATE : 2019/12/17 20:25
      * @param $level
+     * @param int $parentId
      * @return array
      * @author chentulin
      */
-    public static function findAllMenu($level)
+    public static function findAllMenu($level ,$parentId = 0) :array
     {
-        return (new Query())->select('*')->from(self::tableName())->where('level = :level', [':level' => $level])->all();
+        return (new Query())->select('*')->from(self::tableName())->where('level = :level AND parent_id = :parentId', [':level' => $level ,':parentId' => $parentId])->all();
+    }
+
+    /**
+     * 新增某个等级的菜单
+     * Date: 2019/12/18
+     * @param $level
+     * @param $name
+     * @param int $parentId
+     * @param string $controller
+     * @param string $action
+     * @return array | bool
+     * @author chentulin
+     */
+    public static function addMenu($level, $name,$parentId = 0, $controller = '', $action = '')
+    {
+        $model = new self();
+        $model->level = (string)$level;
+        $model->name = $name;
+        $model->parent_id = $parentId;
+        $model->controller = $controller;
+        $model->action = $action;
+        if ($model->save() === false){
+            return $model->getErrors();
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * 删除菜单
+     * Date: 2019/12/18
+     * @author chentulin
+     * @param $id
+     */
+    public static function DeletAll($id)
+    {
+        Yii::$app->
     }
 }

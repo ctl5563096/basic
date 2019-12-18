@@ -33,7 +33,36 @@ class MenuController extends BaseController
      */
     public function actionAdd()
     {
-        var_dump($this->request->get());
-        die();
+        $level = (int)$this->request->get('level');
+        if ($this->request->isGet){
+            // 根据菜单等级来判断加载的页面
+            if ($level === 0){
+                return $this->render('add_zero');
+            }else{
+                return $this->render('add_first');
+            }
+        }else{
+            $this->response->format = \yii\web\Response::FORMAT_JSON;
+            $level = $level??0;
+            $name = $this->request->post('menu');
+            $res = Menu::addMenu($level ,$name);
+            if ($res === true){
+                return $this->response->data = ['code' => 200 ,'msg' => '添加菜单成功'];
+            }else{
+                return $this->response->data = ['code' => 500 ,'msg' => '添加菜单失败'];
+            }
+        }
+    }
+
+    /**
+     * 删除菜单
+     * Date: 2019/12/18
+     * @author chentulin
+     */
+    public function actionDelete()
+    {
+        $id = (int)$this->request->post('id');
+        // 菜单删除需要把父菜单和子菜单全部删除
+        $res = Menu::DeletAll($id);
     }
 }

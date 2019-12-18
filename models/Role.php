@@ -92,7 +92,7 @@ class Role extends \yii\db\ActiveRecord
     {
         $res = Role::find()->select('role_arr')->where('role_name = :role_name', [':role_name' => $roleName])->one()->role_arr;
         if ($res){
-            return json_decode($res);
+            return json_decode($res, true);
         }else{
             return [];
         }

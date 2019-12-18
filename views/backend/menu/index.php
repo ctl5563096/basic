@@ -33,11 +33,10 @@
                                 <i class="layui-icon" lay-filter="demo">&#xe642;</i>
                             </button>
                         </a>
-                        <a href=" <?php echo yii\helpers\Url::toRoute(['backend/jurisdiction/edit' ,'role_name'=>$k]); ?>">
                             <button type="button" class="layui-btn" lay-filter="demo" data-id="" id="id" onclick="test(this)">
+                                <input type="hidden" id="<?php echo $v['id']?>" value="<?php echo $v['id']?>">
                                 <i class="layui-icon" lay-filter="demo">&#xe640;</i>
                             </button>
-                        </a>
                     </td>
                 </tr>
                 <?php $i++; ?>
@@ -54,4 +53,17 @@
         var $ = layui.jquery, layer = layui.layer;
         var table = layui.table;
     });
+    function test(o){
+        var obj = $(o).children('input');
+        var id = obj.val();
+        var data = {id:id}
+        $.post("<?php echo yii\helpers\Url::to(['backend/menu/delete']); ?>" , data ,function (data) {
+            if (data.code == 200){
+                layer.msg(data.msg, {time: 1500, anim: 6});
+                window.location.href = " <?php echo yii\helpers\Url::to(['backend/menu/index']); ?> ";
+            }else {
+                layer.msg(data.msg, {time: 1500, anim: 6});
+            }
+        });
+    }
 </script>
