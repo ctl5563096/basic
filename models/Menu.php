@@ -104,6 +104,12 @@ class Menu extends \yii\db\ActiveRecord
      */
     public static function DeletAll($id)
     {
-        Yii::$app->
+        $transaction = self::getDb()->beginTransaction();
+        try{
+            //批量删除顶级菜单
+            $model = Menu::find()->where()->one();
+        }catch (\Exception $e){
+
+        }
     }
 }
