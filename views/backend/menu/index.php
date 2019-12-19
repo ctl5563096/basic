@@ -28,8 +28,8 @@
                     <td><?php echo $i ?></td>
                     <td><?php echo $v['name'] ?></td>
                     <td>
-                        <a href=" <?php echo yii\helpers\Url::toRoute(['backend/jurisdiction/edit' ,'role_name'=>$v['id']]); ?>">
-                            <button type="button" class="layui-btn" lay-filter="demo" data-id="" id="id" onclick="test(this)">
+                        <a href=" <?php echo yii\helpers\Url::toRoute(['backend/menu/edit' ,'id'=>$v['id'] ,'name'=>$v['name']]); ?>">
+                            <button type="button" class="layui-btn" lay-filter="demo" data-id="" id="id">
                                 <i class="layui-icon" lay-filter="demo">&#xe642;</i>
                             </button>
                         </a>
@@ -57,13 +57,20 @@
         var obj = $(o).children('input');
         var id = obj.val();
         var data = {id:id}
-        $.post("<?php echo yii\helpers\Url::to(['backend/menu/delete']); ?>" , data ,function (data) {
-            if (data.code == 200){
-                layer.msg(data.msg, {time: 1500, anim: 6});
-                window.location.href = " <?php echo yii\helpers\Url::to(['backend/menu/index']); ?> ";
-            }else {
-                layer.msg(data.msg, {time: 1500, anim: 6});
+        layer.confirm('确定删除吗', {
+            btn: ['确定', '取消'] //可以无限个按钮
+            ,btn3: function(index, layero){
+
             }
+        }, function(index, layero){
+            $.post("<?php echo yii\helpers\Url::to(['backend/menu/delete']); ?>", data, function (data) {
+                if (data.code == 200) {
+                    layer.msg(data.msg, {time: 3000, anim: 6});
+                    window.location.href = " <?php echo yii\helpers\Url::to(['backend/menu/index']); ?> ";
+                } else {
+                    layer.msg(data.msg, {time: 1500, anim: 6});
+                }
+            })
         });
     }
 </script>

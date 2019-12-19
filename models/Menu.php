@@ -97,19 +97,30 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * 删除菜单
+     * 删除菜单以及子菜单
      * Date: 2019/12/18
-     * @author chentulin
      * @param $id
+     * @return bool
+     * @throws \Throwable
+     * @author chentulin
      */
-    public static function DeletAll($id)
+    public static function deletAllMenu($id) :bool
     {
         $transaction = self::getDb()->beginTransaction();
         try{
-            //批量删除顶级菜单
-            $model = Menu::find()->where()->one();
+            $model = Menu::find()->where('id = :id', [':id' => $id])->one();
+            $res = $model->delete();
+            if ($res){
+                $all = Menu::find()->where('parent_id = :id', [':id' => $id])->all();
+                foreach ($all as $v){
+                    $v->delete();
+                }
+            }
+            $transaction->commit();
+            return true;
         }catch (\Exception $e){
-
+            $transaction->rollBack();
+            return false;
         }
     }
 }

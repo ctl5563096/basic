@@ -63,6 +63,27 @@ class MenuController extends BaseController
     {
         $id = (int)$this->request->post('id');
         // 菜单删除需要把父菜单和子菜单全部删除
-        $res = Menu::DeletAll($id);
+        $res = Menu::deletAllMenu($id);
+        if ($res){
+            $this->response->format = \yii\web\Response::FORMAT_JSON;
+            return $this->response->data = ['code' => 200 ,'msg' => '删除成功'];
+        }
+    }
+
+    /**
+     * 编辑一级菜单的子菜单
+     * DATE : 2019/12/19 23:57
+     * @author chentulin
+     */
+    public function actionEdit()
+    {
+        if (!$this->request->isAjax){
+            $id = (int)$this->request->get('id');
+            $name = $this->request->get('name');
+            // 找出该菜单下面所有的子菜单
+
+        }else{
+            var_dump(22222222222);
+        }
     }
 }
