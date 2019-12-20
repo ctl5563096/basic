@@ -71,7 +71,7 @@ class RoleController extends BaseController
     public function actionTest()
     {
         $clnt = YunpianClient::create('177a2833184609c6fae709150d709409');
-        $param = [YunpianClient::MOBILE => '18616020000',YunpianClient::TEXT => '【云片网】您的验证码是1234'];
+        $param = [YunpianClient::MOBILE => '13692477981',YunpianClient::TEXT => '【云片网】定时任务'];
         $r = $clnt->sms()->single_send($param);
         if($r->isSucc()){
 
