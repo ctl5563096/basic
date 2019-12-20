@@ -6,6 +6,7 @@ use Yii;
 use app\commands\BaseController;
 use app\models\Role;
 use yii\web\Response;
+use Yunpian\Sdk\YunpianClient;
 
 /**
  * 角色模块
@@ -64,6 +65,17 @@ class RoleController extends BaseController
             $this->response->data = ['msg' => '删除成功' , 'code' => 200];
         }else{
             $this->response->data = ['msg' => '删除失败,请联系管理员' , 'code' => 500];
+        }
+    }
+
+    public function actionTest()
+    {
+        $clnt = YunpianClient::create('177a2833184609c6fae709150d709409');
+        $param = [YunpianClient::MOBILE => '18616020000',YunpianClient::TEXT => '【云片网】您的验证码是1234'];
+        $r = $clnt->sms()->single_send($param);
+        if($r->isSucc()){
+
+            var_dump($r->data());
         }
     }
 }
