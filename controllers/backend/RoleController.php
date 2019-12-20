@@ -74,7 +74,6 @@ class RoleController extends BaseController
         $param = [YunpianClient::MOBILE => '13692477981',YunpianClient::TEXT => '【云片网】定时任务'];
         $r = $clnt->sms()->single_send($param);
         if($r->isSucc()){
-
             var_dump($r->data());
         }
     }
