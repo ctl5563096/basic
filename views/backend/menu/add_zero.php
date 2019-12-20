@@ -10,6 +10,23 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">控制器名</label>
+                <div class="layui-input-block" style="width: 500px">
+                    <input type="text" name="controller"   placeholder="输入控制器名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">方法名</label>
+                <div class="layui-input-block" style="width: 500px">
+                    <input type="text" name="action"   placeholder="输入方法名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block" style="width: 500px">
+                    <input type="hidden" name="level" required  lay-verify="required"  autocomplete="off" class="layui-input" value="<?php echo $level ?>">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>

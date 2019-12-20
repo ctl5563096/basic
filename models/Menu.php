@@ -67,7 +67,7 @@ class Menu extends \yii\db\ActiveRecord
      */
     public static function findAllMenu($level ,$parentId = 0) :array
     {
-        return (new Query())->select('*')->from(self::tableName())->where('level = :level AND parent_id = :parentId', [':level' => $level ,':parentId' => $parentId])->all();
+        return (new Query())->select('*')->from(self::tableName())->where("level= :level AND parent_id = :parentId AND is_delete = 'no' AND is_use = 'yes'", [':level' => $level ,':parentId' => $parentId])->all();
     }
 
     /**
@@ -81,7 +81,7 @@ class Menu extends \yii\db\ActiveRecord
      * @return array | bool
      * @author chentulin
      */
-    public static function addMenu($level, $name,$parentId = 0, $controller = '', $action = '')
+    public static function addMenu($level, $name, $controller = '', $action = '' ,$parentId = 0)
     {
         $model = new self();
         $model->level = (string)$level;

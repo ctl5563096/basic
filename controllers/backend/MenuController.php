@@ -33,19 +33,18 @@ class MenuController extends BaseController
      */
     public function actionAdd()
     {
-        $level = (int)$this->request->get('level');
         if ($this->request->isGet){
-            // 根据菜单等级来判断加载的页面
-            if ($level === 0){
-                return $this->render('add_zero');
-            }else{
-                return $this->render('add_first');
-            }
+            $level = (int)$this->request->get('level');
+                return $this->render('add_zero',array('level' => $level));
+
         }else{
+            $level = (int)$this->request->post('level');
+            $controller = $this->request->post('controller')??'';
+            $action = $this->request->post('action')??'';
             $this->response->format = \yii\web\Response::FORMAT_JSON;
             $level = $level??0;
             $name = $this->request->post('menu');
-            $res = Menu::addMenu($level ,$name);
+            $res = Menu::addMenu($level ,$name ,$controller ,$action);
             if ($res === true){
                 return $this->response->data = ['code' => 200 ,'msg' => '添加菜单成功'];
             }else{
@@ -81,7 +80,8 @@ class MenuController extends BaseController
             $id = (int)$this->request->get('id');
             $name = $this->request->get('name');
             // 找出该菜单下面所有的子菜单
-
+            $lists = Menu::findAllMenu($this->first ,$id);
+            return $this->render('detail' ,array('lists' => $lists ,'name'=>$name));
         }else{
             var_dump(22222222222);
         }
