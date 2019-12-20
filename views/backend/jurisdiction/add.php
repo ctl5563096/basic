@@ -40,12 +40,12 @@
         var form=layui.form;
         form.on('submit(formDemo)', function(data){
             $.post(
-                "<?php echo yii\helpers\Url::to(['backend/menu/add','level'=>0]); ?>",
+                "<?php echo yii\helpers\Url::to(['backend/jurisdiction/add','level'=>0]); ?>",
                 $(data.form).serialize(),
                 function (obj) {
                     if (obj.code == 200) {
                         layer.msg(obj.msg, {time: 1500}, function () {
-                            window.location.href = " <?php echo yii\helpers\Url::to(['backend/menu/index']); ?> ";
+                            window.location.href = " <?php echo yii\helpers\Url::to(['backend/jurisdiction/index']); ?> ";
                         });
                     }
                     else {

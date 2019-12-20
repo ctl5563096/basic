@@ -81,7 +81,7 @@ class Menu extends \yii\db\ActiveRecord
      * @return array | bool
      * @author chentulin
      */
-    public static function addMenu($level, $name, $controller = '', $action = '' ,$parentId = 0)
+    public static function addMenu($level, $name, $controller = '', $action = '' ,$parentId)
     {
         $model = new self();
         $model->level = (string)$level;

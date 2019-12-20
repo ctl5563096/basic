@@ -4,7 +4,7 @@
     <!-- 内容主体区域 -->
     <h1 style="padding-left: 15px"><?php echo $name;  ?></h1>
     <div style="padding: 15px;color: #0C0C0C">
-        <a href=" <?php echo yii\helpers\Url::to(['backend/menu/add' ,'level'=>1]); ?> ">
+        <a href=" <?php echo yii\helpers\Url::to(['backend/menu/add' ,'level'=>1 ,'parent_id' => $parent_id]); ?> ">
             <button type="button" class="layui-btn layui-btn-lg"">
             <i class="layui-icon">&#xe654;</i>
             </button>
@@ -62,7 +62,7 @@
             $.post("<?php echo yii\helpers\Url::to(['backend/menu/delete']); ?>", data, function (data) {
                 if (data.code == 200) {
                     layer.msg(data.msg, {time: 3000, anim: 6});
-                    window.location.href = " <?php echo yii\helpers\Url::to(['backend/menu/detail']); ?> ";
+                    window.location.reload()
                 } else {
                     layer.msg(data.msg, {time: 1500, anim: 6});
                 }

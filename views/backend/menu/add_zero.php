@@ -27,6 +27,11 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <div class="layui-input-block" style="width: 500px">
+                    <input type="hidden" name="parent_id" required  lay-verify="required"  autocomplete="off" class="layui-input" value="<?php echo $parent_id ?>">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -50,7 +55,7 @@
                 function (obj) {
                     if (obj.code == 200) {
                         layer.msg(obj.msg, {time: 1500}, function () {
-                            window.location.href = " <?php echo yii\helpers\Url::to(['backend/menu/index']); ?> ";
+                            window.history.go(-1);
                         });
                     }
                     else {

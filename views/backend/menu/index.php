@@ -3,7 +3,7 @@
 <div class="layui-body" style="color: #0C0C0C">
     <!-- 内容主体区域 -->
     <div style="padding: 15px;color: #0C0C0C">
-        <a href=" <?php echo yii\helpers\Url::to(['backend/menu/add' ,'level'=>0]); ?> ">
+        <a href=" <?php echo yii\helpers\Url::to(['backend/menu/add' ,'level'=>0 ,'parent_id' => 0]); ?> ">
             <button type="button" class="layui-btn layui-btn-lg"">
             <i class="layui-icon">&#xe654;</i>
             </button>
@@ -66,7 +66,7 @@
             $.post("<?php echo yii\helpers\Url::to(['backend/menu/delete']); ?>", data, function (data) {
                 if (data.code == 200) {
                     layer.msg(data.msg, {time: 3000, anim: 6});
-                    window.location.href = " <?php echo yii\helpers\Url::to(['backend/menu/index']); ?> ";
+                    window.location.reload()
                 } else {
                     layer.msg(data.msg, {time: 1500, anim: 6});
                 }

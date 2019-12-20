@@ -35,16 +35,18 @@ class MenuController extends BaseController
     {
         if ($this->request->isGet){
             $level = (int)$this->request->get('level');
-                return $this->render('add_zero',array('level' => $level));
+            $parentId =  (int)$this->request->get('parent_id');
+                return $this->render('add_zero',array('level' => $level ,'parent_id' => $parentId ));
 
         }else{
             $level = (int)$this->request->post('level');
+            $parentId = (int)$this->request->post('parent_id');
             $controller = $this->request->post('controller')??'';
             $action = $this->request->post('action')??'';
             $this->response->format = \yii\web\Response::FORMAT_JSON;
             $level = $level??0;
             $name = $this->request->post('menu');
-            $res = Menu::addMenu($level ,$name ,$controller ,$action);
+            $res = Menu::addMenu($level ,$name ,$controller ,$action ,$parentId);
             if ($res === true){
                 return $this->response->data = ['code' => 200 ,'msg' => '添加菜单成功'];
             }else{
@@ -76,14 +78,10 @@ class MenuController extends BaseController
      */
     public function actionEdit()
     {
-        if (!$this->request->isAjax){
             $id = (int)$this->request->get('id');
             $name = $this->request->get('name');
             // 找出该菜单下面所有的子菜单
             $lists = Menu::findAllMenu($this->first ,$id);
-            return $this->render('detail' ,array('lists' => $lists ,'name'=>$name));
-        }else{
-            var_dump(22222222222);
-        }
+            return $this->render('detail' ,array('lists' => $lists ,'name'=>$name ,'parent_id' => $id));
     }
 }
