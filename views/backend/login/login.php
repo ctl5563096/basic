@@ -35,6 +35,10 @@ use yii\helpers\Html;
     function tijiao() {
         var username = $("input[name='username']").val();
         var password = $("input[name='password']").val();
+        if (!password || !username){
+            alert('请检查账号密码是否输入')
+            return
+        }
         var data = {
             username:username,
             password:password
