@@ -1,12 +1,15 @@
 <?php
 
+use app\channels\TestChannel;
+use yiiplus\websocket\swoole\WebSocket;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','websocket'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -14,6 +17,14 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
+            'websocket' => [
+                'class' => WebSocket::class,
+                'host' => '127.0.0.1',
+                'port' => 9501,
+                'channels' => [
+                    'push-message' => TestChannel::class, // 配置 channel 对应的执行类
+                ],
+            ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

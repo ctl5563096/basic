@@ -21,7 +21,9 @@
         "overtrue/wechat": "~4.0",
         "yunpian/yunpian-php-sdk" : "~1.0",
         "tsingsun/yii2-swoole" : "2.1.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "jianyan74/yii2-websocket": "^1.1",
+        "yiiplus/yii2-websocket": "^1.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
