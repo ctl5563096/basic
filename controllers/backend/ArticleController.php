@@ -38,7 +38,7 @@ class ArticleController extends BaseController
      */
     public function actionIndex()
     {
-        $client = new RabbitMq('guest','guest','127.0.0.1',5672);
+        $client = new RabbitMq('guest','guest','127.0.0.1',5673);
         $client->sendMessage(json_encode(['test' => 111111111]));
     }
 }

@@ -24,7 +24,7 @@ class ConsumeController extends Controller
      */
     public function actionRun()
     {
-        $client = new RabbitMq('guest','guest','127.0.0.1',5672);
+        $client = new RabbitMq('guest','guest','127.0.0.1',5673);
         $callback = static function(AMQPMessage $msg){
             // 处理消费队列消费的逻辑
             echo json_decode($msg->body,true)['test'];
