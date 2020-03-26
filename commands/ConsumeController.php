@@ -3,6 +3,7 @@
 
 namespace app\commands;
 
+use app\components\mq\DelayMq;
 use app\components\mq\RabbitMq;
 use PhpAmqpLib\Message\AMQPMessage;
 use yii\console\Controller;
@@ -30,5 +31,24 @@ class ConsumeController extends Controller
             echo json_decode($msg->body,true)['test'];
         };
         $client->consumeMessage('Yii',$callback);
+    }
+
+    /**
+     * 延时消费
+     *
+     * Date: 2020/3/26
+     * @throws \Exception
+     * @author chentulin
+     */
+    public function actionDelay()
+    {
+        $client = new DelayMq('guest','guest','127.0.0.1',5672,20000);
+        $callback = static function(AMQPMessage $msg){
+            echo date('Y-m-d H:i:s'). ' [x] Received',$msg->body,PHP_EOL;
+
+            $msg->delivery_info['channel']->basic_ack($msg->delivery_info['delivery_tag']);
+
+        };
+        $client->dealMessage('delay_exchange',$callback,'cache_exchange');
     }
 }

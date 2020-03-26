@@ -1,5 +1,6 @@
 <?php
 
+use yii\redis\Session;
 use EasyWeChat\Factory;
 
 $params = require __DIR__ . '/params.php';
@@ -40,8 +41,15 @@ $config = [
             'useFileTransport' => true,
         ],
         'session' => [
-            'class' => 'yii\web\Session',
-            'cookieParams' => ['lifetime' => 6000]
+            'class' => Session::class,
+            'timeout' => 6000,
+            'cookieParams' => ['lifetime' => 30],
+            'redis' => [
+                    'hostname' => '127.0.0.1',
+                    'port' => 6379,
+                    //'password' => '', //没有密码，这行注意注释，不然报错密码错误
+                    'database' => 0, //选择数据库
+                    ]
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

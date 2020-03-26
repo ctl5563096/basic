@@ -20,19 +20,19 @@ use PhpAmqpLib\Message\AMQPMessage;
 class RabbitMq
 {
     /** @var string $username */
-    private $username;
+    public $username;
 
     /** @var string $password */
-    private $password;
+    public $password;
 
     /** @var string $host */
-    private $host;
+    public $host;
 
     /** @var integer $port */
-    private $port;
+    public $port;
 
     /** @var AMQPStreamConnection $connection */
-    private $connection;
+    public $connection;
 
     /**
      * mq初始化函数
