@@ -41,6 +41,7 @@ class LoginController extends Controller
             $row = (new Query())->select('*')->from('admin_user')->where('username = :username')->addParams([':username' => $username])->one();
             if (password_verify($password ,$row['password'])){
                 Yii::$app->session->set('user' , $row['username']);
+                Yii::$app->session->set('user_id' , $row['id']);
                 $response->data = ['code' => 200 ,'msg' => '登陆成功'];
             }else{
                 $response->data = ['code' => 500 ,'msg' => '密码错误'];

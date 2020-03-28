@@ -5,17 +5,18 @@ namespace app\controllers\backend;
 
 
 use app\commands\BaseController;
-use app\components\mq\DelayMq;
-use app\components\mq\RabbitMq;
 use app\dao\ArticleDao;
+use app\dto\ArticleDto;
 use app\models\Article;
+use Yii;
 
 /**
  * 文章管理
  *
- * Class ActicleController
+ * Class ArticleController
  * @package app\controllers\backend
- * @property integer $userId
+ * @property string $userName
+ * @property ArticleDto $articleDto
  * @property ArticleDao $articleDao
  */
 class ArticleController extends BaseController
@@ -23,12 +24,29 @@ class ArticleController extends BaseController
     /**
      * @var integer 用户id
      */
-    public $userId;
+    public $userName;
 
     /**
-     * @var ArticleDao
+     * @var ArticleDao $articleDao
      */
     public $articleDao;
+
+    /** @var ArticleDto $articleDto*/
+    public $articleDto;
+
+    /**
+     * ArticleController constructor.
+     * @param $id
+     * @param $module
+     * @param array $config
+     */
+    public function __construct($id, $module, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->userName = Yii::$app->session->get('user');
+        $this->articleDto = new ArticleDto();
+        $this->articleDao = new ArticleDao();
+    }
 
     /**
      * 获取文章列表
@@ -39,19 +57,14 @@ class ArticleController extends BaseController
      */
     public function actionIndex()
     {
-        var_dump(\Yii::$app->session->get('test'));die();
-        $client = new RabbitMq('guest','guest','127.0.0.1',5673);
-        $client->sendMessage(json_encode(['test' => 111111111]));
-    }
-
-    public function actionDelay()
-    {
-        \Yii::$app->session->set('test','2222222');die();
-        $client = new DelayMq('guest','guest','127.0.0.1',5672,100000);
-        try {
-            $client->sendDelayMessage('测试延时队列');
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
+        if ($this->request->isAjax) {
+            $dataList = $this->articleDao->getList((int)Yii::$app->session->get('user_id'),$this->request->post());
+            exit(json_encode([
+                'code' => 200,
+                'msg'  => '获取列表成功',
+                'list' => $dataList
+            ]));
         }
+        return $this->render('index');
     }
 }

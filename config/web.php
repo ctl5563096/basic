@@ -43,7 +43,7 @@ $config = [
         'session' => [
             'class' => Session::class,
             'timeout' => 6000,
-            'cookieParams' => ['lifetime' => 30],
+            'cookieParams' => ['lifetime' => 6000],
             'redis' => [
                     'hostname' => '127.0.0.1',
                     'port' => 6379,
