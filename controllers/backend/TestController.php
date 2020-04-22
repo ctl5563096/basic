@@ -28,6 +28,8 @@ class TestController extends Controller
         $client = new RabbitMq('guest','guest','127.0.0.1',5672);
         $client->sendMessage('测试消息');
 
+
+
         var_dump('发送完毕');
     }
 }
