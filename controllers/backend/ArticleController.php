@@ -31,7 +31,7 @@ class ArticleController extends BaseController
      */
     public $articleDao;
 
-    /** @var ArticleDto $articleDto*/
+    /** @var ArticleDto $articleDto */
     public $articleDto;
 
     /**
@@ -43,7 +43,7 @@ class ArticleController extends BaseController
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->userName = Yii::$app->session->get('user');
+        $this->userName   = Yii::$app->session->get('user');
         $this->articleDto = new ArticleDto();
         $this->articleDao = new ArticleDao();
     }
@@ -58,7 +58,7 @@ class ArticleController extends BaseController
     public function actionIndex()
     {
         if ($this->request->isAjax) {
-            $dataList = $this->articleDao->getList((int)Yii::$app->session->get('user_id'),$this->request->post());
+            $dataList = $this->articleDao->getList((int)Yii::$app->session->get('user_id'), $this->request->post());
             exit(json_encode([
                 'code' => 200,
                 'msg'  => '获取列表成功',
