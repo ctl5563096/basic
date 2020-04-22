@@ -1,5 +1,6 @@
 <?php
 
+use app\components\TestComponent;
 use yii\redis\Session;
 use EasyWeChat\Factory;
 
@@ -79,6 +80,9 @@ $config = [
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
             ],
         ],
+        'test' => [
+            'class' => TestComponent::class
+        ]
     ],
     'params' => $params,
 ];

@@ -88,7 +88,7 @@ class RabbitMq
     {
         $client = $this->connection;
         $channelConsume = $client->channel();
-        $channelConsume->queue_declare('hello', false, false, false, false);
+        $channelConsume->queue_declare('Yii', false, false, false, false);
         echo ' [*] Waiting for messages. To exit press CTRL+C', "\n";
         $channelConsume->basic_consume($channel, '', false, true, false, false, $callback);
         //while判断消息是否已经消费完
