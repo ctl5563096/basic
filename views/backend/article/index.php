@@ -32,6 +32,7 @@
     }
 </style>
     <div class="layui-body" style="color: #0C0C0C">
+        <div><button name="btnModify" type="button" class="layui-btn" style="float: right;margin: 10px" onclick="addNew()">添加新文章</button></div>
         <div class="container content">
             <div class="row">
                 <div>
@@ -39,7 +40,7 @@
                         <div class="panel-body">
                             <div>
                                 <div>
-                                    <table class="table table-bordered table-striped layui-table">
+                                    <table class="table table-bordered table-striped layui-table"  style="padding-right: 20px;margin-left: 20px">
                                         <thead>
                                         <tr>
                                             <th>序号</th>
@@ -127,11 +128,31 @@
             }else {
                 info += '<td>' + '<input type="checkbox" class="checke" onclick="changeStatus(' +obj.id + ')">' + '</td>';
             }
-            info += '<td>' + obj.created_at + '</td>';
-            info += '<td>' + '<button data-method="notice" class="layui-btn">示范一个公告层</button>' + '</td>';
-            info += '<td style="text-align: center;"><button name="btnModify" type="button" class="btn btn-success btn-xs" >修改</button><button name="btnDelete" type="button" class="btn btn-danger btn-xs" onclick="remove(' + obj.id + ')">删除</button></td>';
+            info += '<td>' + timestampToTime(obj.created_at) + '</td>';
+            info += '<td>' + '<button data-method="notice" class="layui-btn" onclick="artDetail(' +obj.id + ')">查看文章详情</button>' + '</td>';
+            info += '<td style="text-align: center;"><button name="btnModify" type="button" class="layui-btn layui-btn-sm" >修改</button><button name="btnDelete" type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="remove(' + obj.id + ')">删除</button></td>';
             info += '</tr>';
             $("#tab_list").append(info);
         });
+    }
+
+    function artDetail(id)
+    {
+        alert(id);
+    }
+
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';
+        var h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+        var m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';
+        var s = (date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds());
+        return Y+M+D+h+m+s;
+    }
+
+    function addNew(){
+        window.location.href = 'www.baidu.com'
     }
 </script>
