@@ -7,8 +7,9 @@ namespace app\controllers\backend;
 use app\commands\BaseController;
 use app\dao\ArticleDao;
 use app\dto\ArticleDto;
-use app\models\Article;
+use app\service\ArticleService;
 use Yii;
+use yii\web\Response;
 
 /**
  * 文章管理
@@ -18,6 +19,7 @@ use Yii;
  * @property string $userName
  * @property ArticleDto $articleDto
  * @property ArticleDao $articleDao
+ * @property ArticleService $articleService;
  */
 class ArticleController extends BaseController
 {
@@ -34,6 +36,9 @@ class ArticleController extends BaseController
     /** @var ArticleDto $articleDto */
     public $articleDto;
 
+    /** @var ArticleService $articleService */
+    public $articleService;
+
     /**
      * ArticleController constructor.
      * @param $id
@@ -43,9 +48,10 @@ class ArticleController extends BaseController
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->userName   = Yii::$app->session->get('user');
-        $this->articleDto = new ArticleDto();
-        $this->articleDao = new ArticleDao();
+        $this->userName       = Yii::$app->session->get('user');
+        $this->articleDto     = new ArticleDto();
+        $this->articleDao     = new ArticleDao();
+        $this->articleService = new ArticleService();
     }
 
     /**
@@ -66,5 +72,90 @@ class ArticleController extends BaseController
             ]));
         }
         return $this->render('index');
+    }
+
+    /**
+     * 添加文章
+     *
+     * Date: 2020/5/5
+     * @author chentulin
+     */
+    public function actionAdd()
+    {
+        if ($this->request->isAjax) {
+            $params          = $this->request->post();
+            $params['label'] = implode(',', array_keys($params['label']));
+            $this->articleDto->setScenario($this->articleDto::SCENARIO_CREATE);
+            $this->articleDto->setAttributes($params);
+            $this->articleDto->validate();
+            $this->articleDao->create($this->articleDto);
+
+            $this->response->format = Response::FORMAT_JSON;
+            return $this->response->data = ['code' => 200, 'msg' => '添加成功'];
+        }
+        return $this->render('add');
+    }
+
+    /**
+     * 改变文章展示状态
+     *
+     * Date: 2020/5/5
+     * @author chentulin
+     */
+    public function actionChangeStatus()
+    {
+        $this->articleService->changeStatusService((int)$this->request->get('id'));
+    }
+
+    /**
+     * 删除文章
+     *
+     * Date: 2020/5/5
+     * @author chentulin
+     */
+    public function actionDelete()
+    {
+        $res = $this->articleService->delete((int)$this->request->get('id'));
+        if ($res) {
+            $this->response->format = Response::FORMAT_JSON;
+            return $this->response->data = ['code' => 200, 'msg' => '删除成功'];
+        }
+    }
+
+    /**
+     * 查看文章内容
+     *
+     * Date: 2020/5/5
+     * @author chentulin
+     */
+    public function actionContent()
+    {
+        $content = $this->articleService->contentService((int)$this->request->get('id'));
+        return $this->render('content', array('content' => $content));
+    }
+
+    /**
+     * 跳转到文章想请个
+     *
+     * Date: 2020/5/5
+     * @author chentulin
+     */
+    public function actionDetail()
+    {
+        if ($this->request->isAjax){
+            $params          = $this->request->post();
+            $params['label'] = implode(',', array_keys($params['label']));
+            $this->articleDto->setScenario('update');
+            $this->articleDto->setAttributes($params);
+            $this->articleDto->validate();
+            $res = $this->articleService->updateService($this->articleDto,(int)$this->request->get('id'));
+            if ($res){
+                $this->response->format = Response::FORMAT_JSON;
+                return $this->response->data = ['code' => 200, 'msg' => '修改成功'];
+            }
+        }
+        $detail = $this->articleService->detailService((int)$this->request->get('id'));
+        $label = explode(',',$detail->label);
+        return $this->render('detail',array('detail' => $detail,'label' => $label));
     }
 }
