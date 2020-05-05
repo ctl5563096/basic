@@ -1,4 +1,10 @@
 <?php
+$f      = getenv('HTTP_X_FORWARDED_FOR');
+$server = getenv('HTTP_HOST');
+if (($f !== '') && ($server !== 'www.ctllys.top') && ($server !== 'www.ctllys.top')) {
+    echo '本服务器禁止恶意反向代理！';
+	die;
+}
 
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);

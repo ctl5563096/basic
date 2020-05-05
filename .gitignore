@@ -34,3 +34,4 @@ tests/_support/_generated
 /runtime
 /web/index.php
 /web/upload
+/config/web.php
