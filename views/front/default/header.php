@@ -51,6 +51,14 @@
     .container:after {
         clear: both;
     }
+    .text{
+        line-height: 1.5;
+        text-indent:2em;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
     @media (min-width: 768px) {
         .container {
             width: 750px;

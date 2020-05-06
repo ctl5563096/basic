@@ -22,6 +22,13 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">作者昵称</label>
+            <div class="layui-input-block">
+                <input type="text" name="introduction" placeholder="请输入作者昵称" autocomplete="off" class="layui-input"
+                       lay-verify="required" value="<?php echo $detail->introduction ?>">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">文章模块</label>
             <div class="layui-input-block">
                 <select name="module" lay-filter="aihao">

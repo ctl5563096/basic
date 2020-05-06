@@ -135,7 +135,7 @@ class ArticleService extends BaseService
      */
     public static function findAllArticle(): array
     {
-        $dataList = ArticleDao::find()->select('*')->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->limit(5)->asArray()->all();
+        $dataList = ArticleDao::find()->select('*')->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->limit(6)->asArray()->all();
         return $dataList;
     }
 }

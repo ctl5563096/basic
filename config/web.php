@@ -12,7 +12,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     // 修改默认路由
-    'defaultRoute'=>'backend/login',
+    'defaultRoute'=>'front/index/index',
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

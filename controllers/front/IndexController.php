@@ -4,7 +4,6 @@ namespace app\controllers\front;
 
 use app\controllers\FrontController;
 use app\service\ArticleService;
-use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class IndexController extends FrontController
 {

@@ -142,20 +142,20 @@ class ArticleController extends BaseController
      */
     public function actionDetail()
     {
-        if ($this->request->isAjax){
+        if ($this->request->isAjax) {
             $params          = $this->request->post();
             $params['label'] = implode(',', array_keys($params['label']));
             $this->articleDto->setScenario('update');
             $this->articleDto->setAttributes($params);
             $this->articleDto->validate();
-            $res = $this->articleService->updateService($this->articleDto,(int)$this->request->get('id'));
-            if ($res){
+            $res = $this->articleService->updateService($this->articleDto, (int)$this->request->get('id'));
+            if ($res) {
                 $this->response->format = Response::FORMAT_JSON;
                 return $this->response->data = ['code' => 200, 'msg' => '修改成功'];
             }
         }
         $detail = $this->articleService->detailService((int)$this->request->get('id'));
-        $label = explode(',',$detail->label);
-        return $this->render('detail',array('detail' => $detail,'label' => $label));
+        $label  = explode(',', $detail->label);
+        return $this->render('detail', array('detail' => $detail, 'label' => $label));
     }
 }

@@ -15,7 +15,8 @@ use yii\base\Model;
  * @property string $author_nickname 作者昵称
  * @property string $label 文章标签
  * @property string $module 文章所属模块
- * @property string $is_display;
+ * @property string $is_display 是否展示
+ * @property string $introduction 文章简介
  */
 class ArticleDto extends BaseDto
 {
@@ -41,12 +42,15 @@ class ArticleDto extends BaseDto
     /** @var string $is_display */
     public $is_display;
 
+    /** @var string $introduction */
+    public $introduction;
+
     public function rules()
     {
         return [
-            [['author_nickname','module','content','article_name','is_display'],'required','on' => self::SCENARIO_CREATE,'message' => '不能为空'],
+            [['author_nickname','module','content','article_name','is_display','introduction'],'required','on' => self::SCENARIO_CREATE],
             [['label'],'safe','on' => self::SCENARIO_CREATE],
-            [['author_nickname','module','content','article_name','is_display'],'required','on' => self::SCENARIO_UPDATE,'message' => '不能为空'],
+            [['author_nickname','module','content','article_name','is_display','introduction'],'required','on' => self::SCENARIO_UPDATE],
             [['label'],'safe','on' => self::SCENARIO_UPDATE],
         ];
     }

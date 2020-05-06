@@ -20,6 +20,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">文章简介</label>
+            <div class="layui-input-block">
+                <input type="text" name="introduction" placeholder="请输入文章简介" autocomplete="off" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">文章模块</label>
             <div class="layui-input-block">
                 <select name="module" lay-filter="aihao">

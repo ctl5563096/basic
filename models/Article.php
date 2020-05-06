@@ -18,7 +18,10 @@ use yii\db\ActiveRecord;
  * @property int $author 作者
  * @property string $module 文章模块
  * @property string $author_nickname 作者昵称
- * @property string $label
+ * @property string $label 文章标签
+ * @property string $introduction 文章简介
+ * @property integer $like 点赞数
+ * @property integer $hate 踩数
  */
 class Article extends ActiveRecord
 {
@@ -36,8 +39,8 @@ class Article extends ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'module', 'label','author_nickname'], 'string'],
-            [['created_at', 'deleted_at', 'see_num', 'author'], 'integer'],
+            [['content', 'module', 'label', 'author_nickname', 'introduction'], 'string'],
+            [['created_at', 'deleted_at', 'see_num', 'author', 'like', 'hate'], 'integer'],
             [['article_name', 'is_delete', 'is_display'], 'string', 'max' => 255],
         ];
     }
@@ -59,7 +62,10 @@ class Article extends ActiveRecord
             'author'          => 'Author',
             'module'          => '文章模块',
             'author_nickname' => '作者昵称',
-            'label'           => '文章标签'
+            'label'           => '文章标签',
+            'introduction'    => '文章简介',
+            'like'            => '点赞数',
+            'hate'            => '踩数',
         ];
     }
 }
