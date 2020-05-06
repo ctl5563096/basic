@@ -135,7 +135,7 @@ class ArticleController extends BaseController
     }
 
     /**
-     * 跳转到文章想请个
+     * 修改文章
      *
      * Date: 2020/5/5
      * @author chentulin

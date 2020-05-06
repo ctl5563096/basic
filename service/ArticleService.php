@@ -123,7 +123,7 @@ class ArticleService extends BaseService
             $this->response->format = Response::FORMAT_JSON;
             return $this->response->data = ['code' => 400, 'msg' => '无法找到资源'];
         }
-        $this->articleDao->setAttributes($dto->getAttributes());
-        return $this->articleDao->save();
+        $dao->setAttributes($dto->getAttributes());
+        return $dao->save();
     }
 }
