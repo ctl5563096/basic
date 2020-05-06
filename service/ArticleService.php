@@ -126,4 +126,16 @@ class ArticleService extends BaseService
         $dao->setAttributes($dto->getAttributes());
         return $dao->save();
     }
+
+    /**
+     * 获取所有文章
+     *
+     * Date: 2020/5/6
+     * @author chentulin
+     */
+    public static function findAllArticle(): array
+    {
+        $dataList = ArticleDao::find()->select('*')->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->limit(5)->asArray()->all();
+        return $dataList;
+    }
 }
