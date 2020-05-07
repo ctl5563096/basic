@@ -20,27 +20,27 @@
     <div class="row module" style="height: 180px">
         <div class="col-sm-3 hot" >
             <a href="#" class="text-decoration-none">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588759285737&di=cab165e622d2a77d4b54cb8302496413&imgtype=0&src=http%3A%2F%2Fie.bjd.com.cn%2Fimages%2F201910%2F30%2F5db942a9e4b0d15f72e52ef4.jpeg" width="220px" height="150px">
+                <img src="/header/php.jpeg" width="220px" height="150px">
             </a>
             <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">P H P 代 码 录</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
             <a href="#">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588759285737&di=cab165e622d2a77d4b54cb8302496413&imgtype=0&src=http%3A%2F%2Fie.bjd.com.cn%2Fimages%2F201910%2F30%2F5db942a9e4b0d15f72e52ef4.jpeg" width="220px" height="150px">
+                <img src="/header/mysql.jpg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">mysql 操作</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">mysql</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
             <a href="#">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588759285737&di=cab165e622d2a77d4b54cb8302496413&imgtype=0&src=http%3A%2F%2Fie.bjd.com.cn%2Fimages%2F201910%2F30%2F5db942a9e4b0d15f72e52ef4.jpeg" width="220px" height="150px">
+                <img src="/header/system.jpeg" width="220px" height="150px">
             </a>
             <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">操作系统</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
-            <a href="#">
+            <a href="blog">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588759285737&di=cab165e622d2a77d4b54cb8302496413&imgtype=0&src=http%3A%2F%2Fie.bjd.com.cn%2Fimages%2F201910%2F30%2F5db942a9e4b0d15f72e52ef4.jpeg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">博 主 介 绍</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;"><a href="blog"><strong style="font-family: 'Microsoft YaHei UI'">博 主 介 绍</strong></a></h4>
         </div>
     </div>
     <div >
@@ -69,9 +69,9 @@
                     </div>
                     <br>
                     <div style="padding-bottom: 10px">
-                        <button type="button" class="btn btn-primary" style="float: left">查看详情</button>
-                        <button type="button" class="btn btn-danger" style="float: right;width: 40px">踩</button>
-                        <button type="button" class="btn btn-success" style="float: right;width: 40px;margin-right: 10px">点赞</button>
+                        <button type="button" class="btn btn-primary" style="float: left"  onclick="detail(<?php echo $v['id'] ?>)">查看详情</button>
+                        <button type="button" class="btn btn-danger" style="float: right;width: 40px" onclick="hate(<?php echo $v['id']?>)">踩</button>
+                        <button type="button" class="btn btn-success" style="float: right;width: 40px;margin-right: 10px" onclick="like(<?php echo $v['id']?>)">点赞</button>
                     </div>
                 </div>
             <br>
@@ -84,8 +84,36 @@
                     </strong>
                 </H3>
                 <div style="margin-top: 10px">
-                    <img src="https://static.runoob.com/images/mix/cinqueterre.jpg" class="rounded" style="width: 50px" alt="YYCTL">&nbsp;&nbsp;&nbsp;YYCTL
+                    <img src="/header/blog.jpg" class="rounded" style="width: 50px" alt="YYCTL">&nbsp;&nbsp;&nbsp;YYCTL
                 </div>
+                <h3 style="margin-top: 10px">每 日 吐 槽</h3>
+                <div class="card" style="margin-top: 10px">
+                    <div class="card-body">总想吐槽点什么东西</div>
+                    <p class="card-body" style="text-align: right">发布于--<?php echo date('Y-m-d') ?></p>
+                </div>
+                <h3 style="margin-top: 10px">个 人 经 历</h3>
+                <div class="card" style="margin-top: 10px">
+                    <div class="card-body">点过去看看吧<button type="button" class="btn btn-primary" style="float: right" onclick="personal()">MORE-></button></div>
+                </div>
+                <h3 style="margin-top: 10px">座 右 铭</h3>
+                <div class="card border border-right-0 border-top-0 border-left-0" style="margin-top: 10px" >
+                    <div class="card-body">
+                       人生路漫漫长,任重而道远
+                    </div>
+                </div>
+                <h3 style="margin-top: 5px">热点排行</h3>
+                <?php foreach ($hotArticle as $key => $hot): ?>
+                    <div class="card border border-right-0 border-top-0 border-left-0" style="margin-top: 10px" >
+                        <div class="card-body">
+                            <a href="detail?id=<?php echo $hot['id']?>">
+                                <?php echo ($key+1).'.'.$hot['article_name'] ?>
+                                <p style="display: inline-block;float: right">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span> <?php echo $hot['like']?>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
         </div>
     </div>
 </div>
@@ -107,3 +135,49 @@
 </body>
 </html>
 <?php require __DIR__ . '/../default/footer.php'; ?>
+<script>
+    // 跳转个人简介页面
+    function personal(){
+        window.location.href = 'blog'
+    }
+
+    // 点赞接口
+    function like(id){
+        $.ajax({
+            url:'/front/index/like',
+            type:'post',
+            dataType:'json',
+            data:{id:id},
+            success: function(data){
+                if (data.code === 200){
+                    alert('感谢点赞')
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            },
+        })
+    }
+
+    // 踩接口
+    function hate(id){
+        $.ajax({
+            url:'/front/index/hate',
+            type:'post',
+            dataType:'json',
+            data:{id:id},
+            success: function(data){
+                if (data.code === 200){
+                    alert('会持续改进,欢迎发送邮件或者留言更正错误地方')
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            },
+        })
+    }
+    
+    function detail(id) {
+        window.location.href = 'detail?id=' + id
+    }
+</script>

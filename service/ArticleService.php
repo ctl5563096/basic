@@ -138,4 +138,55 @@ class ArticleService extends BaseService
         $dataList = ArticleDao::find()->select('*')->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->limit(6)->asArray()->all();
         return $dataList;
     }
+
+    /**
+     * 获取前8名点赞数最多文章
+     *
+     * Date: 2020/5/7
+     * @author chentulin
+     * @return array
+     */
+    public static function findHotArticle(): array
+    {
+        $dataList = ArticleDao::find()->select(['id','author_nickname','article_name','like'])->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->orderBy(['like' => SORT_DESC])->limit(8)->asArray()->all();
+        return $dataList;
+    }
+
+    /**
+     * 点赞
+     *
+     * Date: 2020/5/7
+     * @author chentulin
+     * @param int $id
+     * @return bool|array
+     */
+    public function addLike(int $id)
+    {
+        $dao = $this->articleDao::findOne(['id' => $id]);
+        if (!$dao) {
+            $this->response->format = Response::FORMAT_JSON;
+            return $this->response->data = ['code' => 400, 'msg' => '无法找到资源'];
+        }
+        ++$dao->like;
+        return $dao->save();
+    }
+
+    /**
+     * 踩
+     *
+     * Date: 2020/5/7
+     * @author chentulin
+     * @param int $id
+     * @return bool|array
+     */
+    public function addHate(int $id)
+    {
+        $dao = $this->articleDao::findOne(['id' => $id]);
+        if (!$dao) {
+            $this->response->format = Response::FORMAT_JSON;
+            return $this->response->data = ['code' => 400, 'msg' => '无法找到资源'];
+        }
+        ++$dao->hate;
+        return $dao->save();
+    }
 }
