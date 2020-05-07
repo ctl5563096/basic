@@ -180,6 +180,6 @@ require __DIR__ . '/../default/header.php'; ?>
     }
     
     function detail(id) {
-        window.location.href = 'detail?id=' + id
+        window.location.href = '/front/index/detail?id=' + id
     }
 </script>

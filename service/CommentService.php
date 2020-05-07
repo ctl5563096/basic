@@ -6,7 +6,6 @@ namespace app\service;
 
 use app\dao\CommentDao;
 use app\dto\CommentDto;
-use yii\base\ViewRenderer;
 use yii\web\Response;
 
 class CommentService extends BaseService
