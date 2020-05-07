@@ -81,6 +81,7 @@ class IndexController extends FrontController
         $id = Yii::$app->request->get('id');
         $service = new ArticleService();
         $detail = $service->detailService((int)$id);
+        $service->addLook((int)$id);
         // 获取评论详情
         $comment_detail = (new CommentService)->getList((int)$id);
         return $this->render('detail',array('detail' => $detail,'comment' => $comment_detail));

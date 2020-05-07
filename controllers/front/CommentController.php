@@ -32,6 +32,7 @@ class CommentController extends FrontController
         $dto->setAttributes($params);
         $dto->validate();
         $res = (new CommentService())->createRecord($dto);
+        $res['created_at'] =  date('Y-m-d H:i:s', $res['created_at']);
         if ($res){
             $this->response->format = Response::FORMAT_JSON;
             return $this->response->data = ['code' => 200, 'msg' => '插入成功' , 'data' => $res];

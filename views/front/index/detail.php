@@ -57,12 +57,19 @@ require __DIR__ . '/../default/header.php'; ?>
             </div>
         </div>
         <div class="card border" style="margin: 30px;" id="parent">
-                <?php foreach ($comment as $k => $v): ?>
-                    <div class="card-body" style="padding: 5px">
-                        <?php echo $v['comment']; ?>
+                <?php if ($comment):?>
+                    <?php foreach ($comment as $k => $v): ?>
+                        <div class="card-body son" style="padding: 5px">
+                            <?php echo $v['comment']; ?>
+                        </div>
+                        <div class="card-body border border-right-0 border-left-0 border-top-0" style="margin: 5px;text-align: right;padding: 0px;padding-bottom: 5px "><?php echo $v['user_name']; ?> 于 <?php echo date('Y-m-d H:i:s',$v['created_at'])?> 评论 </div>
+                    <?php endforeach;?>
+                <?php else:?>
+                    <div class="card-body nocommet" style="height: 70px;display: inline-block;float: right;">
+                        暂无评论,请去评论吧~！
                     </div>
-                    <div class="card-body border border-right-0 border-left-0 border-top-0" style="margin: 5px;text-align: right;padding: 0px;padding-bottom: 5px"><?php echo $v['user_name']; ?> 于 <?php echo date('Y-m-d H:i:s',$v['created_at'])?> 评论 </div>
-                <?php endforeach;?>
+                <?php endif; ?>
+
         </div>
     </div>
 </div>
@@ -119,8 +126,9 @@ require __DIR__ . '/../default/header.php'; ?>
             data:{id:id},
             success: function(data){
                 if (data.code === 200){
-                    alert(data.msg)
-
+                    hate = parseInt(like) + 1;
+                    $(".hate").html(hate);
+                    alert('感谢关注我会持续改进')
                 }
             },
             error: function (err) {
@@ -146,7 +154,23 @@ require __DIR__ . '/../default/header.php'; ?>
             dataType:'json',
             success: function(data){
                 if (data.code === 200){
-                    $
+                    var dom  = '';
+                    dom += '<div class="card-body son" style="padding: 5px">';
+                    dom += data.data.comment;
+                    dom += '</div>';
+                    dom += '<div class="card-body border border-right-0 border-left-0 border-top-0" style="margin: 5px;text-align: right;padding: 0px;padding-bottom: 5px ">';
+                    dom += data.data.user_name;
+                    dom += ' 于 ';
+                    dom += data.data.created_at + '评论 </div>';
+                    var son = $("#parent").children(".son:first-child");
+                    if (son.length === 0){
+                        console.log(1111)
+                        $(".nocommet").remove();
+                        var parent = $("#parent");
+                        $(parent).append(dom);
+                        return false
+                    }
+                    $(dom).insertBefore(son);
                 }
             },
             error: function (err) {

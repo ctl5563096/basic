@@ -189,4 +189,23 @@ class ArticleService extends BaseService
         ++$dao->hate;
         return $dao->save();
     }
+
+    /**
+     * Notes:
+     * @param int $id
+     * @return array|bool
+     * @author: chentulin
+     * Date: 2020/5/7
+     * Time: 19:52
+     */
+    public function addLook(int $id)
+    {
+        $dao = $this->articleDao::findOne(['id' => $id]);
+        if (!$dao) {
+            $this->response->format = Response::FORMAT_JSON;
+            return $this->response->data = ['code' => 400, 'msg' => '无法找到资源'];
+        }
+        ++$dao->see_num;
+        return $dao->save();
+    }
 }
