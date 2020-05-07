@@ -1,4 +1,6 @@
-<?php require __DIR__ . '/../default/header.php'; ?>
+<?php use yii\helpers\Url;
+
+require __DIR__ . '/../default/header.php'; ?>
 <style>
     .hot{
         height: 100px;
@@ -138,7 +140,7 @@
 <script>
     // 跳转个人简介页面
     function personal(){
-        window.location.href = 'blog'
+        window.location.href = '<?php echo Url::toRoute(['/front/index/blog']); ?>';
     }
 
     // 点赞接口

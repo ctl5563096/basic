@@ -1,4 +1,6 @@
-<?php require __DIR__ . '/../default/header.php'; ?>
+<?php use yii\helpers\Url;
+
+require __DIR__ . '/../default/header.php'; ?>
 <style>
     .hot{
         height: 100px;
@@ -84,7 +86,7 @@
 <?php require __DIR__ . '/../default/footer.php'; ?>
 <script>
     function backIndex(){
-        window.location.href = 'index'
+        window.location.href = window.location.href = '<?php echo Url::toRoute(['/front/index/index']); ?>';
     }
     // 点赞接口
     function like(id){
