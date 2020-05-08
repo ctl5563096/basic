@@ -5,6 +5,7 @@ namespace app\service;
 use app\dao\ArticleDao;
 use app\dto\ArticleDto;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\Query;
 use yii\web\Response;
 
@@ -117,7 +118,7 @@ class ArticleService extends BaseService
      * @return array|bool
      * @author chentulin
      */
-    public function updateService(ArticleDto $dto,int $id)
+    public function updateService(ArticleDto $dto, int $id)
     {
         $dao = $this->articleDao::find()->where(['id' => $id])->one();
         if (!$dao) {
@@ -144,12 +145,12 @@ class ArticleService extends BaseService
      * 获取前8名点赞数最多文章
      *
      * Date: 2020/5/7
-     * @author chentulin
      * @return array
+     * @author chentulin
      */
     public static function findHotArticle(): array
     {
-        $dataList = ArticleDao::find()->select(['id','author_nickname','article_name','like'])->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->orderBy(['like' => SORT_DESC])->limit(8)->asArray()->all();
+        $dataList = ArticleDao::find()->select(['id', 'author_nickname', 'article_name', 'like'])->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->orderBy(['like' => SORT_DESC])->limit(8)->asArray()->all();
         return $dataList;
     }
 
@@ -157,9 +158,9 @@ class ArticleService extends BaseService
      * 点赞
      *
      * Date: 2020/5/7
-     * @author chentulin
      * @param int $id
      * @return bool|array
+     * @author chentulin
      */
     public function addLike(int $id)
     {
@@ -176,9 +177,9 @@ class ArticleService extends BaseService
      * 踩
      *
      * Date: 2020/5/7
-     * @author chentulin
      * @param int $id
      * @return bool|array
+     * @author chentulin
      */
     public function addHate(int $id)
     {
@@ -226,8 +227,21 @@ class ArticleService extends BaseService
         $query->where(['is_delete' => 'no']);
         $query->andWhere(['is_display' => 'yes']);
         $query->andFilterWhere(['module' => $params['module'] ?? null]);
-        $query->andFilterWhere(['like','article_name'.$params['article_name'] ?? null]);
+        $query->andFilterWhere(['like', 'article_name', $params['article_name'] ?? null]);
         $query->orderBy(['created_at' => SORT_DESC]);
-        return $query->all();
+
+        $provider = new ActiveDataProvider([
+            'query'      => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+        ]);
+
+        return [
+            'dataList'   => $provider->getModels(),
+            'pageParams' => $provider->getPagination(),
+            'totalPage'  => (int)ceil($provider->totalCount / 5),
+            'totalCount' => $provider->totalCount
+        ];
     }
 }

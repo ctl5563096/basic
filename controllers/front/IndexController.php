@@ -94,10 +94,14 @@ class IndexController extends FrontController
      * Date: 2020/5/8
      * @author chentulin
      */
-    public function actionArtList()
+    public function actionArticleList()
     {
         $params = $this->request->get();
         $dataList = (new ArticleService())->getList($params);
-        var_dump($dataList);die();
+        // 判断总页数
+        if ($dataList['totalPage'] === 1){
+            $params['page'] = 1;
+        }
+        return $this->render('page',['data' => $dataList['dataList'],'page' => $params['page'] ?? 1 ,'totalPage' => $dataList['totalPage'] ,'params' => $params ,'totalCount' => $dataList['totalCount'] ]);
     }
 }

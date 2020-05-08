@@ -15,28 +15,28 @@ require __DIR__ . '/../default/header.php'; ?>
     <div class="row title" style="height: 60px;margin-bottom: 30px;">
         <a href="#" style="display: inline-block;width: 150px;height: 30px;font-size: 20px;text-align: center;padding-top: 25px">YYCTL</a>
         <div class="input-group" style="width: 300px;height: 32px;padding-top: 23px;margin-left: 480px">
-            <input type="text" class="form-control" placeholder="搜点文章" style="height: 30px">
-            <button type="button" class="btn btn-outline-secondary" style="height: 30px;width: 80px"><span class="glyphicon glyphicon-search"style="display: inline-block;"></span></button>
+            <input type="text" class="form-control" placeholder="搜点文章" style="height: 30px" id="title" name="title">
+            <button type="button" class="btn btn-outline-secondary" style="height: 30px;width: 80px" onclick="searchArticle()"><span class="glyphicon glyphicon-search"style="display: inline-block;"></span></button>
         </div>
     </div>
     <div class="row module" style="height: 180px">
         <div class="col-sm-3 hot" >
-            <a href="#" class="text-decoration-none">
+            <a href="/front/index/article-list?module=php" class="text-decoration-none">
                 <img src="/header/php.jpeg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">P H P 代 码 录</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/article-list?module=php"><strong style="font-family: 'Microsoft YaHei UI'">P H P 代 码 录</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
-            <a href="#">
+            <a href="/front/index/article-list?module=sql">
                 <img src="/header/mysql.jpg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">mysql</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/article-list?module=sql"><strong style="font-family: 'Microsoft YaHei UI'">mysql</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
-            <a href="#">
+            <a href="/front/index/article-list?module=system">
                 <img src="/header/system.jpeg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">操作系统</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/article-list?module=system"><strong style="font-family: 'Microsoft YaHei UI'">操作系统</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
             <a href="/front/index/blog">
@@ -178,8 +178,14 @@ require __DIR__ . '/../default/header.php'; ?>
             },
         })
     }
-    
+
+    // 文章详情
     function detail(id) {
         window.location.href = '/front/index/detail?id=' + id
+    }
+
+    // 搜索文章名
+    function searchArticle() {
+        window.location.href = '/front/index/article-list?article_name=' + $(" input[ name='title' ] ").val();
     }
 </script>
