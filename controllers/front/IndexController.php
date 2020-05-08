@@ -5,6 +5,7 @@ namespace app\controllers\front;
 use app\controllers\FrontController;
 use app\service\ArticleService;
 use app\service\CommentService;
+use Pimple\Tests\Fixtures\Service;
 use Yii;
 use yii\web\Response;
 
@@ -85,5 +86,18 @@ class IndexController extends FrontController
         // 获取评论详情
         $comment_detail = (new CommentService)->getList((int)$id);
         return $this->render('detail',array('detail' => $detail,'comment' => $comment_detail));
+    }
+
+    /**
+     * 获取文章列表 搜索文章
+     *
+     * Date: 2020/5/8
+     * @author chentulin
+     */
+    public function actionArtList()
+    {
+        $params = $this->request->get();
+        $dataList = (new ArticleService())->getList($params);
+        var_dump($dataList);die();
     }
 }

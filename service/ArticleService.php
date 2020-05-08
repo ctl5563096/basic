@@ -5,6 +5,7 @@ namespace app\service;
 use app\dao\ArticleDao;
 use app\dto\ArticleDto;
 use Yii;
+use yii\db\Query;
 use yii\web\Response;
 
 /**
@@ -207,5 +208,26 @@ class ArticleService extends BaseService
         }
         ++$dao->see_num;
         return $dao->save();
+    }
+
+    /**
+     * 文章列表服务层
+     *
+     * Date: 2020/5/8
+     * @param array $params
+     * @return array
+     * @author chentulin
+     */
+    public function getList(array $params): array
+    {
+        $query = new Query();
+        $query->from(ArticleDao::tableName());
+        $query->select('*');
+        $query->where(['is_delete' => 'no']);
+        $query->andWhere(['is_display' => 'yes']);
+        $query->andFilterWhere(['module' => $params['module'] ?? null]);
+        $query->andFilterWhere(['like','article_name'.$params['article_name'] ?? null]);
+        $query->orderBy(['created_at' => SORT_DESC]);
+        return $query->all();
     }
 }

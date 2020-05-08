@@ -39,10 +39,10 @@ require __DIR__ . '/../default/header.php'; ?>
             <h4 style="text-align: center;font-size: 24px;"><a href="#"><strong style="font-family: 'Microsoft YaHei UI'">操作系统</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
-            <a href="blog">
+            <a href="/front/index/blog">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588759285737&di=cab165e622d2a77d4b54cb8302496413&imgtype=0&src=http%3A%2F%2Fie.bjd.com.cn%2Fimages%2F201910%2F30%2F5db942a9e4b0d15f72e52ef4.jpeg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="blog"><strong style="font-family: 'Microsoft YaHei UI'">博 主 介 绍</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/blog"><strong style="font-family: 'Microsoft YaHei UI'">博 主 介 绍</strong></a></h4>
         </div>
     </div>
     <div >

@@ -1,12 +1,13 @@
 <?php
 
 use app\components\TestComponent;
+use app\components\ExceptionHandler;
 use yii\redis\Session;
 use EasyWeChat\Factory;
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-require_once __DIR__.'/di.php';
+//require_once __DIR__.'/di.php';
 
 $config = [
     'id' => 'basic',
@@ -32,7 +33,7 @@ $config = [
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'class' => ExceptionHandler::class,
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
