@@ -9,11 +9,13 @@ require __DIR__ . '/../default/header.php'; ?>
         margin-top: 30px;
         margin-bottom: 50px;
     }
+    .clock { position: fixed;top: 30px;left: 150px}
 </style>
 <body>
-<div style="width: 300px;height: 200px;position: fixed;right: 0px;top:0px;" class="card">
+<!--<div class="clock"></div>-->
+<div style="width: 300px;height: 200px;position: fixed;right: 0px;bottom:70px;" class="card">
     <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px">
-        <label for="comment" style="text-align: center">「人生在世，留句话给我吧」</label>
+        <label for="comment" style="text-align: center;margin-left: 50px">「路过总要留点东西下来」</label>
         <textarea class="form-control" rows="5" id="content" name="content"></textarea>
         <div class="form-group">
             <label for="usr">留下贵姓必有回复</label>
@@ -24,13 +26,30 @@ require __DIR__ . '/../default/header.php'; ?>
         </div>
     </div>
 </div>
-<div style="width: 300px;height: 400px;position: fixed;right: 0px;top:300px;" class="card">
-
+<div style="width: 300px;position: fixed;right: 0px;top:50px;" class="card">
+    <div class="card-header" style="text-align: center">留言板</div>
+    <?php foreach ($comment as $ck => $cv): ?>
+        <div class="card-body border" style="margin: 3px">
+            <p style="font-size: 12px"><?php echo $cv['content'] ?></p>
+            <P style="font-size: 8px"><?php echo $cv['name'] ?> 于 <?php echo date('Y-m-d H:i:s') ?> 留下他的足迹</P>
+        </div>
+    <?php endforeach; ?>
+    <div class="card-body" style="float: right">
+        <button type="button" class="btn btn-primary btn-sm" onclick="messageBoard()" style="float: right">查看更多留言</button>
+    </div>
 </div>
 <div class="container main-content" style="width: 1050px;">
+    <div class="row title" style="height: 280px;">
+        <img src="https://i0.hdslb.com/bfs/article/a452474691b43b474d43e3f931fb6e44fd157a5c.gif" style="width: 1050px;display: block;height: 280px;">
+    </div>
     <div class="row title" style="height: 60px;margin-bottom: 30px;">
-        <a href="#" style="display: inline-block;width: 150px;height: 30px;font-size: 20px;text-align: center;padding-top: 25px">YYCTL</a>
-        <div class="input-group" style="width: 300px;height: 32px;padding-top: 23px;margin-left: 480px">
+        <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">首页 </a>
+        <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">留言板 </a>
+        <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">碎碎念 </a>
+        <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">生活圈子</a>
+        <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">生命树</a>
+        <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">查看更多</a>
+        <div class="input-group" style="width: 300px;height: 32px;padding-top: 21px;margin-left: 110px">
             <input type="text" class="form-control" placeholder="搜点文章" style="height: 30px" id="title" name="title">
             <button type="button" class="btn btn-outline-secondary" style="height: 30px;width: 80px " onclick="searchArticle()"><span class="glyphicon glyphicon-search"style="display: inline-block;"></span></button>
         </div>
@@ -154,6 +173,13 @@ require __DIR__ . '/../default/header.php'; ?>
 </html>
 <?php require __DIR__ . '/../default/footer.php'; ?>
 <script>
+    var clock = $(".clock").clock({
+            width: 200,       // set width
+            height: 200,      // set height
+            theme: 't3',      // set theme  => 't1' 't2' 't3'
+            date: new Date()  // set date => new Date()
+        }),
+        data = clock.data('clock');
     // 跳转个人简介页面
     function personal(){
         window.location.href = '<?php echo Url::toRoute(['/front/index/blog']); ?>';

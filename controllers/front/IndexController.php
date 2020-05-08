@@ -5,6 +5,7 @@ namespace app\controllers\front;
 use app\controllers\FrontController;
 use app\service\ArticleService;
 use app\service\CommentService;
+use app\service\MessageBoardService;
 use Pimple\Tests\Fixtures\Service;
 use Yii;
 use yii\web\Response;
@@ -23,7 +24,9 @@ class IndexController extends FrontController
         $indexData = ArticleService::findAllArticle();
         // 获取热点文章
         $hotArticle = ArticleService::findHotArticle();
-        return $this->render('index',['data' => $indexData,'hotArticle' => $hotArticle]);
+        // 获取最新三条留言
+        $Comment = MessageBoardService::findHotMessage();
+        return $this->render('index', ['data' => $indexData, 'hotArticle' => $hotArticle ,'comment' => $Comment]);
     }
 
     /**
@@ -45,10 +48,10 @@ class IndexController extends FrontController
      */
     public function actionLike()
     {
-        $id = Yii::$app->request->post('id');
+        $id      = Yii::$app->request->post('id');
         $service = new ArticleService();
-        $res = $service->addLike((int)$id);
-        if ($res){
+        $res     = $service->addLike((int)$id);
+        if ($res) {
             $this->response->format = Response::FORMAT_JSON;
             return $this->response->data = ['code' => 200, 'msg' => '成功'];
         }
@@ -62,10 +65,10 @@ class IndexController extends FrontController
      */
     public function actionHate()
     {
-        $id = Yii::$app->request->post('id');
+        $id      = Yii::$app->request->post('id');
         $service = new ArticleService();
-        $res = $service->addHate((int)$id);
-        if ($res){
+        $res     = $service->addHate((int)$id);
+        if ($res) {
             $this->response->format = Response::FORMAT_JSON;
             return $this->response->data = ['code' => 200, 'msg' => '成功'];
         }
@@ -79,13 +82,13 @@ class IndexController extends FrontController
      */
     public function actionDetail()
     {
-        $id = Yii::$app->request->get('id');
+        $id      = Yii::$app->request->get('id');
         $service = new ArticleService();
-        $detail = $service->detailService((int)$id);
+        $detail  = $service->detailService((int)$id);
         $service->addLook((int)$id);
         // 获取评论详情
         $comment_detail = (new CommentService)->getList((int)$id);
-        return $this->render('detail',array('detail' => $detail,'comment' => $comment_detail));
+        return $this->render('detail', array('detail' => $detail, 'comment' => $comment_detail));
     }
 
     /**
@@ -96,12 +99,12 @@ class IndexController extends FrontController
      */
     public function actionArticleList()
     {
-        $params = $this->request->get();
+        $params   = $this->request->get();
         $dataList = (new ArticleService())->getList($params);
         // 判断总页数
-        if ($dataList['totalPage'] === 1){
+        if ($dataList['totalPage'] === 1) {
             $params['page'] = 1;
         }
-        return $this->render('page',['data' => $dataList['dataList'],'page' => $params['page'] ?? 1 ,'totalPage' => $dataList['totalPage'] ,'params' => $params ,'totalCount' => $dataList['totalCount'] ]);
+        return $this->render('page', ['data' => $dataList['dataList'], 'page' => $params['page'] ?? 1, 'totalPage' => $dataList['totalPage'], 'params' => $params, 'totalCount' => $dataList['totalCount']]);
     }
 }
