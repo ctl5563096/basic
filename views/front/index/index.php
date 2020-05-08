@@ -11,12 +11,18 @@ require __DIR__ . '/../default/header.php'; ?>
     }
 </style>
 <body>
+<div style="width: 300px;height: 200px;position: fixed;right: 0px;top:0px;" class="card">
+    <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px">
+        <label for="comment" style="text-align: center">「人生在世，留句话给我吧」</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+    </div>
+</div>
 <div class="container main-content" style="width: 1050px;">
     <div class="row title" style="height: 60px;margin-bottom: 30px;">
         <a href="#" style="display: inline-block;width: 150px;height: 30px;font-size: 20px;text-align: center;padding-top: 25px">YYCTL</a>
         <div class="input-group" style="width: 300px;height: 32px;padding-top: 23px;margin-left: 480px">
             <input type="text" class="form-control" placeholder="搜点文章" style="height: 30px" id="title" name="title">
-            <button type="button" class="btn btn-outline-secondary" style="height: 30px;width: 80px" onclick="searchArticle()"><span class="glyphicon glyphicon-search"style="display: inline-block;"></span></button>
+            <button type="button" class="btn btn-outline-secondary" style="height: 30px;width: 80px " onclick="searchArticle()"><span class="glyphicon glyphicon-search"style="display: inline-block;"></span></button>
         </div>
     </div>
     <div class="row module" style="height: 180px">
