@@ -11,7 +11,7 @@ require __DIR__ . '/../default/header.php'; ?>
     }
 </style>
 <body>
-<div class="container main-content" style="width: 1000px;">
+<div class="container main-content" style="width: 1050px;">
     <div class="row title" style="height: 60px;margin-bottom: 30px;">
         <a href="#" style="display: inline-block;width: 150px;height: 30px;font-size: 20px;text-align: center;padding-top: 25px">YYCTL</a>
         <div class="input-group" style="width: 300px;height: 32px;padding-top: 23px;margin-left: 480px">
