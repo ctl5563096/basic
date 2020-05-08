@@ -31,7 +31,7 @@ require __DIR__ . '/../default/header.php'; ?>
     <?php foreach ($comment as $ck => $cv): ?>
         <div class="card-body border" style="margin: 3px">
             <p style="font-size: 12px"><?php echo $cv['content'] ?></p>
-            <P style="font-size: 8px"><?php echo $cv['name'] ?> 于 <?php echo date('Y-m-d H:i:s') ?> 留下他的足迹</P>
+            <P style="font-size: 8px"><?php echo $cv['name'] ?> 于 <?php echo date('Y-m-d H:i:s',$cv['created_at']) ?> 留下他的足迹</P>
         </div>
     <?php endforeach; ?>
     <div class="card-body" style="float: right">
