@@ -15,6 +15,7 @@ use yii\web\Response;
  * Class BaseController
  * @package app\commands
  * @property Request $request
+ * @property Response $response
  */
 class BaseController extends Controller
 {

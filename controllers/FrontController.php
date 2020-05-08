@@ -4,21 +4,24 @@
 namespace app\controllers;
 
 
-use app\models\AccessRecord;
 use app\service\AccessRecordService;
-use Pimple\Tests\Fixtures\Service;
 use Yii;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\Request;
+use yii\web\Response;
 
 /**
  * 前台基类控制器
  *
  * Class FrontController
  * @package app\controllers
+ * @property Request $request
+ * @property Response $response
  */
 class FrontController extends Controller
 {
+    /** @var  */
     public $request;
 
     public $response;

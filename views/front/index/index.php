@@ -14,8 +14,18 @@ require __DIR__ . '/../default/header.php'; ?>
 <div style="width: 300px;height: 200px;position: fixed;right: 0px;top:0px;" class="card">
     <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px">
         <label for="comment" style="text-align: center">「人生在世，留句话给我吧」</label>
-        <textarea class="form-control" rows="5" id="comment"></textarea>
+        <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+        <div class="form-group">
+            <label for="usr">留下贵姓必有回复</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="card-body" style="float: right">
+            <button type="button" class="btn btn-primary btn-sm" onclick="messageBoard()">留下你的痕迹 []~(~▽~)~* </button>
+        </div>
     </div>
+</div>
+<div style="width: 300px;height: 400px;position: fixed;right: 0px;top:300px;" class="card">
+
 </div>
 <div class="container main-content" style="width: 1050px;">
     <div class="row title" style="height: 60px;margin-bottom: 30px;">
@@ -193,5 +203,38 @@ require __DIR__ . '/../default/header.php'; ?>
     // 搜索文章名
     function searchArticle() {
         window.location.href = '/front/index/article-list?article_name=' + $(" input[ name='title' ] ").val();
+    }
+
+    $("#name").keydown(function() {
+        //给输入框绑定按键事件
+        if(event.keyCode == "13") {//判断如果按下的是回车键则执行下面的代码
+            messageBoard()
+        }
+    })
+
+    function messageBoard(){
+        // 获取姓名和内容
+        var name = $('#name').val();
+        var content = $('#content').val();
+        if (name === '' || content === ''){
+            alert('请输入完整信息哦 我才能看到你的留言 （￣︶￣）↗!')
+            return false;
+        }
+        $.ajax({
+            url:'/front/message/message-board',
+            type:'post',
+            dataType:'json',
+            data:{content:content,name:name},
+            success: function(data){
+                if (data.code === 200){
+                    alert('我已经收到你的留言,我会在第一时间回复你，感谢关注 <(￣︶￣)>')
+                    $('#name').val('');
+                    $('#content').val('');
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            },
+        })
     }
 </script>
