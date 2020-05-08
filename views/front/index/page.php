@@ -37,7 +37,7 @@
             <?php endif; ?>
         </div>
     </div>
-    <div class="title border border-left-0 border-right-0 border-bottom-0" style="margin: 30px;height: 1000px">
+    <div class="title border border-left-0 border-right-0 border-bottom-0" style="margin: 30px;height: 1200px">
         <?php if ($totalCount !== 0): ?>
             <?php foreach ($data as $v):?>
                 <div style="margin-top:20px;padding-bottom: 30px" class="article border border-left-0 border-right-0 border-top-0" style="width: 545px;height: 415px">
