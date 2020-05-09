@@ -9,5 +9,9 @@ return [
         	'secret' => 'b2bf1b59f797e4c0cea4c44b4bfe81f9', // AppSecret
         	'token' => 'chentulin', // Token
 		'response_type' => 'array',//返回类型
+    ],
+    'weather' => [
+        'public' => 'Pi6N22DKlMVlDs9EB',
+        'protect' => 'SMixGqyyO1Htih8qU',
     ]
 ];

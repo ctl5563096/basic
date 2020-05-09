@@ -2,6 +2,7 @@
 
 namespace app\controllers\front;
 
+use app\apiService\weatherApiService;
 use app\controllers\FrontController;
 use app\service\ArticleService;
 use app\service\CommentService;
@@ -20,13 +21,16 @@ class IndexController extends FrontController
      */
     public function actionIndex()
     {
+        $api     = new weatherApiService();
+        // 天气服务
+        $weather = $api->getTodayWeatherByIp();
         // 文章列表
         $indexData = ArticleService::findAllArticle();
         // 获取热点文章
         $hotArticle = ArticleService::findHotArticle();
         // 获取最新三条留言
         $Comment = MessageBoardService::findHotMessage();
-        return $this->render('index', ['data' => $indexData, 'hotArticle' => $hotArticle ,'comment' => $Comment]);
+        return $this->render('index', ['data' => $indexData, 'hotArticle' => $hotArticle, 'comment' => $Comment ,'weather' => current($weather['results'])]);
     }
 
     /**

@@ -13,11 +13,11 @@ require __DIR__ . '/../default/header.php'; ?>
 </style>
 <body οnlοad="newtext()">
 <!--<div class="clock"></div>-->
-<div style="width: 300px;height: 220px;position: fixed;right: 0px;bottom:70px;" class="card">
+<div style="width: 300px;height: 220px;position: fixed;right: 0px;bottom:70px;z-index: 2000" class="card">
     <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px;">
         <label for="comment" style="text-align: center;margin-left: 50px">「路过总要留点东西下来」</label>
         <textarea class="form-control" rows="5" id="content" name="content"></textarea>
-        <div class="form-group">
+        <div class="form-group" style="z-index: 2000">
             <label for="usr" style="margin-left: 100px">留下宁的大名</label>
             <input type="text" class="form-control" id="name" name="name" >
         </div>
@@ -49,9 +49,10 @@ require __DIR__ . '/../default/header.php'; ?>
         <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">生活圈子</a>
         <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">生命树</a>
         <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">查看更多</a>
-        <div class="input-group" style="width: 300px;height: 32px;padding-top: 21px;margin-left: 110px">
+        <div class="input-group" style="width: 300px;height: 32px;padding-top: 21px;margin-left: 80px">
             <input type="text" class="form-control" placeholder="搜点文章" style="height: 30px" id="title" name="title">
             <button type="button" class="btn btn-outline-secondary" style="height: 30px;width: 80px " onclick="searchArticle()"><span class="glyphicon glyphicon-search"style="display: inline-block;"></span></button>
+            <img src="/header/blog.jpg" class="rounded-circle" style="width: 30px;height: 30px;margin-left: 30px" alt="YYCTL">
         </div>
     </div>
     <div class="row module" style="height: 180px">
@@ -115,22 +116,27 @@ require __DIR__ . '/../default/header.php'; ?>
             <?php endforeach;?>
         </div>
         <div class="col-sm-4 border border-right-2" style="">
-                <H3 style="padding-bottom: 5px;margin-top: 5px" class="border border-right-0 border-top-0 border-left-0">
-                    <strong style="font-family: 'Microsoft YaHei UI'">
-                        关于博主
-                    </strong>
-                </H3>
-                <div style="margin-top: 10px">
-                    <img src="/header/blog.jpg" class="rounded" style="width: 50px" alt="YYCTL">&nbsp;&nbsp;&nbsp;YYCTL
+                <h3 style="margin-top: 10px">今 日 天 气</h3>
+                <div class="card " style="margin-top: 10px">
+                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 60px">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市 : <?php echo $weather['location']['name'] ?><img src="/header/city.png" class="rounded card-body" style="width: 50px;margin-left: 130px" ></div>
+                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 60px">现在天气 : <?php echo $weather['now']['text'] ?><img src="/black/<?php echo  $weather['now']['code']?>@1x.png" class="rounded card-body" style="width: 50px;margin-left: 130px" ></div>
+                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 60px">气&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;温 : &nbsp;<?php echo $weather['now']['temperature'] ?>&#8451;</div>
                 </div>
+<!--                <H3 style="padding-bottom: 5px;margin-top: 5px" class="border border-right-0 border-top-0 border-left-0">-->
+<!--                    <strong style="font-family: 'Microsoft YaHei UI'">-->
+<!--                        关于博主-->
+<!--                    </strong>-->
+<!--                </H3>-->
+<!--                <div style="margin-top: 10px">-->
+<!--                    <img src="/header/blog.jpg" class="rounded" style="width: 50px" alt="YYCTL">&nbsp;&nbsp;&nbsp;YYCTL-->
+<!--                </div>-->
                 <h3 style="margin-top: 10px">每 日 吐 槽</h3>
                 <div class="card" style="margin-top: 10px">
                     <div class="card-body">总想吐槽点什么东西</div>
-                    <p class="card-body" style="text-align: right">发布于--<?php echo date('Y-m-d') ?></p>
                 </div>
                 <h3 style="margin-top: 10px">个 人 经 历</h3>
                 <div class="card" style="margin-top: 10px">
-                    <div class="card-body">点过去看看吧<button type="button" class="btn btn-primary" style="float: right" onclick="personal()">MORE-></button></div>
+                    <div class="card-body">查看更多<button type="button" class="btn btn-primary" style="float: right" onclick="personal()">MORE-></button></div>
                 </div>
                 <h3 style="margin-top: 10px">座 右 铭</h3>
                 <div class="card border border-right-0 border-top-0 border-left-0" style="margin-top: 10px" >
