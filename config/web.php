@@ -1,5 +1,6 @@
 <?php
 
+use yii\swiftmailer\Mailer;
 use app\components\TestComponent;
 use app\components\ExceptionHandler;
 use yii\redis\Session;
@@ -36,11 +37,26 @@ $config = [
             'class' => ExceptionHandler::class,
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+            'class' => Mailer::class,
+            'viewPath' => '/mail/layouts',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                //这里如果你是qq的邮箱，可以参考qq客户端设置后再进行配置 http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.163.com',
+                'username' => 'chentulinys@163.com',
+                'password' => 'CNYUIKCCQOKCHXWX',
+                'port' => '25',
+                'encryption' => 'tls',
+            ],
+            'messageConfig'=>[
+                'charset'=>'UTF-8',
+                'from'=>['chentulinys@163.com'=>'YYCTL']
+            ],
+
         ],
         'session' => [
             'class' => Session::class,

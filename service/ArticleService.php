@@ -150,7 +150,7 @@ class ArticleService extends BaseService
      */
     public static function findHotArticle(): array
     {
-        $dataList = ArticleDao::find()->select(['id', 'author_nickname', 'article_name', 'like'])->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->orderBy(['like' => SORT_DESC])->limit(8)->asArray()->all();
+        $dataList = ArticleDao::find()->select(['id', 'author_nickname', 'article_name', 'like'])->where(['is_display' => 'yes'])->andWhere(['is_delete' => 'no'])->orderBy(['like' => SORT_DESC])->limit(7)->asArray()->all();
         return $dataList;
     }
 

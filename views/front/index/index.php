@@ -13,19 +13,6 @@ require __DIR__ . '/../default/header.php'; ?>
 </style>
 <body οnlοad="newtext()">
 <!--<div class="clock"></div>-->
-<div style="width: 300px;height: 220px;position: fixed;right: 0px;bottom:70px;z-index: 2000" class="card">
-    <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px;">
-        <label for="comment" style="text-align: center;margin-left: 50px">「路过总要留点东西下来」</label>
-        <textarea class="form-control" rows="5" id="content" name="content"></textarea>
-        <div class="form-group" style="z-index: 2000">
-            <label for="usr" style="margin-left: 100px">留下宁的大名</label>
-            <input type="text" class="form-control" id="name" name="name" >
-        </div>
-        <div class="card-body" style="float: right;">
-            <button type="button" class="btn btn-primary btn-sm" onclick="messageBoard()">留下你的痕迹 []~(~▽~)~* </button>
-        </div>
-    </div>
-</div>
 <div style="width: 300px;position: fixed;right: 0px;top:50px;" class="card">
     <div class="card-header" style="text-align: center">留言板</div>
     <?php foreach ($comment as $ck => $cv): ?>
@@ -157,6 +144,27 @@ require __DIR__ . '/../default/header.php'; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
+            <div class="card" style="margin-top: 50px">
+                <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px;">
+                    <label for="comment" style="text-align: center;margin-left: 50px">「路过总要留点东西下来」</label>
+                    <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+                    <div class="form-group" style="z-index: 2000">
+                        <label for="usr">大 名</label>
+                        <input type="text" class="form-control" id="name" name="name" >
+                    </div>
+                    <div class="form-group" style="z-index: 2000">
+                        <label for="usr" >邮 箱</label>
+                        <input type="text" class="form-control" id="name" name="mail" >
+                    </div>
+                    <div class="form-group" style="z-index: 2000">
+                        <label for="usr" >电话号码</label>
+                        <input type="text" class="form-control" id="name" name="phone" >
+                    </div>
+                    <div class="card-body" style="text-align: center">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="messageBoard()">留下你的痕迹 []~(~▽~)~* </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
