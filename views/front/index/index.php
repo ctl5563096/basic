@@ -40,7 +40,7 @@ require __DIR__ . '/../default/header.php'; ?>
 </div>
 <div class="container main-content" style="width: 1050px;">
     <div class="row title" style="height: 280px;">
-        <img src="https://i0.hdslb.com/bfs/article/a452474691b43b474d43e3f931fb6e44fd157a5c.gif" style="width: 1050px;display: block;height: 280px;">
+        <img src="/header/back.gif" style="width: 1050px;display: block;height: 280px;">
     </div>
     <div class="row title" style="height: 60px;margin-bottom: 30px;">
         <a href="#" style="display: inline-block;width: 100px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">首页 </a>
