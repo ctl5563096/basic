@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>YYCTL 个人博客</title>
+    <title>搬 砖 工 长 期 驻 地 <(￣︶￣)></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="YYCTL ctllys blog chentulin" />
+
     <!-- 引入 Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -65,4 +67,5 @@
             width: 750px;
         }
 </style>
+
 

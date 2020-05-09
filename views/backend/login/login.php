@@ -5,7 +5,7 @@ use yii\helpers\Html;
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Slide Login Form Flat Responsive Widget Template :: w3layouts</title>
+    <title>博 客 后 台</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,7 +62,7 @@ use yii\helpers\Html;
 <!-- main -->
 <div class="w3layouts-main">
     <div class="bg-layer">
-        <h1>Slide Login form</h1>
+        <h1>Login Blog</h1>
         <div class="header-main">
             <div class="main-icon">
                 <span class="fa fa-eercast"></span>
@@ -77,9 +77,9 @@ use yii\helpers\Html;
                         <span class="fa fa-lock"></span>
                         <input type="password" placeholder="Password" name="password" required=""/>
                     </div>
-                    <div class="login-check">
-                        <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Keep me logged in</label>
-                    </div>
+<!--                    <div class="login-check">-->
+<!--                        <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i> Keep me logged in</label>-->
+<!--                    </div>-->
                     <div class="bottom">
                         <button class="btn" type="button" id="submit" onclick="tijiao()">Log In</button>
                     </div>

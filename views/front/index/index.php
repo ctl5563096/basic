@@ -11,17 +11,17 @@ require __DIR__ . '/../default/header.php'; ?>
     }
     .clock { position: fixed;top: 30px;left: 150px}
 </style>
-<body>
+<body οnlοad="newtext()">
 <!--<div class="clock"></div>-->
-<div style="width: 300px;height: 200px;position: fixed;right: 0px;bottom:70px;" class="card">
-    <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px">
+<div style="width: 300px;height: 220px;position: fixed;right: 0px;bottom:70px;" class="card">
+    <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px;">
         <label for="comment" style="text-align: center;margin-left: 50px">「路过总要留点东西下来」</label>
         <textarea class="form-control" rows="5" id="content" name="content"></textarea>
         <div class="form-group">
-            <label for="usr">留下贵姓必有回复</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <label for="usr" style="margin-left: 100px">留下宁的大名</label>
+            <input type="text" class="form-control" id="name" name="name" >
         </div>
-        <div class="card-body" style="float: right">
+        <div class="card-body" style="float: right;">
             <button type="button" class="btn btn-primary btn-sm" onclick="messageBoard()">留下你的痕迹 []~(~▽~)~* </button>
         </div>
     </div>
