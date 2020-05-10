@@ -4,6 +4,8 @@
 namespace app\dao;
 
 use app\models\MessageBoard;
+use yii\data\ActiveDataProvider;
+use yii\db\Query;
 
 /**
  * 留言板数据访问层
@@ -32,5 +34,32 @@ class MessageBoardDao extends MessageBoard
         $dao->name = $params['name'];
         $dao->created_at = time();
         return $dao->save();
+    }
+
+    /**
+     * Notes: 获取留言板数据
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 0:25
+     */
+    public static function getDataList()
+    {
+        $query = new Query();
+        $query->from(self::tableName());
+        $query->select('*');
+        $query->where(['is_delete' => 0]);
+        $query->orderBy(['created_at' => SORT_DESC]);
+
+        $provider = new ActiveDataProvider([
+            'query'      => $query,
+            'pagination' => [
+                'pageSize' => 15,
+            ],
+        ]);
+
+        return [
+            'dataList'   => $provider->getModels(),
+            'totalPage'  => (int)ceil($provider->totalCount / 15),
+        ];
     }
 }

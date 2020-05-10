@@ -29,6 +29,30 @@ class MessageController extends FrontController
     }
 
     /**
+     * Notes: 渲染留言区页面
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 0:09
+     */
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
+    /**
+     * Notes: 获取评论数据
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 0:21
+     */
+    public function actionGetList()
+    {
+        $messageList = $this->messageBoardService->getDataList();
+        $this->response->format = Response::FORMAT_JSON;
+        return $this->response->data = ['code' => 200, 'msg' => '成功','dataList' => $messageList];
+    }
+
+    /**
      * 留言板功能
      *
      * Notes:

@@ -50,4 +50,16 @@ class MessageBoardService extends BaseService
     {
         return MessageBoardDao::find()->select(['content','name','created_at'])->where(['is_delete' => 0])->orderBy(['created_at' => SORT_ASC])->asArray()->limit(3)->all();
     }
+
+    /**
+     * Notes:
+     * @return array
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 0:22
+     */
+    public function getDataList(): array
+    {
+        return MessageBoardDao::getDataList();
+    }
 }
