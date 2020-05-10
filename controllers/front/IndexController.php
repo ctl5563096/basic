@@ -21,7 +21,9 @@ class IndexController extends FrontController
      */
     public function actionIndex()
     {
-        $api     = new weatherApiService();
+        $api = new weatherApiService();
+        // 调用天气服务层
+        $moreWeather = $api->getReportWeatherByIp();
         // 天气服务
         $weather = $api->getTodayWeatherByIp();
         // 文章列表
@@ -30,7 +32,7 @@ class IndexController extends FrontController
         $hotArticle = ArticleService::findHotArticle();
         // 获取最新三条留言
         $Comment = MessageBoardService::findHotMessage();
-        return $this->render('index', ['data' => $indexData, 'hotArticle' => $hotArticle, 'comment' => $Comment ,'weather' => current($weather['results'])]);
+        return $this->render('index', ['data' => $indexData, 'hotArticle' => $hotArticle, 'comment' => $Comment, 'weather' => current($weather['results']) ,'moreWeather' => current($moreWeather['results'])]);
     }
 
     /**
@@ -110,5 +112,20 @@ class IndexController extends FrontController
             $params['page'] = 1;
         }
         return $this->render('page', ['data' => $dataList['dataList'], 'page' => $params['page'] ?? 1, 'totalPage' => $dataList['totalPage'], 'params' => $params, 'totalCount' => $dataList['totalCount']]);
+    }
+
+    /**
+     * Notes: 获取近今天 明天 后天天气预报
+     * @author: chentulin
+     * Date: 2020/5/10
+     * Time: 11:50
+     */
+    public function actionGetWeatherReport()
+    {
+        $api = new weatherApiService();
+        // 调用天气服务层
+        $res = $api->getReportWeatherByIp();
+        $this->response->format = Response::FORMAT_JSON;
+        return $this->response->data = ['code' => 200, 'msg' => '成功', 'dataList' => current($res['results']) ];
     }
 }

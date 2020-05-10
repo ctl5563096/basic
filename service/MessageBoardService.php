@@ -28,14 +28,15 @@ class MessageBoardService extends BaseService
      *
      * Notes:
      * @param array $params
+     * @param array $dto
      * @return bool
      * @author: chentulin
      * Date: 2020/5/8
      * Time: 21:44
      */
-    public function createRecord(array $params): bool
+    public function createRecord(array $params,array $dto): bool
     {
-        return $this->messageBoardDao->createRecord($params);
+        return $this->messageBoardDao->createRecord($params,$dto);
     }
 
     /**

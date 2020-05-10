@@ -1,3 +1,10 @@
+<?php
+use yii\helpers\Html;
+?>
+<?=Html::jsFile('@web/js/jq.js')?>
+<?=Html::jsFile('@web/css/layui/layui.js')?>
+<?=Html::cssFile('@web/css/layui/css/layui.css')?>
+<?=Html::jsFile('@web/css/layui/layui.js')?>
 <!DOCTYPE html>
 <html>
 <head>

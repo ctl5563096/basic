@@ -18,14 +18,16 @@ class MessageBoardDao extends MessageBoard
      *
      * Notes:
      * @param array $params
+     * @param array $dto
      * @return bool
      * @author: chentulin
      * Date: 2020/5/8
      * Time: 21:46
      */
-    public function createRecord(array $params): bool
+    public function createRecord(array $params,array $dto): bool
     {
         $dao = new self();
+        $dao->setAttributes($dto);
         $dao->content = $params['content'];
         $dao->name = $params['name'];
         $dao->created_at = time();

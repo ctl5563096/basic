@@ -138,5 +138,46 @@
     function backIndex(){
         window.location.href = 'index'
     }
+
+    // 文章详情
+    function detail(id) {
+        window.location.href = '/front/index/detail?id=' + id
+    }
+
+    // 点赞接口
+    function like(id){
+        $.ajax({
+            url:'/front/index/like',
+            type:'post',
+            dataType:'json',
+            data:{id:id},
+            success: function(data){
+                if (data.code === 200){
+                    alert('感谢点赞')
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            },
+        })
+    }
+
+    // 踩接口
+    function hate(id){
+        $.ajax({
+            url:'/front/index/hate',
+            type:'post',
+            dataType:'json',
+            data:{id:id},
+            success: function(data){
+                if (data.code === 200){
+                    alert('会持续改进,欢迎发送邮件或者留言更正错误地方')
+                }
+            },
+            error: function (err) {
+                console.log(err)
+            },
+        })
+    }
 </script>
 

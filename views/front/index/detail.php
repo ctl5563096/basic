@@ -15,8 +15,8 @@ require __DIR__ . '/../default/header.php'; ?>
     <div class="row title" style="height: 60px;margin: 30px;">
         <div class="card border-0">
             <div class="card-body">
-                <button type="button" class="btn btn-default btn-sm border" onclick="backIndex()">
-                    <span class="glyphicon glyphicon-circle-arrow-left"></span> 返回首页
+                <button type="button" class="btn btn-default btn-sm border" onclick="backLast()">
+                    <span class="glyphicon glyphicon-circle-arrow-left"></span> 返回上一页
                 </button>
             </div>
         </div>
@@ -92,8 +92,9 @@ require __DIR__ . '/../default/header.php'; ?>
 </html>
 <?php require __DIR__ . '/../default/footer.php'; ?>
 <script>
-    function backIndex(){
-        window.location.href = window.location.href = '<?php echo Url::toRoute(['/front/index/index']); ?>';
+    // 返回上一页
+    function backLast(){
+        window.history.back();
     }
     // 点赞接口
     function like(id){

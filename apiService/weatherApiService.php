@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\ClientException;
 use Yii;
 
 /**
- * 心之天气服务
+ * 心知天气服务
  *
  * Class weatherApiService
  * @package app\apiService
@@ -39,5 +39,19 @@ class weatherApiService extends BaseApiService
             $res = $this->httpClient->request('GET' , $this->url);
             return json_decode($res->getBody()->getContents(), true);
         }
+    }
+
+    /**
+     * 通过ip获取未来两天天天气
+     *
+     * Date: 2020/5/9
+     * @return array
+     * @author chentulin
+     */
+    public function getReportWeatherByIp(): array
+    {
+        $this->url = 'https://api.seniverse.com/v3/weather/daily.json?key='. Yii::$app->params['weather']['protect'] .'&location=ip&language=zh-Hans&unit=c&start=0&days=5';
+        $res = $this->httpClient->request('GET' , $this->url);
+        return json_decode($res->getBody()->getContents(), true);
     }
 }

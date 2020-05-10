@@ -12,6 +12,7 @@ require __DIR__ . '/../default/header.php'; ?>
     .clock { position: fixed;top: 30px;left: 150px}
 </style>
 <body οnlοad="newtext()">
+<?php //var_dump($moreWeather); ?>
 <!--<div class="clock"></div>-->
 <div style="width: 300px;position: fixed;right: 0px;top:50px;" class="card">
     <div class="card-header" style="text-align: center">留言板</div>
@@ -47,31 +48,31 @@ require __DIR__ . '/../default/header.php'; ?>
             <a href="/front/index/article-list?module=php" class="text-decoration-none">
                 <img src="/header/php.jpeg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/article-list?module=php"><strong style="font-family: 'Microsoft YaHei UI'">P H P 代 码 录</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;margin-top: 10px"><a href="/front/index/article-list?module=php"><strong style="font-family: 'Microsoft YaHei UI'">P H P 代 码 录</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
             <a href="/front/index/article-list?module=sql">
                 <img src="/header/mysql.jpg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/article-list?module=sql"><strong style="font-family: 'Microsoft YaHei UI'">mysql</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;margin-top: 10px"><a href="/front/index/article-list?module=sql"><strong style="font-family: 'Microsoft YaHei UI'">mysql</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
             <a href="/front/index/article-list?module=system">
                 <img src="/header/system.jpeg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/article-list?module=system"><strong style="font-family: 'Microsoft YaHei UI'">操作系统</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;margin-top: 10px"><a href="/front/index/article-list?module=system"><strong style="font-family: 'Microsoft YaHei UI'">操作系统</strong></a></h4>
         </div>
         <div class="col-sm-3 hot">
             <a href="/front/index/blog">
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588759285737&di=cab165e622d2a77d4b54cb8302496413&imgtype=0&src=http%3A%2F%2Fie.bjd.com.cn%2Fimages%2F201910%2F30%2F5db942a9e4b0d15f72e52ef4.jpeg" width="220px" height="150px">
             </a>
-            <h4 style="text-align: center;font-size: 24px;"><a href="/front/index/blog"><strong style="font-family: 'Microsoft YaHei UI'">博 主 介 绍</strong></a></h4>
+            <h4 style="text-align: center;font-size: 24px;margin-top: 10px"><a href="/front/index/blog"><strong style="font-family: 'Microsoft YaHei UI'">博 主 介 绍</strong></a></h4>
         </div>
     </div>
     <div >
 
     </div>
-    <div class="row main" style="height: 1500px;padding-top: 10px;padding-left: 10px">
+    <div class="row main" style="padding-top: 10px;padding-left: 10px">
         <div class="col-sm-7 border border-left-0 border-bottom-0 border-top-0 " style="margin-right: 50px ">
             <?php foreach ($data as $v):?>
                 <div style="margin-top:20px;padding-bottom: 30px" class="article border border-left-0 border-right-0 border-top-0" style="width: 545px;height: 415px">
@@ -103,11 +104,44 @@ require __DIR__ . '/../default/header.php'; ?>
             <?php endforeach;?>
         </div>
         <div class="col-sm-4 border border-right-2" style="">
-                <h3 style="margin-top: 10px">今 日 天 气</h3>
+                <h3 style="margin-top: 10px">现 在 天 气</h3>
                 <div class="card " style="margin-top: 10px">
-                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 60px">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市 : <?php echo $weather['location']['name'] ?><img src="/header/city.png" class="rounded card-body" style="width: 50px;margin-left: 130px" ></div>
-                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 60px">现在天气 : <?php echo $weather['now']['text'] ?><img src="/black/<?php echo  $weather['now']['code']?>@1x.png" class="rounded card-body" style="width: 50px;margin-left: 130px" ></div>
-                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 60px">气&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;温 : &nbsp;<?php echo $weather['now']['temperature'] ?>&#8451;</div>
+                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 50px">城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;市 : <?php echo $weather['location']['name'] ?><img src="/header/city.png" class="rounded card-body" style="width: 50px;margin-left: 130px" ></div>
+                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 50px">现在天气 : <?php echo $weather['now']['text'] ?><img src="/black/<?php echo  $weather['now']['code']?>@1x.png" class="rounded card-body" style="width: 50px;margin-left: 130px" ></div>
+                    <div class="card-body" style="padding-top: 5px;padding-bottom: 5px;height: 50px">气&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;温 : &nbsp;<?php echo $weather['now']['temperature'] ?>&#8451;</div>
+                    <div class="card-body weather border" style="padding: 0px;display: none;margin-left: 10px;margin-right: 10px;margin-bottom: 10px;">
+                        <div class="card-body" style="padding: 5px;">
+                            明 天 天 气：
+                            <div class="card-body" style="padding: 0px;">
+                                白天天气 : <?php echo $moreWeather['daily'][1]['text_day'] ?>
+                                <img src="/black/<?php echo  $moreWeather['daily']['1']['code_day']?>@1x.png" class="rounded card-body" style="width: 50px;margin-left: 80px" >
+                            </div>
+                            <div class="card-body" style="padding: 0px;">
+                                晚间天气 : <?php echo $moreWeather['daily'][1]['text_night'] ?>
+                                <img src="/black/<?php echo  $moreWeather['daily']['1']['code_night']?>@1x.png" class="rounded card-body" style="width: 50px;margin-left: 80px" >
+                            </div>
+                            <div class="card-body" style="padding: 0px;">
+                                最高气温：<?php echo $moreWeather['daily'][1]['high'] ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最低气温：<?php echo $moreWeather['daily'][1]['low'] ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body weather border" style="padding: 0px;display: none;margin-left: 10px;margin-right: 10px;margin-bottom: 10px;">
+                        <div class="card-body" style="padding: 5px;">
+                            后 天 天 气：
+                            <div class="card-body" style="padding: 0px;">
+                                白天天气 : <?php echo $moreWeather['daily'][2]['text_day'] ?>
+                                <img src="/black/<?php echo  $moreWeather['daily'][2]['code_day']?>@1x.png" class="rounded card-body" style="width: 50px;margin-left: 80px" >
+                            </div>
+                            <div class="card-body" style="padding: 0px;">
+                                晚间天气 : <?php echo $moreWeather['daily'][2]['text_night'] ?>
+                                <img src="/black/<?php echo  $moreWeather['daily'][2]['code_night']?>@1x.png" class="rounded card-body" style="width: 50px;margin-left: 80px" >
+                            </div>
+                            <div class="card-body" style="padding: 0px;">
+                                最高气温：<?php echo $moreWeather['daily'][2]['high'] ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 最低气温：<?php echo $moreWeather['daily'][1]['low'] ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body" id="layerDemo" style="padding-top: 0px;padding-bottom: 0px;height: 50px"><button type="button" class="btn btn-primary weatherButton" data-method="notice" style="margin-left: 100px" onclick="getWeather()">查看明后两天天气</button></div>
                 </div>
 <!--                <H3 style="padding-bottom: 5px;margin-top: 5px" class="border border-right-0 border-top-0 border-left-0">-->
 <!--                    <strong style="font-family: 'Microsoft YaHei UI'">-->
@@ -147,18 +181,18 @@ require __DIR__ . '/../default/header.php'; ?>
             <div class="card" style="margin-top: 50px">
                 <div class="form-group card-body" style="padding-bottom: 0px;margin-bottom: 0px;">
                     <label for="comment" style="text-align: center;margin-left: 50px">「路过总要留点东西下来」</label>
-                    <textarea class="form-control" rows="5" id="content" name="content"></textarea>
+                    <textarea class="form-control" rows="5" id="content" name="content" placeholder="留下你的意见"></textarea>
                     <div class="form-group" style="z-index: 2000">
                         <label for="usr">大 名</label>
-                        <input type="text" class="form-control" id="name" name="name" >
+                        <input type="text" class="form-control" id="name" name="name" placeholder="留下大名">
                     </div>
                     <div class="form-group" style="z-index: 2000">
                         <label for="usr" >邮 箱</label>
-                        <input type="text" class="form-control" id="name" name="mail" >
+                        <input type="text" class="form-control" id="mail" name="mail" placeholder="选填">
                     </div>
                     <div class="form-group" style="z-index: 2000">
                         <label for="usr" >电话号码</label>
-                        <input type="text" class="form-control" id="name" name="phone" >
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="选填">
                     </div>
                     <div class="card-body" style="text-align: center">
                         <button type="button" class="btn btn-primary btn-sm" onclick="messageBoard()">留下你的痕迹 []~(~▽~)~* </button>
@@ -183,10 +217,36 @@ require __DIR__ . '/../default/header.php'; ?>
         </div>
     </nav>
 </div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    模态框（Modal）标题
+                </h4>
+            </div>
+            <div class="modal-body">
+                在这里添加一些文本
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 </body>
 </html>
 <?php require __DIR__ . '/../default/footer.php'; ?>
 <script>
+
     var clock = $(".clock").clock({
             width: 200,       // set width
             height: 200,      // set height
@@ -256,6 +316,8 @@ require __DIR__ . '/../default/header.php'; ?>
         // 获取姓名和内容
         var name = $('#name').val();
         var content = $('#content').val();
+        var mail = $('#mail').val();
+        var phone = $('#phone').val();
         if (name === '' || content === ''){
             alert('请输入完整信息哦 我才能看到你的留言 （￣︶￣）↗!')
             return false;
@@ -264,17 +326,35 @@ require __DIR__ . '/../default/header.php'; ?>
             url:'/front/message/message-board',
             type:'post',
             dataType:'json',
-            data:{content:content,name:name},
+            data:{content:content,name:name,mail:mail,phone:phone},
             success: function(data){
                 if (data.code === 200){
-                    alert('我已经收到你的留言,我会在第一时间回复你，感谢关注 <(￣︶￣)>')
+                    alert('你的留言已经发送到我的邮箱,我会在第一时间回复你，感谢关注 <(￣︶￣)>')
                     $('#name').val('');
                     $('#content').val('');
+                    $('#mail').val('');
+                    $('#phone').val('');
+                }else {
+                    alert(data.msg);
                 }
             },
             error: function (err) {
                 console.log(err)
             },
         })
+    }
+
+    /**
+     * 获取明天和后天天气
+     */
+    function getWeather() {
+        var dom = $('.weather').css('display')
+        if(dom === 'none'){
+            $('.weather').slideDown(1500)
+            $('.weatherButton').text("收起天气预告板")
+        }else {
+            $('.weather').slideUp(1500)
+            $('.weatherButton').text("查看明后两天天气")
+        }
     }
 </script>

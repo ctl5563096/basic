@@ -5,6 +5,7 @@ namespace app\controllers\front;
 
 
 use app\controllers\FrontController;
+use app\dto\MessageBoardDto;
 use app\service\MailService;
 use app\service\MessageBoardService;
 use yii\web\Response;
@@ -38,7 +39,10 @@ class MessageController extends FrontController
     public function actionMessageBoard()
     {
         $params = $this->request->post();
-        $res    = $this->messageBoardService->createRecord($params);
+        $dto    = new MessageBoardDto();
+        $dto->setAttributes($params);
+        $dto->validate();
+        $res = $this->messageBoardService->createRecord($params,$dto->getAttributes());
         if ($res) {
             // 这里需要用异步处理 否则会阻塞留言接口
             $mailService = new MailService();

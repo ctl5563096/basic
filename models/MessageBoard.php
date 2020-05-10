@@ -14,6 +14,8 @@ use yii\db\ActiveRecord;
  * @property int $is_read 是否查看 0/是没有查看 1是已经查看
  * @property int $is_reply 是否回复 0/是没有回复 1是已经回复
  * @property int $is_delete 是否删除 0/是没有删除 1是已经删除
+ * @property int $mail 邮箱
+ * @property int $phone 邮箱
  */
 class MessageBoard extends ActiveRecord
 {
@@ -32,7 +34,7 @@ class MessageBoard extends ActiveRecord
     {
         return [
             [['created_at', 'is_read', 'is_reply', 'is_delete'], 'integer'],
-            [['content', 'name'], 'string', 'max' => 255],
+            [['content', 'name' , 'mail' , 'phone'], 'string', 'max' => 255],
         ];
     }
 
