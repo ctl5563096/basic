@@ -53,13 +53,13 @@ class MessageBoardDao extends MessageBoard
         $provider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
-                'pageSize' => 15,
+                'pageSize' => 10,
             ],
         ]);
 
         return [
             'dataList'   => $provider->getModels(),
-            'totalPage'  => (int)ceil($provider->totalCount / 15),
+            'totalPage'  => (int)ceil($provider->totalCount / 10),
         ];
     }
 }

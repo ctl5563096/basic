@@ -7,7 +7,6 @@ use app\controllers\FrontController;
 use app\service\ArticleService;
 use app\service\CommentService;
 use app\service\MessageBoardService;
-use Pimple\Tests\Fixtures\Service;
 use Yii;
 use yii\web\Response;
 

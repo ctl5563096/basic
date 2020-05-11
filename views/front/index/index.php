@@ -23,7 +23,7 @@ require __DIR__ . '/../default/header.php'; ?>
         </div>
     <?php endforeach; ?>
     <div class="card-body" style="float: right">
-        <button type="button" class="btn btn-primary btn-sm" onclick="messageBoard()" style="float: right">查看更多留言</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="goMessageBoard()" style="float: right">查看更多留言</button>
     </div>
 </div>
 <div class="container main-content" style="width: 1050px;">
@@ -356,5 +356,11 @@ require __DIR__ . '/../default/header.php'; ?>
             $('.weather').slideUp(1500)
             $('.weatherButton').text("查看明后两天天气")
         }
+    }
+
+    // 跳转留言板
+    function goMessageBoard()
+    {
+        window.location.href = '/front/message/index';
     }
 </script>

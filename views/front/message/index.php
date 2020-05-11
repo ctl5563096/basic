@@ -34,6 +34,8 @@
     </html>
 <?php require __DIR__ . '/../default/footer.php'; ?>
 <script>
+    var page = 1;
+    var totalPage;
     // 返回上一页
     function backLast(){
         window.history.back();
@@ -51,16 +53,13 @@
         }
     })
 
+    // 时间戳装换时间类型
     function getLocalTime(nS) {
         return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
     }
 
 
     $(function(){
-        var page = 1;
-        var innerHeight = window.innerHeight;
-        var timer2 = null;
-
         $.ajax({
             type: 'POST',
             url: "/front/message/get-list",
@@ -86,67 +85,68 @@
                         dom += value.content;
                         dom += '</div>';
                         dom += '</div>';
+                        dom += '<div class="card-body"><span class="label label-success">版 主 回 复</span>';
+                        dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
+                        dom += '暂无回复!~';
+                        dom += '</div>';
+                        dom += '</div>';
                         dom += '</div>';
                     });
-                    if (page === parseInt(data.dataList.totalPage)){
-                        dom += '<div class="card-body" style="text-align: center">下滑加载更多';
-                        dom += '</div>';
-                    }else {
-                        dom += '<div class="card-body" style="text-align: center">已经到底啦~！';
-                        dom += '</div>';
-                    }
+                    totalPage = parseInt(data.dataList.totalPage);
                     $('.body-content').append(dom);
                 }}
         })
-
-        $(window).scroll(function(){
-            var scrollTop = $(this).scrollTop();
-            var scrollHeight = $(document).height();
-            var windowHeight = $(this).height();
-            if(scrollTop + windowHeight === scrollHeight){
-                alert("已经到最底部了！");
-            }
-        });
-            var p=0,t=0;
-            $(window).scroll(function(e) {
-
-                var scrollTop = $(this).scrollTop();
-                var scrollHeight = $(document).height();
-                var windowHeight = $(this).height();
-                console.log(scrollTop)
-                console.log(scrollHeight)
-                console.log(windowHeight)
-                if (scrollTop + windowHeight === scrollHeight) {  //滚动到底部执行事件
-                        alert('我到底')
-                }
-                // clearTimeout(timer2);
-                // timer2 = setTimeout(function() {
-                //     p = $(this).scrollTop();
-                //     page++;
-                //     if(t<=p){//下滚
-                //         $.ajax({
-                //             type: 'POST',
-                //             url: "/front/message/get-list",
-                //             data: {page:page},
-                //             dataType: 'json',
-                //             success: function(data){
-                //                 if(data.success==true){
-                //                     var result = '';
-                //                     for(var i=0;i < data.data.list.length; i++){
-                //
-                //
-                //                     }
-                //                     $('.dylist').append(result);
-                //                 }else{
-                //                     $(window).unbind('scroll');
-                //                 }
-                //             }
-                //         });
-                //     }else{
-                //
-                //     } //上滚
-                //     t = p;
-                // }, 200);
-            })
     });
+
+    $(window).scroll(function(e) {
+        console.log(page)
+        console.log(totalPage)
+        if (page < totalPage){
+            page++;
+            setTimeout(function(){
+                $.ajax({
+                type: 'POST',
+                url: "/front/message/get-list?page=" + page,
+                dataType: 'json',
+                success: function(data){
+                    if (data.code ==+ 200) {
+                        var dom = '';
+                        $.each(data.dataList.dataList,function(index,value){
+                            var date = new Date(parseInt(value.created_at));
+                            Y = date.getFullYear() + '-';
+                            M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                            D = date.getDate() + ' ';
+                            h = date.getHours() + ':';
+                            m = date.getMinutes() + ':';
+                            s = date.getSeconds();
+                            dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
+                            dom += '<div class="card-body"><span class="label label-info">热 心 伙 伴</span>  &nbsp;&nbsp;&nbsp;';
+                            dom += value.name;
+                            dom += ' 在 ' + Y + M +D + h + m + s + '时,在博客留下了痕迹';
+                            dom += '</div>';
+                            dom += '<div class="card-body"><span class="label label-primary">留 言 内 容</span>';
+                            dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
+                            dom += value.content;
+                            dom += '</div>';
+                            dom += '</div>';
+                            dom += '<div class="card-body"><span class="label label-success">版 主 回 复</span>';
+                            dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
+                            dom += '暂无回复!~';
+                            dom += '</div>';
+                            dom += '</div>';
+                            dom += '</div>';
+                        });
+                        $('.body-content').append(dom);
+                    }}
+            })},1500);
+        }else if (page === totalPage){
+            page++;
+            $(document).ajaxStop(function() {
+                var dom = '';
+                dom += '<div class="card-body" style="text-align: center">已经到底啦~！';
+                dom += '</div>';
+                $('.body-content').append(dom);
+            });
+        }
+    })
 </script>
