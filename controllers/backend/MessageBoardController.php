@@ -7,6 +7,7 @@ namespace app\controllers\backend;
 use app\commands\BaseController;
 use app\service\MessageBoardService;
 use Yii;
+use yii\web\BadRequestHttpException;
 
 /**
  * 留言板管理模块
@@ -56,7 +57,7 @@ class MessageBoardController extends BaseController
      */
     public function actionList()
     {
-        $params = $this->request->post();
+        $params   = $this->request->post();
         $dataList = $this->messageService->getListBackend($params);
         exit(json_encode([
             'code' => 200,
@@ -69,15 +70,71 @@ class MessageBoardController extends BaseController
      * 改变已读状态
      *
      * Date: 2020/5/11
+     * @throws BadRequestHttpException
      * @author chentulin
      */
     public function actionChangeRead()
     {
-        $id = $this->request->get('id');
+        $id  = $this->request->get('id');
         $res = $this->messageService->changeRead((int)$id);
+        if ($res) {
+            exit(json_encode([
+                'code' => 200,
+                'msg'  => '阅读成功',
+            ]));
+        } else {
+            exit(json_encode([
+                'code' => 400,
+                'msg'  => '阅读失败',
+            ]));
+        }
+    }
+
+    /**
+     * Notes: 删除留言
+     * @throws BadRequestHttpException
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 21:31
+     */
+    public function actionDelete()
+    {
+        $id  = $this->request->get('id');
+        $res = $this->messageService->delete((int)$id);
+        if ($res) {
+            exit(json_encode([
+                'code' => 200,
+                'msg'  => '删除成功',
+            ]));
+        } else {
+            exit(json_encode([
+                'code' => 400,
+                'msg'  => '删除失败',
+            ]));
+        }
+    }
+
+    /**
+     * Notes: 回复接口
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 22:33
+     */
+    public function actionReply()
+    {
+        $id      = $this->request->get('id');
+        $content = $this->request->post('content');
+        $res     = $this->messageService->reply((int)$id, (string)$content);
+        if ($res) {
+            exit(json_encode([
+                'code'    => 200,
+                'msg'     => '回复成功',
+                'content' => $content
+            ]));
+        }
         exit(json_encode([
-            'code' => 200,
-            'msg'  => '阅读成功',
+            'code'    => 400,
+            'msg'     => '失败',
         ]));
     }
 }

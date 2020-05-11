@@ -132,102 +132,188 @@
                 var info = '';
                 info += '<tr>';
                 info += '<td>' + index + '</td>';
-                info += '<td class="layerDemo" data-content="' + obj.id + '">' + '<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal" data-content="' + obj.content  +'">查看留言详情</button>' + '</td>';
+                info += '<td class="layerDemo" data-content="' + obj.id + '">' + '<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal" data-content="' + obj.content + '">查看留言详情</button>' + '</td>';
                 info += '<td>' + obj.name + '</td>';
                 if (parseInt(obj.is_read) === 1) {
                     info += '<td>' + '<input type="checkbox" class="checke" checked onclick="changeStatus(' + obj.id + ')">' + '</td>';
                 } else {
                     info += '<td>' + '<input type="checkbox" class="checke" onclick="changeStatus(' + obj.id + ')">' + '</td>';
                 }
-                if (parseInt(obj.is_read) === 1) {
+                if (parseInt(obj.is_reply) === 1) {
                     info += '<td>' + '<input type="checkbox" class="checke" checked onclick="changeStatus(' + obj.id + ')">' + '</td>';
                 } else {
                     info += '<td>' + '<input type="checkbox" class="checke" onclick="changeStatus(' + obj.id + ')">' + '</td>';
                 }
-                if (obj.mail === ''){
+                if (obj.mail === '') {
                     info += '<td> 无邮箱</td>';
-                }else {
+                } else {
                     info += '<td>' + obj.mail + '</td>';
                 }
-                if (obj.phone === ''){
+                if (obj.phone === '') {
                     info += '<td> 无电话号码</td>';
-                }else {
+                } else {
                     info += '<td>' + obj.phone + '</td>';
                 }
                 info += '<td>' + timestampToTime(obj.created_at) + '</td>';
-                if (obj.reply_time === null){
+                if (obj.reply_time === null) {
                     info += '<td> 无回复</td>';
-                }else {
+                } else {
                     info += '<td>' + timestampToTime(obj.reply_time) + '</td>';
                 }
-                if (obj.reply_content === ''){
-                    info += '<td> 无回复内容</td>';
-                }else {
-                    info += '<td>' + '<button data-method="notice" class="layui-btn" onclick="artDetail(' + obj.id + ')">查看回复详情</button>' + '</td>';
+                if (obj.reply_content === '') {
+                    info += '<td class="layerDemo1">无回复内容</td>';
+                } else {
+                    info += '<td class="layerDemo1">' + '<button data-method="offset" class="layui-btn" data-content="' + obj.reply_content + '">查看回复详情</button>' + '</td>';
                 }
-                info += '<td style="text-align: center;"><button name="btnModify" type="button" class="layui-btn layui-btn-sm" onclick="update(' + obj.id + ')">回复</button><button name="btnDelete" type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="remove(' + obj.id + ')">删除</button></td>';
+                if (obj.reply_content === '') {
+                    info += '<td class="reply" style="text-align: center;"><button name="btnModify" type="button" data-method="notice" class="layui-btn layui-btn-sm" data-content="' + obj.id + '">回复</button><button name="btnDelete" type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="remove(' + 'this' + ',' + obj.id + ')">删除</button></td>';
+                } else {
+                    info += '<td class="reply" style="text-align: center;"><button name="btnModify" type="button" class="layui-btn layui-btn-disabled layui-btn-sm" data-content="' + obj.id + '">回复</button><button name="btnDelete" type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="remove(' + 'this' + ',' + obj.id + ')">删除</button></td>';
+                }
                 info += '</tr>';
                 $("#tab_list").append(info);
             });
-            layui.use('layer', function(){ //独立版的layer无需执行这一句
+            layui.use('layer', function () { //独立版的layer无需执行这一句
                 var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
 
                 //触发事件
                 var active = {
-                    setTop: function(){
-                        var that = this;
-                        //多窗口模式，层叠置顶
-                        layer.open({
-                            type: 2 //此处以iframe举例
-                            ,title: '当你选择该窗体时，即会在最顶端'
-                            ,area: ['390px', '260px']
-                            ,shade: 0
-                            ,maxmin: true
-                            ,offset: [ //为了演示，随机坐标
-                                Math.random()*($(window).height()-300)
-                                ,Math.random()*($(window).width()-390)
-                            ]
-                            ,content: '//layer.layui.com/test/settop.html'
-                            ,btn: ['继续弹出', '全部关闭'] //只是为了演示
-                            ,yes: function(){
-                                $(that).click();
-                            }
-                            ,btn2: function(){
-                                layer.closeAll();
-                            }
-
-                            ,zIndex: layer.zIndex //重点1
-                            ,success: function(layero){
-                                layer.setTop(layero); //重点2
-                            }
-                        });
-                    }
-                    ,offset: function(othis){
+                    offset: function (othis) {
                         var type = othis.data('type')
-                            ,text = othis.attr('data-content')
+                            , text = othis.attr('data-content')
                         layer.open({
                             type: 1
-                            ,offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-                            ,id: 'layerDemo'+type //防止重复弹出
-                            ,content: '<div style="padding: 20px 100px;">'+ text +'</div>'
-                            ,btn: '关闭全部'
-                            ,btnAlign: 'c' //按钮居中
-                            ,shade: 0 //不显示遮罩
-                            ,yes: function(){
+                            , offset: type
+                            , title: '留言详情'
+                            , id: 'layerDemo' + type //防止重复弹出
+                            , content: '<div style="padding: 20px 100px;">' + text + '</div>'
+                            , btn: '关闭全部'
+                            , btnAlign: 'c' //按钮居中
+                            , shade: 0 //不显示遮罩
+                            , yes: function () {
                                 layer.closeAll();
                             }
                         });
 
                     }
                 };
-                $('.layerDemo .layui-btn').on('click', function(){
+
+                //触发事件
+                var active1 = {
+                    offset: function (othis) {
+                        var type = othis.data('type')
+                            , text = othis.attr('data-content')
+                        layer.open({
+                            type: 1
+                            , offset: type
+                            , title: '回复信息'
+                            , id: 'layerDemo' + type //防止重复弹出
+                            , content: '<div style="padding: 20px 100px;">' + text + '</div>'
+                            , btn: '关闭全部'
+                            , btnAlign: 'c' //按钮居中
+                            , shade: 0 //不显示遮罩
+                            , yes: function () {
+                                layer.closeAll();
+                            }
+                        });
+
+                    }
+                };
+
+                //触发事件
+                var active2 = {
+                    notice: function (othis) {
+                        var id = othis.attr('data-content');
+                        //示范一个公告层
+                        layer.open({
+                            type: 1
+                            ,
+                            title: false //不显示标题栏
+                            ,
+                            closeBtn: false
+                            ,
+                            area: '400px;'
+                            ,
+                            shade: 0.8
+                            ,
+                            id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                            ,
+                            btn: ['回复', '退出']
+                            ,
+                            btnAlign: 'c'
+                            ,
+                            moveType: 1 //拖拽模式，0或者1
+                            ,
+                            content: '<div style="padding: 30px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">' +
+                                '<br>回复内容<br>' +
+                                '<textarea placeholder="请输入回复内容" class="layui-textarea-' + id + '"  name="desc" style="margin-top: 10px;height: 100px;width: 300px;"></textarea>' +
+                                '</div>'
+                            ,
+                            success: function (layero) {
+                            }
+                            ,
+                            yes: function (index, layero) {
+                                var class_name = '.layui-textarea-' + id;
+                                var content = $(class_name).val()
+                                if (content === '') {
+                                    layer.msg('请输入回复内容', {
+                                        time: 2000 //2秒关闭（如果不配置，默认是3秒）
+                                    });
+                                    return false
+                                }
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/backend/message-board/reply?id=' + id,
+                                    data: {content: content},
+                                    dataType: 'json',
+                                    success: function (res) {
+                                        if (res.code === 200) {
+                                            layer.msg(res.msg, {
+                                                time: 2000
+                                            });
+                                            $(othis).off('click')
+                                            othis.attr('class','layui-btn layui-btn-disabled layui-btn-sm');
+                                            othis.parent().parent().children().eq(9).html('');
+                                            $(othis.parent().parent().children().eq(9)).append('<button data-method="offset" class="layui-btn" data-content="' + res.content + '">查看回复详情</button>');
+                                            $(othis.parent().parent().children().eq(4)).children('.checke').prop("checked",true)
+                                            // 重新绑定元素
+                                            $('.layerDemo1 .layui-btn').on('click', function () {
+                                                var othis = $(this), method = othis.data('method');
+                                                active1[method] ? active1[method].call(this, othis) : '';
+                                            });
+                                            setTimeout(function () {
+                                                layer.close(index); //如果设定了yes回调，需进行手工关闭
+                                            }, 1500)
+                                        } else {
+                                            layer.msg(res.msg);
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                };
+
+                $('.layerDemo .layui-btn').on('click', function () {
                     var id = $(this).parent().attr('data-content')
-                    $.get('/backend/message-board/change-read?id=' + id , function(res){
-                        alert(1111111)
-                        return
-                    });
+                    var dom = $(this).parent().parent().children('td').eq(3).children('.checke');
+                    $.get('/backend/message-board/change-read?id=' + id, function (res) {
+                        if (res.code === 200) {
+                            dom.prop("checked", true);
+                        }
+                    }, 'json');
                     var othis = $(this), method = othis.data('method');
                     active[method] ? active[method].call(this, othis) : '';
+                });
+
+                $('.layerDemo1 .layui-btn').on('click', function () {
+                    var othis = $(this), method = othis.data('method');
+                    active1[method] ? active1[method].call(this, othis) : '';
+                });
+
+                $('.reply .layui-btn').on('click', function () {
+                    var othis = $(this), method = othis.data('method');
+                    active2[method] ? active2[method].call(this, othis) : '';
                 });
             });
         }
@@ -257,12 +343,12 @@
             }, 'json')
         }
 
-        function remove(id) {
-            $.post('/backend/article/delete?id=' + id, {}, function (data) {
+        function remove(e, id) {
+            var dom = e;
+            $.post('/backend/message-board/delete?id=' + id, {}, function (data) {
                 if (data.code === 200) {
-                    layer.msg(data.msg, {time: 1500}, function () {
-                        window.location.href = '/backend/article/index'
-                    });
+                    layer.msg(data.msg)
+                    $(dom).parent().parent().remove();
                 }
             }, 'json')
         }

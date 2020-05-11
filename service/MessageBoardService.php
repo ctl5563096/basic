@@ -34,9 +34,9 @@ class MessageBoardService extends BaseService
      * Date: 2020/5/8
      * Time: 21:44
      */
-    public function createRecord(array $params,array $dto): bool
+    public function createRecord(array $params, array $dto): bool
     {
-        return $this->messageBoardDao->createRecord($params,$dto);
+        return $this->messageBoardDao->createRecord($params, $dto);
     }
 
     /**
@@ -48,7 +48,7 @@ class MessageBoardService extends BaseService
      */
     public static function findHotMessage(): array
     {
-        return MessageBoardDao::find()->select(['content','name','created_at'])->where(['is_delete' => 0])->orderBy(['created_at' => SORT_ASC])->asArray()->limit(3)->all();
+        return MessageBoardDao::find()->select(['content', 'name', 'created_at'])->where(['is_delete' => 0])->orderBy(['created_at' => SORT_ASC])->asArray()->limit(3)->all();
     }
 
     /**
@@ -82,10 +82,46 @@ class MessageBoardService extends BaseService
      * Date: 2020/5/11
      * @param int $id
      * @return bool
+     * @throws \yii\web\BadRequestHttpException
      * @author chentulin
      */
     public function changeRead(int $id): bool
     {
         return (new MessageBoardDao())->changeRead($id);
+    }
+
+    /**
+     * Notes:
+     * @param int $id
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 21:32
+     */
+    public function delete(int $id): bool
+    {
+        return (new MessageBoardDao())->changeDelete($id);
+    }
+
+    /**
+     * Notes: 发邮服务
+     * @param int $id
+     * @param string $content
+     * @return bool
+     * @author: chentulin
+     * Date: 2020/5/11
+     * Time: 22:58
+     */
+    public function reply(int $id, string $content): bool
+    {
+        $dao = MessageBoardDao::findOne(['id' => $id]);
+        $res = (new MailService())->sendMailByMail($content, $dao->mail);
+        if (true) {
+            $dao->reply_content = $content;
+            $dao->is_reply = 1;
+            return $dao->save();
+        }
+        return false;
     }
 }

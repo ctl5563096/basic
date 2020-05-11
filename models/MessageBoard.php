@@ -14,10 +14,10 @@ use yii\db\ActiveRecord;
  * @property int $is_read 是否查看 0/是没有查看 1是已经查看
  * @property int $is_reply 是否回复 0/是没有回复 1是已经回复
  * @property int $is_delete 是否删除 0/是没有删除 1是已经删除
- * @property int $mail 邮箱
+ * @property string $mail 邮箱
  * @property int $phone 电话号码
  * @property int reply_time 回复时间
- * @property string string $reply_content 回复内容
+ * @property string $reply_content 回复内容
  */
 class MessageBoard extends ActiveRecord
 {
