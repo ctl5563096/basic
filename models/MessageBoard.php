@@ -15,7 +15,9 @@ use yii\db\ActiveRecord;
  * @property int $is_reply 是否回复 0/是没有回复 1是已经回复
  * @property int $is_delete 是否删除 0/是没有删除 1是已经删除
  * @property int $mail 邮箱
- * @property int $phone 邮箱
+ * @property int $phone 电话号码
+ * @property int reply_time 回复时间
+ * @property string string $reply_content 回复内容
  */
 class MessageBoard extends ActiveRecord
 {
@@ -33,8 +35,9 @@ class MessageBoard extends ActiveRecord
     public function rules()
     {
         return [
-            [['created_at', 'is_read', 'is_reply', 'is_delete'], 'integer'],
-            [['content', 'name' , 'mail' , 'phone'], 'string', 'max' => 255],
+            [['created_at', 'is_read', 'is_reply', 'is_delete', 'reply_time'], 'integer'],
+            [['content', 'name', 'mail', 'phone'], 'string', 'max' => 255],
+            [['reply_content'], 'string']
         ];
     }
 
@@ -44,13 +47,15 @@ class MessageBoard extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'content' => 'Content',
-            'created_at' => 'Created At',
-            'name' => 'Name',
-            'is_read' => 'Is Read',
-            'is_reply' => 'Is Reply',
-            'is_delete' => 'Is Delete',
+            'id'            => 'ID',
+            'content'       => 'Content',
+            'created_at'    => 'Created At',
+            'name'          => 'Name',
+            'is_read'       => 'Is Read',
+            'is_reply'      => 'Is Reply',
+            'is_delete'     => 'Is Delete',
+            'reply_time'    => '回复时间',
+            'reply_content' => '回复内容'
         ];
     }
 }

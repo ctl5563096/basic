@@ -62,4 +62,30 @@ class MessageBoardService extends BaseService
     {
         return MessageBoardDao::getDataList();
     }
+
+    /**
+     * 后台获取留言列表
+     *
+     * Date: 2020/5/11
+     * @param array $params
+     * @return array
+     * @author chentulin
+     */
+    public function getListBackend(array $params): array
+    {
+        return MessageBoardDao::getListBackend($params);
+    }
+
+    /**
+     * 改变已读状态
+     *
+     * Date: 2020/5/11
+     * @param int $id
+     * @return bool
+     * @author chentulin
+     */
+    public function changeRead(int $id): bool
+    {
+        return (new MessageBoardDao())->changeRead($id);
+    }
 }
