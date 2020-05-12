@@ -117,11 +117,33 @@ class MessageBoardService extends BaseService
     {
         $dao = MessageBoardDao::findOne(['id' => $id]);
         $res = (new MailService())->sendMailByMail($content, $dao->mail);
-        if (true) {
+        if ($res) {
             $dao->reply_content = $content;
             $dao->is_reply = 1;
             return $dao->save();
         }
         return false;
+    }
+
+    /**
+     * 获取留言板统计
+     *
+     * Date: 2020/5/12
+     * @param string $type
+     * @param int $date
+     * @return array
+     * @author chentulin
+     */
+    public function getDataCount(string $type,int $date): array
+    {
+        switch ($type){
+            case 'day':
+                return $this->messageBoardDao->getDayCount($date);
+            case 'week':
+                return $this->messageBoardDao->getWeekCount($date);
+            case 'month':
+                return $this->messageBoardDao->getMonthCount($date);
+        }
+        return [];
     }
 }

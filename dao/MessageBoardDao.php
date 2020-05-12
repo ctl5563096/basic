@@ -135,13 +135,15 @@ class MessageBoardDao extends MessageBoard
     }
 
     /**
-     * Notes:
-     * @author: chentulin
-     * Date: 2020/5/11
-     * Time: 19:51
+     * 获取每日统计数量
+     *
+     * Date: 2020/5/12
+     * @param int $date
+     * @return array
+     * @author chentulin
      */
-//    public function afterFind()
-//    {
-//        var_dump($this);die();
-//    }
+    public function getDayCount(int $date): array
+    {
+
+    }
 }

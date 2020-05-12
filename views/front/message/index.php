@@ -85,9 +85,13 @@
                         dom += value.content;
                         dom += '</div>';
                         dom += '</div>';
-                        dom += '<div class="card-body"><span class="label label-success">版 主 回 复</span>';
+                        dom += '<div class="card-body"><span class="label label-success">博 主 回 复</span>';
                         dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
-                        dom += '暂无回复!~';
+                        if (value.reply_content === ''){
+                            dom += '暂无回复,博主看到消息会第一时间回复你~!';
+                        }else {
+                            dom += value.reply_content;
+                        }
                         dom += '</div>';
                         dom += '</div>';
                         dom += '</div>';
@@ -129,9 +133,13 @@
                             dom += value.content;
                             dom += '</div>';
                             dom += '</div>';
-                            dom += '<div class="card-body"><span class="label label-success">版 主 回 复</span>';
+                            dom += '<div class="card-body"><span class="label label-success">博 主 回 复</span>';
                             dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
-                            dom += '暂无回复!~';
+                            if (value.reply_content === ''){
+                                dom += '暂无回复,博主看到消息会第一时间回复你~!';
+                            }else {
+                                dom += value.reply_content;
+                            }
                             dom += '</div>';
                             dom += '</div>';
                             dom += '</div>';
