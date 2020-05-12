@@ -58,8 +58,8 @@ class DataCountController extends BaseController
             $dateArr = explode('-',$date);
             $date = mktime(0,0,0,(int)date($dateArr[1]),(int)date($dateArr[2]),(int)date($dateArr[0]));
         }
-        $this->messageService->getDataCount('day',$date);
-        return $this->render('index');
+        $data = $this->messageService->getDataCount('day',$date);
+        return $this->render('index',array('data' => $data));
     }
 
     /**
@@ -81,6 +81,6 @@ class DataCountController extends BaseController
      */
     public function actionMonth()
     {
-        return $this->render('4month');
+        return $this->render('month');
     }
 }

@@ -135,7 +135,7 @@ class MessageBoardDao extends MessageBoard
     }
 
     /**
-     * 获取每日统计数量
+     * 获取每日统计数量留言
      *
      * Date: 2020/5/12
      * @param int $date
@@ -144,6 +144,45 @@ class MessageBoardDao extends MessageBoard
      */
     public function getDayCount(int $date): array
     {
+        $count = [];
+        $timeRes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        foreach ($timeRes as $key => $value){
+            $num = $key + 1;
+            $beginTime = $key * 3600 + $date;
+            $endTime = ($num * 3600 +  $date) - 1;
+            $data = (new Query())
+                ->from(self::tableName())
+                ->select(['created_at'])
+                ->where(['between' ,'created_at' ,$beginTime ,$endTime])
+                ->count();
+            $count[$key] = (int)$data;
+        }
+        return $count;
+    }
 
+    /**
+     * Notes: 获取每周留言板统计
+     * @param int $date
+     * @return array
+     * @author: chentulin
+     * Date: 2020/5/13
+     * Time: 1:13
+     */
+    public function getWeekCount(int $date): array
+    {
+        return [];
+    }
+
+    /**
+     * Notes: 获取每月统计
+     * @param int $date
+     * @return array
+     * @author: chentulin
+     * Date: 2020/5/13
+     * Time: 1:14
+     */
+    public function getMonthCount(int $date): array
+    {
+        return [];
     }
 }
