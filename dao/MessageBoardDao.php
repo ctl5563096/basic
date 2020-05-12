@@ -77,6 +77,9 @@ class MessageBoardDao extends MessageBoard
         $query = new Query();
         $query->from(self::tableName());
         $query->where(['is_delete' => 0]);
+        $query->andFilterWhere(['is_read' => $params['is_read'] ?? null]);
+        $query->andFilterWhere(['is_reply' => $params['is_reply'] ?? null]);
+        $query->andFilterWhere(['like' , 'name', $params['name'] ?? null]);
         $query->orderBy(['created_at' => SORT_DESC]);
 
         $provider = new ActiveDataProvider([

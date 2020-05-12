@@ -34,11 +34,40 @@
     }
 </style>
 <div class="layui-body" style="color: #0C0C0C">
-    <div>
-        <button name="btnModify" type="button" class="layui-btn" style="float: right;margin: 10px" onclick="addNew()">
-            添加新文章
-        </button>
-    </div>
+    <form class="layui-form">
+        <div class="layui-form-item" style="margin-top: 10px">
+            <label class="layui-form-label" style="width: 110px;padding-right: 5px">请选择筛选条件 :</label>
+            <div class="layui-inline">
+                <div class="layui-input-inline" style="width: 150px;">
+                    <select name="is_ready" id="searchRead">
+                        <option value="">请选择已读状态</option>
+                        <option value="1">已读</option>
+                        <option value="0">未读</option>
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-input-inline" style="width: 150px;margin-right: 0px;">
+                    <select name="is_reply" id="searchReply">
+                        <option value="">请选择回复状态</option>
+                        <option value="1">已回</option>
+                        <option value="0">未回</option>
+                        <option value="">全部</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label" style="padding:9px 0px;text-align: center;">留言人:</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                    <button type="button" class="layui-btn" onclick="initLayPage()">搜索</button>
+            </div>
+        </div>
+    </form>
     <div class="container content">
         <div class="row">
             <div>
@@ -79,7 +108,8 @@
     <?php require __DIR__ . '/../default/footer.php'; ?>
     <script>
         //JavaScript代码区域
-        layui.use(['layer', 'element', 'table'], function () {
+        layui.use(['form','layer', 'element', 'table'], function () {
+            var form = layui.form
             var element = layui.element;
             var $ = layui.jquery, layer = layui.layer;
             var table = layui.table;
@@ -95,9 +125,11 @@
         function initLayPage(pageConf) {
             if (!pageConf) {
                 pageConf = {};
+                pageConf.is_read = $("#searchRead").val();
+                pageConf.is_reply = $("#searchReply").val();
+                pageConf.name = $("input[name='name']").val();
                 pageConf.pageSize = 10;
                 pageConf.page = 1;
-
             }
             $.post("/backend/message-board/list", pageConf, function (data) {
                 layui.use(['laypage', 'layer'], function () {
@@ -316,10 +348,6 @@
                     active2[method] ? active2[method].call(this, othis) : '';
                 });
             });
-        }
-
-        function artDetail(id) {
-            window.open('content?id=' + id, '文章详情', 'height=600, width=600, top=100, left=600, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no')
         }
 
         function timestampToTime(timestamp) {

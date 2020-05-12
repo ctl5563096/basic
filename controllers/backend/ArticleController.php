@@ -8,6 +8,7 @@ use app\commands\BaseController;
 use app\dao\ArticleDao;
 use app\dto\ArticleDto;
 use app\service\ArticleService;
+use app\service\CommentService;
 use Yii;
 use yii\web\Response;
 
@@ -20,6 +21,7 @@ use yii\web\Response;
  * @property ArticleDto $articleDto
  * @property ArticleDao $articleDao
  * @property ArticleService $articleService;
+ * @property CommentService $commentService;
  */
 class ArticleController extends BaseController
 {
@@ -39,6 +41,9 @@ class ArticleController extends BaseController
     /** @var ArticleService $articleService */
     public $articleService;
 
+    /** @var CommentService  $commentService */
+    public $commentService;
+
     /**
      * ArticleController constructor.
      * @param $id
@@ -52,6 +57,7 @@ class ArticleController extends BaseController
         $this->articleDto     = new ArticleDto();
         $this->articleDao     = new ArticleDao();
         $this->articleService = new ArticleService();
+        $this->commentService = new CommentService();
     }
 
     /**
@@ -157,5 +163,48 @@ class ArticleController extends BaseController
         $detail = $this->articleService->detailService((int)$this->request->get('id'));
         $label  = explode(',', $detail->label);
         return $this->render('detail', array('detail' => $detail, 'label' => $label));
+    }
+
+    /**
+     * 获取所有文章的评论
+     *
+     * Date: 2020/5/12
+     * @author chentulin
+     */
+    public function actionComment()
+    {
+        if ($this->request->isAjax){
+            $params = $this->request->post();
+            $res = $this->commentService->getAllList($params);
+            exit(json_encode([
+                'code' => 200,
+                'msg'  => '获取列表成功',
+                'list' => $res
+            ]));
+        }
+        return $this->render('list');
+    }
+
+    /**
+     * 删除评论
+     *
+     * Date: 2020/5/12
+     * @author chentulin
+     */
+    public function actionDeleteComment()
+    {
+        $id  = $this->request->get('id');
+        $res = $this->commentService->delete((int)$id);
+        if ($res) {
+            exit(json_encode([
+                'code' => 200,
+                'msg'  => '删除成功',
+            ]));
+        } else {
+            exit(json_encode([
+                'code' => 400,
+                'msg'  => '删除失败',
+            ]));
+        }
     }
 }

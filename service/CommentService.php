@@ -8,6 +8,11 @@ use app\dao\CommentDao;
 use app\dto\CommentDto;
 use yii\web\Response;
 
+/**
+ * Class CommentService
+ * @package app\service
+ * @property CommentDao $commentDao
+ */
 class CommentService extends BaseService
 {
     /** @var CommentDao $commentDao */
@@ -19,7 +24,7 @@ class CommentService extends BaseService
     public function __construct()
     {
         parent::__construct();
-        $this->commentDao = new commentDao();
+        $this->commentDao = new CommentDao();
     }
 
     /**
@@ -58,5 +63,31 @@ class CommentService extends BaseService
 
         $this->response->format = Response::FORMAT_JSON;
         return $this->response->data = ['code' => 400, 'msg' => current($dao->getFirstErrors())];
+    }
+
+    /**
+     * 后台获取文章评论列表
+     *
+     * Date: 2020/5/12
+     * @param array $params
+     * @return array
+     * @author chentulin
+     */
+    public function getAllList(array $params): array
+    {
+        return $this->commentDao->findAllByParams($params);
+    }
+
+    /**
+     * 删除评论
+     *
+     * Date: 2020/5/12
+     * @param int $id
+     * @return bool
+     * @author chentulin
+     */
+    public function delete(int $id): bool
+    {
+        return $this->commentDao->deleteComment($id);
     }
 }
