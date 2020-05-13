@@ -8,6 +8,7 @@ use app\models\AdminUser;
 use app\models\Article;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 use yii\debug\models\timeline\DataProvider;
 use yii\web\BadRequestHttpException;
 
@@ -47,7 +48,7 @@ class ArticleDao extends Article
             'query'      => $query->asArray(),
             'pagination' => [
                 'pageSize' => $params['pageSize'],
-                'page'     => $params['page']-1,
+                'page'     => $params['page'] - 1,
             ],
         ]);
         return [
@@ -72,7 +73,7 @@ class ArticleDao extends Article
             'query'      => $query->asArray(),
             'pagination' => [
                 'pageSize' => $params['pageSize'],
-                'page'     => $params['page']-1,
+                'page'     => $params['page'] - 1,
             ],
         ]);
         return [
@@ -95,5 +96,83 @@ class ArticleDao extends Article
         $this->author     = (int)Yii::$app->session->get('user_id');
         $this->created_at = time();
         return $this->save();
+    }
+
+    /**
+     * 获取每日文章统计数
+     *
+     * Date: 2020/5/12
+     * @param int $date
+     * @return array
+     * @author chentulin
+     */
+    public function getDayCount(int $date): array
+    {
+        $countArticle = [];
+        $timeRes      = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        foreach ($timeRes as $key => $value) {
+            $num                = $key + 1;
+            $beginTime          = $key * 3600 + $date;
+            $endTime            = ($num * 3600 + $date) - 1;
+            $data               = (new Query())
+                ->from(self::tableName())
+                ->select(['created_at'])
+                ->where(['between', 'created_at', $beginTime, $endTime])
+                ->count();
+            $countArticle[$key] = (int)$data;
+        }
+        return $countArticle;
+    }
+
+    /**
+     * Notes: 获取每周文章统计
+     * @param int $date
+     * @return array
+     * @author: chentulin
+     * Date: 2020/5/13
+     * Time: 1:13
+     */
+    public function getWeekCount(int $date): array
+    {
+        $count   = [];
+        $timeRes = [0, 0, 0, 0, 0, 0, 0];
+        foreach ($timeRes as $key => $value) {
+            $num         = $key + 1;
+            $beginTime   = $key * 86400 + $date;
+            $endTime     = ($num * 86400 + $date) - 1;
+            $data        = (new Query())
+                ->from(self::tableName())
+                ->select(['created_at'])
+                ->where(['between', 'created_at', $beginTime, $endTime])
+                ->count();
+            $count[$key] = (int)$data;
+        }
+        return $count;
+    }
+
+    /**
+     * Notes: 获取每月统计
+     * @param int $date
+     * @return array
+     * @author: chentulin
+     * Date: 2020/5/13
+     * Time: 1:14
+     */
+    public function getMonthCount(int $date): array
+    {
+        $count   = [];
+        $timeRes = [0, 0, 0, 0];
+        foreach ($timeRes as $key => $value) {
+            $num         = $key + 1;
+            $beginTime   = $key * 604800 + $date;
+            $endTime     = ($num * 604800 + $date) - 1;
+            $data        = (new Query())
+                ->from(self::tableName())
+                ->select(['created_at'])
+                ->where(['between', 'created_at', $beginTime, $endTime])
+                ->count();
+            $count[$key] = (int)$data;
+        }
+        return $count;
     }
 }

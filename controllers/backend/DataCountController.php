@@ -52,14 +52,22 @@ class DataCountController extends BaseController
     public function actionIndex()
     {
         $date = $this->request->get('time');
-        if (!isset($date)){
-            $date = mktime(0,0,0,(int)date('m'),(int)date('d'),(int)date('Y'));
-        }else{
-            $dateArr = explode('-',$date);
-            $date = mktime(0,0,0,(int)date($dateArr[1]),(int)date($dateArr[2]),(int)date($dateArr[0]));
+        if (!isset($date)) {
+            $date = mktime(0, 0, 0, (int)date('m'), (int)date('d'), (int)date('Y'));
+        } else {
+            $dateArr = explode('-', $date);
+            $date    = mktime(0, 0, 0, (int)date($dateArr[1]), (int)date($dateArr[2]), (int)date($dateArr[0]));
         }
-        $data = $this->messageService->getDataCount('day',$date);
-        return $this->render('index',array('data' => $data));
+        $messageData  = $this->messageService->getDataCount('day', $date);
+        $articleData  = $this->articleService->getDataCount('day', $date);
+        $accessData   = $this->accessService->getDataCount('day', $date);
+        $messageTotal = array_sum($messageData);
+        $articleTotal = array_sum($articleData);
+        $accessTotal  = array_sum($accessData);
+        $messageData  = implode(',', $messageData);
+        $articleData  = implode(',', $articleData);
+        $accessData   = implode(',', $accessData);
+        return $this->render('index', array('messageData' => $messageData, 'messageTotal' => $messageTotal, 'articleData' => $articleData, 'articleTotal' => $articleTotal, 'accessTotal' => $accessTotal, 'accessData' => $accessData));
     }
 
     /**
@@ -70,7 +78,26 @@ class DataCountController extends BaseController
      */
     public function actionWeek()
     {
-        return $this->render('week');
+        $date         = mktime(0, 0, 0, (int)date('m'), (int)date('d') - date('w') + 1, (int)date('Y'));
+        $messageData  = $this->messageService->getDataCount('week', $date);
+        $articleData  = $this->articleService->getDataCount('week', $date);
+        $accessData   = $this->accessService->getDataCount('week', $date);
+        $messageTotal = array_sum($messageData);
+        $messageData  = implode(',', $messageData);
+        $articleTotal = array_sum($articleData);
+        $articleData  = implode(',', $articleData);
+        $accessTotal  = array_sum($accessData);
+        $accessData   = implode(',', $accessData);
+        return $this->render('week',
+            [
+                'messageData'  => $messageData,
+                'messageTotal' => $messageTotal,
+                'articleData'  => $articleData,
+                'articleTotal' => $articleTotal,
+                'accessTotal'  => $accessTotal,
+                'accessData'   => $accessData
+            ]
+        );
     }
 
     /**
@@ -81,6 +108,25 @@ class DataCountController extends BaseController
      */
     public function actionMonth()
     {
-        return $this->render('month');
+        $date         = mktime(0, 0, 0, (int)date('m'), 1, (int)date('Y'));
+        $messageData  = $this->messageService->getDataCount('month', $date);
+        $articleData  = $this->articleService->getDataCount('month', $date);
+        $accessData   = $this->accessService->getDataCount('month', $date);
+        $messageTotal = array_sum($messageData);
+        $messageData  = implode(',', $messageData);
+        $articleTotal = array_sum($articleData);
+        $articleData  = implode(',', $articleData);
+        $accessTotal  = array_sum($accessData);
+        $accessData   = implode(',', $accessData);
+        return $this->render('month',
+            [
+                'messageData'  => $messageData,
+                'messageTotal' => $messageTotal,
+                'articleData'  => $articleData,
+                'articleTotal' => $articleTotal,
+                'accessTotal'  => $accessTotal,
+                'accessData'   => $accessData
+            ]
+        );
     }
 }

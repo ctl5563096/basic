@@ -79,7 +79,7 @@ class MessageBoardDao extends MessageBoard
         $query->where(['is_delete' => 0]);
         $query->andFilterWhere(['is_read' => $params['is_read'] ?? null]);
         $query->andFilterWhere(['is_reply' => $params['is_reply'] ?? null]);
-        $query->andFilterWhere(['like' , 'name', $params['name'] ?? null]);
+        $query->andFilterWhere(['like', 'name', $params['name'] ?? null]);
         $query->orderBy(['created_at' => SORT_DESC]);
 
         $provider = new ActiveDataProvider([
@@ -144,16 +144,16 @@ class MessageBoardDao extends MessageBoard
      */
     public function getDayCount(int $date): array
     {
-        $count = [];
-        $timeRes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        foreach ($timeRes as $key => $value){
-            $num = $key + 1;
-            $beginTime = $key * 3600 + $date;
-            $endTime = ($num * 3600 +  $date) - 1;
-            $data = (new Query())
+        $count   = [];
+        $timeRes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        foreach ($timeRes as $key => $value) {
+            $num         = $key + 1;
+            $beginTime   = $key * 3600 + $date;
+            $endTime     = ($num * 3600 + $date) - 1;
+            $data        = (new Query())
                 ->from(self::tableName())
                 ->select(['created_at'])
-                ->where(['between' ,'created_at' ,$beginTime ,$endTime])
+                ->where(['between', 'created_at', $beginTime, $endTime])
                 ->count();
             $count[$key] = (int)$data;
         }
@@ -170,7 +170,20 @@ class MessageBoardDao extends MessageBoard
      */
     public function getWeekCount(int $date): array
     {
-        return [];
+        $count   = [];
+        $timeRes = [0, 0, 0, 0, 0, 0, 0];
+        foreach ($timeRes as $key => $value) {
+            $num         = $key + 1;
+            $beginTime   = $key * 86400 + $date;
+            $endTime     = ($num * 86400 + $date) - 1;
+            $data        = (new Query())
+                ->from(self::tableName())
+                ->select(['created_at'])
+                ->where(['between', 'created_at', $beginTime, $endTime])
+                ->count();
+            $count[$key] = (int)$data;
+        }
+        return $count;
     }
 
     /**
@@ -183,6 +196,19 @@ class MessageBoardDao extends MessageBoard
      */
     public function getMonthCount(int $date): array
     {
-        return [];
+        $count   = [];
+        $timeRes = [0, 0, 0, 0];
+        foreach ($timeRes as $key => $value) {
+            $num         = $key + 1;
+            $beginTime   = $key * 604800 + $date;
+            $endTime     = ($num * 604800 + $date) - 1;
+            $data        = (new Query())
+                ->from(self::tableName())
+                ->select(['created_at'])
+                ->where(['between', 'created_at', $beginTime, $endTime])
+                ->count();
+            $count[$key] = (int)$data;
+        }
+        return $count;
     }
 }

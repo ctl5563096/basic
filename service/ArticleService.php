@@ -244,4 +244,26 @@ class ArticleService extends BaseService
             'totalCount' => $provider->totalCount
         ];
     }
+
+    /**
+     * 获取每日文章情况
+     *
+     * Date: 2020/5/12
+     * @param string $type
+     * @param int $date
+     * @return array
+     * @author chentulin
+     */
+    public function getDataCount(string $type,int $date): array
+    {
+        switch ($type){
+            case 'day':
+                return $this->articleDao->getDayCount($date);
+            case 'week':
+                return $this->articleDao->getWeekCount($date);
+            case 'month':
+                return $this->articleDao->getMonthCount($date);
+        }
+        return [];
+    }
 }
