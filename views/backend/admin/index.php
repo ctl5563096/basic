@@ -95,6 +95,44 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">数据统计</h2>
+                                <div class="layui-colla-content">
+                                    <div class="layui-collapse" lay-accordion="">
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">每日数据</h2>
+                                            <div class="layui-colla-content">
+                                                <p>每小时留言,新增文章,访问人数统计模块</p>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">每周数据</h2>
+                                            <div class="layui-colla-content">
+                                                <p>每天留言,新增文章,访问人数统计模块</p>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">每月数据</h2>
+                                            <div class="layui-colla-content">
+                                                <p>每周留言,新增文章,访问人数统计模块</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">相册</h2>
+                                <div class="layui-colla-content">
+                                    <div class="layui-collapse" lay-accordion="">
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">相册列表</h2>
+                                            <div class="layui-colla-content">
+                                                <p>相册管理功能</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
