@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-    <h2 style="text-align: center">留 言 区</h2>
+    <h2 style="text-align: center">生 活 圈 子</h2>
     <div class="body-content border border-0  card" style="margin: 30px;">
     </div>
 </div>
@@ -42,18 +42,6 @@
     function backLast() {
         window.history.back();
     }
-
-    $.ajax({
-        cache: false,
-        async: false,
-        dataType: 'json',
-        type: 'post',
-        url: "/front/message/get-list",
-        data: {year: 2017},
-        success: function (data) {
-
-        }
-    })
 
     // 时间戳装换时间类型
     function getLocalTime(nS) {
