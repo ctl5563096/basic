@@ -58,4 +58,39 @@ class PhotoService extends BaseService
         $list =  $this->photoDao->getList($page);
         return  $this->photoLogic->getDayPhoto($list,$page);
     }
+
+    /**
+     * 获取总条数
+     *
+     * Date: 2020/5/14
+     * @author chentulin
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return (int)$this->photoDao::find()->count();
+    }
+
+    /**
+     *
+     * Date: 2020/5/14
+     * @param int $id
+     * @return int
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     * @author chentulin
+     */
+    public function delete(int $id): bool
+    {
+        $dao = $this->photoDao::findOne(['id' => $id]);
+        if (!$dao){
+            exit(json_encode([
+                'code'  => 400,
+                'msg'   => '没有找到资源',
+            ]));
+        }
+        $url = $dao->url;
+        $num = $dao->delete();
+        return $num > 0 && unlink($url);
+    }
 }

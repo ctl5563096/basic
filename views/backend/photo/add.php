@@ -117,8 +117,9 @@
                         data: {url: res.url, type: type, content: content},
                         success: function (data) {
                             if (data.code === 200){
-                                layer.msg('新增相册成功',{time:1500})
-
+                                layer.msg('新增相册成功',{time:1500},function () {
+                                    window.location.href = '/backend/photo/index'
+                                });
                             }
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {

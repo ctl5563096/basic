@@ -7,6 +7,7 @@ namespace app\dao;
 use app\models\Photo;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
+use yii\di\NotInstantiableException;
 
 /**
  * 相册数据访问层
@@ -42,8 +43,8 @@ class PhotoDao extends Photo
      */
     public function getList(int $page): array
     {
-        $endTime   = strtotime(date("Y-m-d", time())) + 86400 * $page - 1 ;
-        $startTime = strtotime(date("Y-m-d", time())) - 86400 * $page * 4;
+        $endTime   = (strtotime(date('Y-m-d')) + 86400 - 1) - ($page - 1) * 86400 * 5;
+        $startTime = strtotime(date('Y-m-d')) - 86400 * $page * 5;
         $query     = new Query();
         $query->from(self::tableName());
         $query->select('*');

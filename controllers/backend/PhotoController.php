@@ -3,10 +3,10 @@
 
 namespace app\controllers\backend;
 
-
 use app\commands\BaseController;
 use app\dto\PhotoDto;
 use app\service\PhotoService;
+use yii\db\StaleObjectException;
 use yii\web\UploadedFile;
 
 /**
@@ -76,7 +76,7 @@ class PhotoController extends BaseController
                 'msg'  => '上传文件不能为空'
             ]));
         }
-        $imageName = date('Y-m-d');
+        $imageName = date('YmdHis');
         $ext       = $file->getExtension();
         $rootPath  = 'upload/image/';
         if (!file_exists($rootPath) && !mkdir($rootPath, 0777, true) && !is_dir($rootPath)) {
@@ -122,10 +122,32 @@ class PhotoController extends BaseController
      */
     public function actionList()
     {
-        $page = (int)$this->request->get('page') ?? 1;
-        if ((int)$this->request->get('page') === 0){
+        $page = (int)$this->request->get('page');
+        if ($page === 0) {
             $page = 1;
         }
         $list = $this->photoService->getList($page);
+        exit(json_encode([
+            'code'  => 200,
+            'msg'   => '获取相册列表成功',
+            'data'  => $list,
+            'count' => $this->photoService->getCount()
+        ]));
+    }
+
+    /**
+     * 删除照片
+     *
+     * Date: 2020/5/14
+     * @author chentulin
+     */
+    public function actionDelete()
+    {
+        $id  = (int)$this->request->get('id');
+        $res = $this->photoService->delete($id);
+        exit(json_encode([
+            'code'  => 200,
+            'msg'   => '删除成功'
+        ]));
     }
 }
