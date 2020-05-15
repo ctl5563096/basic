@@ -1,9 +1,5 @@
 <?php require __DIR__ . '/../default/header.php'; ?>
 <?php require __DIR__ . '/../default/menu.php'; ?>
-<?php
-use yii\helpers\Html;
-?>
-<?=Html::jsFile('@web/js/jquery.lazyload.js')?>
 <div class="layui-body" style="color: #0C0C0C;margin-left: 20px;margin-top: 20px">
     <ul class="layui-timeline">
         <!--        <li class="layui-timeline-item">-->
@@ -20,7 +16,6 @@ use yii\helpers\Html;
     <input type="hidden" id="page1" value="0">
 </div>
 <?php require __DIR__ . '/../default/footer.php'; ?>
-<script src=""></script>
 <script>
     //JavaScript代码区域
     layui.use(['form', 'element'], function () {
@@ -30,7 +25,7 @@ use yii\helpers\Html;
 
     $(function () {
         initList(1);
-        $("img.lazy").lazyload({effect: "fadeIn"});
+
         function timeDate(creatAt) {
             var date = new Date(creatAt);
             Y = date.getFullYear() + '-';
@@ -59,7 +54,7 @@ use yii\helpers\Html;
                         dom += '<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis"></i><div class="layui-timeline-content layui-text">';
                         dom += '<h3 class="layui-timeline-title">' + index + '</h3>'
                         $.each(value, function (i, v) {
-                            dom += '<div style="display: inline-block"><img class="photo lazy" data-original=/' + v.url + ' style="width:100px;height:100px;margin: 5px 0px 5px 5px;" title="' + v.content + '"><i class="layui-icon" style="vertical-align:top" onclick="deleteImg(' + v.id + ',' + 'this'+ ')">&#x1006;</i></div>'
+                            dom += '<div style="display: inline-block"><img class="photo" src=/' + v.url + ' style="width:100px;height:100px;margin: 5px 0px 5px 5px;" title="' + v.content + '"><i class="layui-icon" style="vertical-align:top" onclick="deleteImg(' + v.id + ',' + 'this'+ ')">&#x1006;</i></div>'
                         });
                     });
                     var num = $('#page').val();
