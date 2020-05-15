@@ -26,6 +26,17 @@ require __DIR__ . '/../default/header.php'; ?>
         <button type="button" class="btn btn-primary btn-sm" onclick="goMessageBoard()" style="float: right">查看更多留言</button>
     </div>
 </div>
+<div style="width: 300px;position: fixed;left: 30px;top:50px;" class="card">
+    <p class="card-body">在线聊天室,想测试可以开两个页面哦~</p>
+    <div class="card-body border message" style="margin: 10px;height: 250px;">
+    </div>
+    <div class="form-group card-body">
+        <textarea class="form-control" rows="3" id="ws_content"></textarea>
+    </div>
+    <div class="card-body" style="float: right">
+        <button type="button" class="btn btn-primary btn-sm" onclick="sendMessage()">发送消息</button>
+    </div>
+</div>
 <div class="container main-content" style="width: 1050px;">
     <div class="row title" style="height: 280px;">
         <img src="/header/back.gif" style="width: 1050px;display: block;height: 280px;">
@@ -223,7 +234,7 @@ require __DIR__ . '/../default/header.php'; ?>
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
+
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
                     模态框（Modal）标题
@@ -246,6 +257,27 @@ require __DIR__ . '/../default/header.php'; ?>
 </html>
 <?php require __DIR__ . '/../default/footer.php'; ?>
 <script>
+    var ws = new WebSocket("ws://120.78.13.233:18308/Chat");
+    ws.onopen = function () {
+        console.log('websocket连接成功')
+    };
+    function sendMessage() {
+            var dom = $('#ws_content');
+            var message = dom.val();
+            if(message === ''){
+                alert('请输入发送的消息');
+                return false
+            }
+            ws.send(message);
+            dom.val('')
+        }
+
+    ws.onmessage = function (evt) {
+        var result= evt.data;
+        var dom = '';
+        dom = '<p>' + result + '</p>';
+        $('.message').append(dom)
+    };
 
     var clock = $(".clock").clock({
             width: 200,       // set width
