@@ -29,9 +29,8 @@ use yii\helpers\Html;
     });
 
     $(function () {
-        $("img.lazy").lazyload({effect: "fadeIn"});
         initList(1);
-
+        $("img.lazy").lazyload({effect: "fadeIn"});
         function timeDate(creatAt) {
             var date = new Date(creatAt);
             Y = date.getFullYear() + '-';
