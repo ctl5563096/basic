@@ -180,7 +180,7 @@ require __DIR__ . '/../default/header.php'; ?>
                 <?php foreach ($hotArticle as $key => $hot): ?>
                     <div class="card border border-right-0 border-top-0 border-left-0" style="margin-top: 10px" >
                         <div class="card-body">
-                            <a href="detail?id=<?php echo $hot['id']?>">
+                            <a href="/front/index/detail?id=<?php echo $hot['id']?>">
                                 <?php echo ($key+1).'.'.$hot['article_name'] ?>
                                 <p style="display: inline-block;float: right">
                                     <span class="glyphicon glyphicon-thumbs-up"></span> <?php echo $hot['like']?>
