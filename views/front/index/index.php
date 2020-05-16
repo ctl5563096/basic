@@ -28,7 +28,7 @@ require __DIR__ . '/../default/header.php'; ?>
 </div>
 <div style="width: 300px;position: fixed;left: 30px;top:50px;" class="card">
     <p class="card-body">在线聊天室,想测试可以开两个页面哦~</p>
-    <div class="card-body border message" style="margin: 10px;height: 250px;">
+    <div class="card-body border message" style="margin: 10px;height: 300px;padding-bottom: 30px;overflow:auto;">
     </div>
     <div class="form-group card-body">
         <textarea class="form-control" rows="3" id="ws_content"></textarea>

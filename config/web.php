@@ -49,8 +49,8 @@ $config = [
                 'host'       => 'smtp.163.com',
                 'username'   => 'chentulinys@163.com',
                 'password'   => 'CNYUIKCCQOKCHXWX',
-                'port'       => '25',
-                'encryption' => 'tls',
+                'port'       => '465',
+                'encryption' => 'ssl',
             ],
             'messageConfig'    => [
                 'charset' => 'UTF-8',
