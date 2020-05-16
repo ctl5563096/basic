@@ -1,24 +1,42 @@
-<?php
+<?php declare(strict_types=1);
 
 
 namespace app\controllers;
 
-use Yii;
+use app\components\mq\DelayMq;
+use app\components\mq\RabbitMq;
 use yii\web\Controller;
 
+/**
+ * 测试控制器
+ *
+ * Class TestController
+ * @package app\controllers
+ */
 class TestController extends Controller
 {
+    /**
+     * 消费队列
+     *
+     * Date: 2020/5/16
+     * @author chentulin
+     * @throws \Exception
+     */
     public function actionTest()
     {
-        $config = [
-            'app_id' => 'wxc439cbfe9ee8140e',
-            'secret' => 'b2bf1b59f797e4c0cea4c44b4bfe81f9',
-            'token' => 'chentulin',
-            'response_type' => 'array',
-            //...
-        ];
-        $app = Yii::$app->wechat::officialAccount($config);
-        $users = $app->user->list();
-        var_dump($users);
+        $connection = new RabbitMq('guest','guest','127.0.0.1',5672);
+        $connection->sendMessage("测试\n");
+    }
+
+    /**
+     * 延迟队列
+     *
+     * Date: 2020/5/16
+     * @author chentulin
+     */
+    public function actionDelay()
+    {
+        $connection = new DelayMq('guest','guest','127.0.0.1',5672,20000);
+        $connection->sendDelayMessage('测试延迟队列');
     }
 }

@@ -27,7 +27,6 @@ class ConsumeController extends Controller
     {
         $client = new RabbitMq('guest','guest','127.0.0.1',5672);
         $callback = static function(AMQPMessage $msg){
-            sleep(20);
             echo $msg->body;
 //            var_dump($msg->body);die;
 //            sleep(20);

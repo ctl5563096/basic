@@ -41,7 +41,7 @@
         <?php if ($totalCount !== 0): ?>
             <?php foreach ($data as $v):?>
                 <div style="margin-top:20px;padding-bottom: 30px" class="article border border-left-0 border-right-0 border-top-0" style="width: 545px;height: 415px">
-                    <h3 style="width: 300px;margin-bottom: 15px">
+                    <h3 style="width: 400px;margin-bottom: 15px">
                         <strong><?php echo $v['article_name']?></strong>
                     </h3>
                     <div style="margin-bottom: 15px">
