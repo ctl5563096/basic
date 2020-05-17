@@ -7,6 +7,7 @@ use app\commands\BaseController;
 use app\dto\PhotoDto;
 use app\service\PhotoService;
 use yii\db\StaleObjectException;
+use yii\imagine\Image;
 use yii\web\UploadedFile;
 
 /**
@@ -84,10 +85,14 @@ class PhotoController extends BaseController
         }
         $fullName = $rootPath . $imageName . '.' . $ext;
         if ($file->saveAs($fullName)) {
+            $thumb_url = 'upload/image/' . $imageName . '_thumb.' . $ext;
+            // 生成缩略图
+            Image::thumbnail($fullName, 100, 100, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET)->save($thumb_url, ['quality' => 100]);
             exit(json_encode([
-                'code' => 200,
-                'msg'  => '上传成功',
-                'url'  => $fullName
+                'code'      => 200,
+                'msg'       => '上传成功',
+                'url'       => $fullName,
+                'thumb_url' => $thumb_url
             ]));
         }
         exit(json_encode([
@@ -146,8 +151,8 @@ class PhotoController extends BaseController
         $id  = (int)$this->request->get('id');
         $res = $this->photoService->delete($id);
         exit(json_encode([
-            'code'  => 200,
-            'msg'   => '删除成功'
+            'code' => 200,
+            'msg'  => '删除成功'
         ]));
     }
 }

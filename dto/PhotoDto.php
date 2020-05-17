@@ -8,9 +8,13 @@ namespace app\dto;
  * @property string $url
  * @property string $content
  * @property string $type
+ * @property string $thumb_url
  */
 class PhotoDto extends BaseDto
 {
+    /** @var string $thumb_url */
+    public $thumb_url;
+
     /** @var string $url */
     public $url;
 
@@ -23,7 +27,7 @@ class PhotoDto extends BaseDto
     public function rules()
     {
         return [
-            [['url', 'content', 'type'], 'required'],
+            [['url', 'content', 'type' ,'thumb_url'], 'required'],
         ];
     }
 }

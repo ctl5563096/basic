@@ -12,6 +12,7 @@ use Yii;
  * @property int $upload_time 上传时间
  * @property string $type 类型,技术/technology,生活/life,个人/personal,/旅游travel
  * @property string $content 图片摘要
+ * @property string $thumb_url 缩略图url
  */
 class Photo extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class Photo extends \yii\db\ActiveRecord
     {
         return [
             [['upload_time'], 'integer'],
-            [['url', 'type', 'content'], 'string', 'max' => 255],
+            [['url', 'type', 'content' ,'thumb_url'], 'string', 'max' => 255],
         ];
     }
 

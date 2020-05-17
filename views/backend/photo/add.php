@@ -114,7 +114,7 @@
                         type: 'POST',
                         url: '/backend/photo/create',
                         dataType: 'json',
-                        data: {url: res.url, type: type, content: content},
+                        data: {url: res.url,  thumb_url: res.thumb_url  ,type: type, content: content},
                         success: function (data) {
                             if (data.code === 200){
                                 layer.msg('新增相册成功',{time:1500},function () {

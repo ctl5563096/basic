@@ -13,7 +13,7 @@ class m200515_020227_add_colunm_photo_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn($this->tableName, 'thumb_img' , $this->string()->notNull()->defaultValue('')->comment('生成缩略图'));
+        $this->addColumn($this->tableName, 'thumb_url' , $this->string()->notNull()->defaultValue('')->comment('生成缩略图'));
     }
 
     /**
@@ -21,7 +21,7 @@ class m200515_020227_add_colunm_photo_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn($this->tableName ,'thumb_img');
+        $this->dropColumn($this->tableName ,'thumb_url');
     }
 
     /*

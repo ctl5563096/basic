@@ -5,9 +5,7 @@ namespace app\dao;
 
 
 use app\models\Photo;
-use yii\data\ActiveDataProvider;
 use yii\db\Query;
-use yii\di\NotInstantiableException;
 
 /**
  * 相册数据访问层
