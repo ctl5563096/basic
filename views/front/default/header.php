@@ -3,8 +3,6 @@ use yii\helpers\Html;
 ?>
 <?=Html::jsFile('@web/js/jq.js')?>
 <?=Html::jsFile('@web/css/layui/layui.js')?>
-<?=Html::cssFile('@web/css/layui/css/layui.css')?>
-<?=Html::jsFile('@web/css/layui/layui.js')?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +12,9 @@ use yii\helpers\Html;
 
     <!-- 引入 Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
     <link href="/bs/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/layui/css/layui.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="/bs/js/bootstrap.js"></script>

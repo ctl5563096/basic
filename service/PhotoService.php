@@ -28,7 +28,7 @@ class PhotoService extends BaseService
     public function __construct()
     {
         parent::__construct();
-        $this->photoDao = new PhotoDao();
+        $this->photoDao   = new PhotoDao();
         $this->photoLogic = new PhotoLogic();
     }
 
@@ -55,16 +55,16 @@ class PhotoService extends BaseService
      */
     public function getList(int $page): array
     {
-        $list =  $this->photoDao->getList($page);
-        return  $this->photoLogic->getDayPhoto($list,$page);
+        $list = $this->photoDao->getList($page);
+        return $this->photoLogic->getDayPhoto($list, $page);
     }
 
     /**
      * 获取总条数
      *
      * Date: 2020/5/14
-     * @author chentulin
      * @return int
+     * @author chentulin
      */
     public function getCount(): int
     {
@@ -83,14 +83,26 @@ class PhotoService extends BaseService
     public function delete(int $id): bool
     {
         $dao = $this->photoDao::findOne(['id' => $id]);
-        if (!$dao){
+        if (!$dao) {
             exit(json_encode([
-                'code'  => 400,
-                'msg'   => '没有找到资源',
+                'code' => 400,
+                'msg'  => '没有找到资源',
             ]));
         }
         $url = $dao->url;
         $num = $dao->delete();
         return $num > 0 && unlink($url);
+    }
+
+    /**
+     * 获取前台图片列表
+     *
+     * Date: 2020/5/18
+     * @return array
+     * @author chentulin
+     */
+    public function getFrontList(): array
+    {
+        return $this->photoDao->getFrontList();
     }
 }

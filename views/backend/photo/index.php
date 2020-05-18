@@ -54,7 +54,7 @@
                         dom += '<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis"></i><div class="layui-timeline-content layui-text">';
                         dom += '<h3 class="layui-timeline-title">' + index + '</h3>'
                         $.each(value, function (i, v) {
-                            dom += '<div style="display: inline-block"><img data-method="notice" layer-src="/' + v.url +' " data-content="' + v.url +'" class="photo" src=/' + v.thumb_url + ' style="width:100px;height:100px;margin: 5px 0px 5px 5px;" title="' + v.content + '"><i class="layui-icon" style="vertical-align:top" onclick="deleteImg(' + v.id + ',' + 'this'+ ')">&#x1006;</i></div>'
+                            dom += '<div style="display: inline-block"><img data-method="notice" layer-src="http://www.ctllys.top/' + v.url +' " data-content="' + v.url +'" class="photo" src=/' + v.thumb_url + ' style="width:100px;height:100px;margin: 5px 0px 5px 5px;" title="' + v.content + '"><i class="layui-icon" style="vertical-align:top" onclick="deleteImg(' + v.id + ',' + 'this'+ ')">&#x1006;</i></div>'
                         });
                     });
                     var num = $('#page').val();
@@ -108,6 +108,4 @@
             }
         }
     })
-</script>
-<script>
 </script>

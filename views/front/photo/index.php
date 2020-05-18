@@ -1,5 +1,4 @@
 <?php require __DIR__ . '/../default/header.php'; ?>
-<?php //var_dump($page);die(); ?>
 <body>
 <div class="container main-content" style="width: 1000px;">
     <div class="row title" style="height: 60px;margin: 30px;">
@@ -37,6 +36,10 @@
 <script>
     var page = 1;
     var totalPage;
+    layui.use(['form', 'element'], function () {
+        var element = layui.element;
+        var form = layui.form;
+    });
 
     // 返回上一页
     function backLast() {
@@ -52,36 +55,21 @@
     $(function () {
         $.ajax({
             type: 'POST',
-            url: "/front/message/get-list",
+            url: "/front/photo/list",
             dataType: 'json',
             success: function (data) {
                 if (data.code == 200) {
                     var dom = '';
                     $.each(data.dataList.dataList, function (index, value) {
-                        var date = new Date(parseInt(value.created_at));
-                        Y = date.getFullYear() + '-';
-                        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-                        D = date.getDate() + ' ';
-                        h = date.getHours() + ':';
-                        m = date.getMinutes() + ':';
-                        s = date.getSeconds();
+                        var upload_at = getLocalTime(value.upload_time);
                         dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
-                        dom += '<div class="card-body"><span class="label label-info">热 心 伙 伴</span>  &nbsp;&nbsp;&nbsp;';
-                        dom += value.name;
-                        dom += ' 在 ' + Y + M + D + h + m + s + '时,在博客留下了痕迹';
+                        dom += '<div class="card-body img" >';
+                        dom += '<img data-method="notice" layer-src="http://www.ctllys.top/' + value.url +' " style="width: 100px;width: 100px" src="http://www.ctllys.top/' + value.thumb_url + '" alt="' + value.content +'">';
+                        dom += '<p style="vertical-align:bottom;display: inline-block;float: right">发布于 ' + upload_at + '</p>';
                         dom += '</div>';
-                        dom += '<div class="card-body"><span class="label label-primary">留 言 内 容</span>';
-                        dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
+                        dom += '<div class="card-body" style="padding: 0px;">';
+                        dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0px;">';
                         dom += value.content;
-                        dom += '</div>';
-                        dom += '</div>';
-                        dom += '<div class="card-body"><span class="label label-success">博 主 回 复</span>';
-                        dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
-                        if (value.reply_content === '') {
-                            dom += '暂无回复,博主看到消息会第一时间回复你~!';
-                        } else {
-                            dom += value.reply_content;
-                        }
                         dom += '</div>';
                         dom += '</div>';
                         dom += '</div>';
@@ -89,57 +77,62 @@
                     totalPage = parseInt(data.dataList.totalPage);
                     $('.body-content').append(dom);
                 }
+                layer.photos({
+                    photos: '.img'
+                    ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                    ,area:[800 ,800]
+                    ,offset: '20px'
+                    ,tab: function(pic, layero){
+                        console.log(layero.children().eq(0).children('.layui-layer-phimg').css('display','inline-block'))
+                        layero.children().eq(0).children('.layui-layer-phimg').css('display','flex').css('align-items', 'center').css('height', '100%')
+                    }
+                });
             }
         })
     });
 
+    var flag = false;
     $(window).scroll(function (e) {
-        console.log(page)
-        console.log(totalPage)
         if (page < totalPage) {
+            if (flag) return;
+            flag = true;
             page++;
-            setTimeout(function () {
-                $.ajax({
-                    type: 'POST',
-                    url: "/front/message/get-list?page=" + page,
-                    dataType: 'json',
-                    success: function (data) {
-                        if (data.code == 200) {
-                            var dom = '';
-                            $.each(data.dataList.dataList, function (index, value) {
-                                var date = new Date(parseInt(value.created_at));
-                                Y = date.getFullYear() + '-';
-                                M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-                                D = date.getDate() + ' ';
-                                h = date.getHours() + ':';
-                                m = date.getMinutes() + ':';
-                                s = date.getSeconds();
-                                dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
-                                dom += '<div class="card-body"><span class="label label-info">热 心 伙 伴</span>  &nbsp;&nbsp;&nbsp;';
-                                dom += value.name;
-                                dom += ' 在 ' + Y + M + D + h + m + s + '时,在博客留下了痕迹';
-                                dom += '</div>';
-                                dom += '<div class="card-body"><span class="label label-primary">留 言 内 容</span>';
-                                dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
-                                dom += value.content;
-                                dom += '</div>';
-                                dom += '</div>';
-                                dom += '<div class="card-body"><span class="label label-success">博 主 回 复</span>';
-                                dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:2em">';
-                                if (value.reply_content === '') {
-                                    dom += '暂无回复,博主看到消息会第一时间回复你~!';
-                                } else {
-                                    dom += value.reply_content;
-                                }
-                                dom += '</div>';
-                                dom += '</div>';
-                                dom += '</div>';
-                            });
-                            $('.body-content').append(dom);
-                        }
+            $.ajax({
+                type: 'POST',
+                url: "/front/photo/list?page=" + page,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 200) {
+                        var dom = '';
+                        $.each(data.dataList.dataList, function (index, value) {
+                            var upload_at = getLocalTime(value.upload_time);
+                            dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
+                            dom += '<div class="card-body img">';
+                            dom += '<img data-method="notice" layer-src="http://www.ctllys.top/' + value.url +' " style="width: 100px;width: 100px" src="http://www.ctllys.top/' + value.thumb_url + '" alt="' + value.content +'">';
+                            dom += '<p style="vertical-align:bottom;display: inline-block;float: right">发布于 ' + upload_at + '</p>';
+                            dom += '</div>';
+                            dom += '<div class="card-body">';
+                            dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0px;">';
+                            dom += value.content;
+                            dom += '</div>';
+                            dom += '</div>';
+                            dom += '</div>';
+                        });
+                        $('.body-content').append(dom);
+                        flag = false;
                     }
-                })
-            }, 1500);
+                    layer.photos({
+                        photos: '.img'
+                        ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
+                        ,area:['800px','800px']
+                        ,offset: '20px'
+                        ,maxWidth:400
+                        ,tab: function(pic, layero){
+
+                        }
+                    });
+                }
+            });
         } else if (page === totalPage) {
             page++;
             $(document).ajaxStop(function () {
@@ -151,3 +144,4 @@
         }
     })
 </script>
+

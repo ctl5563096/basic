@@ -5,6 +5,7 @@ namespace app\dao;
 
 
 use app\models\Photo;
+use yii\data\ActiveDataProvider;
 use yii\db\Query;
 
 /**
@@ -50,5 +51,33 @@ class PhotoDao extends Photo
         $query->andWhere(['<', 'upload_time', $endTime]);
         $query->orderBy('upload_time');
         return $query->all();
+    }
+
+    /**
+     * 数据提供层获取图片列表
+     *
+     * Date: 2020/5/18
+
+     * @return array
+     * @author chentulin
+     */
+    public function getFrontList(): array
+    {
+        $query = new Query();
+        $query->from(self::tableName());
+        $query->select('*');
+        $query->orderBy(['upload_time' => SORT_DESC]);
+
+        $provider = new ActiveDataProvider([
+            'query'      => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ],
+        ]);
+
+        return [
+            'dataList'  => $provider->getModels(),
+            'totalPage' => (int)ceil($provider->totalCount / 5),
+        ];
     }
 }

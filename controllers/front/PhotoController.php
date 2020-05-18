@@ -6,6 +6,7 @@ namespace app\controllers\front;
 
 use app\controllers\FrontController;
 use app\service\PhotoService;
+use yii\web\Response;
 
 /**
  * 照相墙
@@ -40,5 +41,18 @@ class PhotoController extends FrontController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * 获取图片列表
+     *
+     * Date: 2020/5/18
+     * @author chentulin
+     */
+    public function actionList()
+    {
+        $res    = $this->photoService->getFrontList();
+        $this->response->format = Response::FORMAT_JSON;
+        return $this->response->data = ['code' => 200, 'msg' => '成功','dataList' => $res];
     }
 }
