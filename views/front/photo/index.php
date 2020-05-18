@@ -58,17 +58,17 @@
             url: "/front/photo/list",
             dataType: 'json',
             success: function (data) {
-                if (data.code == 200) {
+                if (data.code === 200) {
                     var dom = '';
                     $.each(data.dataList.dataList, function (index, value) {
                         var upload_at = getLocalTime(value.upload_time);
                         dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
                         dom += '<div class="card-body img" >';
-                        dom += '<img data-method="notice" layer-src="http://www.ctllys.top/' + value.url +' " style="width: 100px;width: 100px" src="http://www.ctllys.top/' + value.thumb_url + '" alt="' + value.content +'">';
+                        dom += '<img data-method="notice" layer-src="/' + value.url +' " style="width: 100px;height: 100px" src="/' + value.thumb_url + '" alt="' + value.content +'">';
                         dom += '<p style="vertical-align:bottom;display: inline-block;float: right">发布于 ' + upload_at + '</p>';
                         dom += '</div>';
-                        dom += '<div class="card-body" style="padding: 0px;">';
-                        dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0px;">';
+                        dom += '<div class="card-body" style="padding: 0;">';
+                        dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0;">';
                         dom += value.content;
                         dom += '</div>';
                         dom += '</div>';
@@ -83,7 +83,7 @@
                     ,area:[800 ,800]
                     ,offset: '20px'
                     ,tab: function(pic, layero){
-                        console.log(layero.children().eq(0).children('.layui-layer-phimg').css('display','inline-block'))
+                        console.log(layero.children().eq(0).children('.layui-layer-phimg').css('display','inline-block'));
                         layero.children().eq(0).children('.layui-layer-phimg').css('display','flex').css('align-items', 'center').css('height', '100%')
                     }
                 });
@@ -92,7 +92,7 @@
     });
 
     var flag = false;
-    $(window).scroll(function (e) {
+    $(window).scroll(function () {
         if (page < totalPage) {
             if (flag) return;
             flag = true;
@@ -102,17 +102,17 @@
                 url: "/front/photo/list?page=" + page,
                 dataType: 'json',
                 success: function (data) {
-                    if (data.code == 200) {
+                    if (data.code === 200) {
                         var dom = '';
                         $.each(data.dataList.dataList, function (index, value) {
                             var upload_at = getLocalTime(value.upload_time);
                             dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
                             dom += '<div class="card-body img">';
-                            dom += '<img data-method="notice" layer-src="http://www.ctllys.top/' + value.url +' " style="width: 100px;width: 100px" src="http://www.ctllys.top/' + value.thumb_url + '" alt="' + value.content +'">';
+                            dom += '<img data-method="notice" layer-src="/' + value.url +' " style="width: 100px;height: 100px" src="/' + value.thumb_url + '" alt="' + value.content +'">';
                             dom += '<p style="vertical-align:bottom;display: inline-block;float: right">发布于 ' + upload_at + '</p>';
                             dom += '</div>';
                             dom += '<div class="card-body">';
-                            dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0px;">';
+                            dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0;">';
                             dom += value.content;
                             dom += '</div>';
                             dom += '</div>';
