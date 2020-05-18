@@ -164,7 +164,7 @@ require __DIR__ . '/../default/header.php'; ?>
 <!--                </div>-->
                 <h3 style="margin-top: 10px">每 日 吐 槽</h3>
                 <div class="card" style="margin-top: 10px">
-                    <div class="card-body">总想吐槽点什么东西</div>
+                    <div class="card-body"><?php echo $speak ?></div>
                 </div>
                 <h3 style="margin-top: 10px">个 人 经 历</h3>
                 <div class="card" style="margin-top: 10px">

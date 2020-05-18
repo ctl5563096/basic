@@ -7,6 +7,7 @@ use app\controllers\FrontController;
 use app\service\ArticleService;
 use app\service\CommentService;
 use app\service\MessageBoardService;
+use app\service\SpeakService;
 use Yii;
 use yii\web\Response;
 
@@ -31,7 +32,18 @@ class IndexController extends FrontController
         $hotArticle = ArticleService::findHotArticle();
         // 获取最新三条留言
         $Comment = MessageBoardService::findHotMessage();
-        return $this->render('index', ['data' => $indexData, 'hotArticle' => $hotArticle, 'comment' => $Comment, 'weather' => current($weather['results']) ,'moreWeather' => current($moreWeather['results'])]);
+        // 获取最新土菜
+        $speak = SpeakService::getNewSpeak();
+        return $this->render('index',
+            [
+                'data'        => $indexData,
+                'hotArticle'  => $hotArticle,
+                'comment'     => $Comment,
+                'weather'     => current($weather['results']),
+                'moreWeather' => current($moreWeather['results']),
+                'speak'       => $speak
+            ]
+        );
     }
 
     /**
@@ -123,8 +135,8 @@ class IndexController extends FrontController
     {
         $api = new weatherApiService();
         // 调用天气服务层
-        $res = $api->getReportWeatherByIp();
+        $res                    = $api->getReportWeatherByIp();
         $this->response->format = Response::FORMAT_JSON;
-        return $this->response->data = ['code' => 200, 'msg' => '成功', 'dataList' => current($res['results']) ];
+        return $this->response->data = ['code' => 200, 'msg' => '成功', 'dataList' => current($res['results'])];
     }
 }
