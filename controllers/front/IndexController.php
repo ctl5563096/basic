@@ -32,7 +32,7 @@ class IndexController extends FrontController
         $hotArticle = ArticleService::findHotArticle();
         // 获取最新三条留言
         $Comment = MessageBoardService::findHotMessage();
-        // 获取最新土菜
+        // 获取最新吐槽
         $speak = SpeakService::getNewSpeak();
         return $this->render('index',
             [

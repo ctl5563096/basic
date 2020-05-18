@@ -84,4 +84,16 @@ class SpeakService extends BaseService
     {
         return (new speakDao)->getNewSpeak();
     }
+
+    /**
+     * Notes: 获取前台碎碎念接口
+     * @return array
+     * @author: chentulin
+     * Date: 2020/5/18
+     * Time: 20:52
+     */
+    public function getFrontList(): array
+    {
+
+    }
 }
