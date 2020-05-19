@@ -86,14 +86,14 @@ class SpeakDao extends Speak
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,
             'pagination' => [
-                'pageSize' => 1
+                'pageSize' => 20
             ]
         ]);
 
         return [
             'dataList' => $dataProvider->getModels(),
             'pageInfo' => $dataProvider->getPagination(),
-            'totalPage' => (int)ceil($dataProvider->totalCount / 1),
+            'totalPage' => (int)ceil($dataProvider->totalCount / 20),
         ];
     }
 }
