@@ -131,6 +131,27 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="layui-collapse" lay-accordion="">
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">增加相册</h2>
+                                            <div class="layui-colla-content">
+                                                <p>相册的添加</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-colla-item">
+                                <h2 class="layui-colla-title">说点什么</h2>
+                                <div class="layui-colla-content">
+                                    <div class="layui-collapse" lay-accordion="">
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">说点什么列表</h2>
+                                            <div class="layui-colla-content">
+                                                <p>碎碎念的功能</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
