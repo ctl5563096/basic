@@ -17,6 +17,7 @@ use yii\helpers\Html;
     <link href="/css/layui/css/layui.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="/bs/js/bootstrap.js"></script>
     <script src="/clock/clock/js/clock-1.1.0.min.js"></script>
 </head>
