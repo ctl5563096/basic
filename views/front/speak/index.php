@@ -55,21 +55,22 @@
     $(function () {
         $.ajax({
             type: 'POST',
-            url: "/front/speak/list",
+            url: "/front/speak/index",
             dataType: 'json',
             success: function (data) {
+                // console.log(data)
+                // return false
                 if (data.code === 200) {
                     var dom = '';
                     $.each(data.dataList.dataList, function (index, value) {
-                        var upload_at = getLocalTime(value.upload_time);
-                        dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
-                        dom += '<div class="card-body img" >';
-                        dom += '<img data-method="notice" layer-src="/' + value.url +' " style="width: 100px;height: 100px" src="/' + value.thumb_url + '" alt="' + value.content +'">';
-                        dom += '<p style="vertical-align:bottom;display: inline-block;float: right">发布于 ' + upload_at + '</p>';
-                        dom += '</div>';
+                        var created_at = getLocalTime(value.created_at);
+                        dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px;padding: 10px">';
                         dom += '<div class="card-body" style="padding: 0;">';
                         dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0;">';
                         dom += value.content;
+                        dom += '</div>';
+                        dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0;margin-top: 5px">';
+                        dom += '发布于 --' + created_at;
                         dom += '</div>';
                         dom += '</div>';
                         dom += '</div>';
@@ -99,21 +100,20 @@
             page++;
             $.ajax({
                 type: 'POST',
-                url: "/front/photo/list?page=" + page,
+                url: "/front/speak/index?page=" + page,
                 dataType: 'json',
                 success: function (data) {
                     if (data.code === 200) {
                         var dom = '';
                         $.each(data.dataList.dataList, function (index, value) {
-                            var upload_at = getLocalTime(value.upload_time);
-                            dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px">';
-                            dom += '<div class="card-body img">';
-                            dom += '<img data-method="notice" layer-src="/' + value.url +' " style="width: 100px;height: 100px" src="/' + value.thumb_url + '" alt="' + value.content +'">';
-                            dom += '<p style="vertical-align:bottom;display: inline-block;float: right">发布于 ' + upload_at + '</p>';
-                            dom += '</div>';
-                            dom += '<div class="card-body">';
+                            var created_at = getLocalTime(value.created_at);
+                            dom += '<div class="card-body body-message border" style="margin-top: 10px;margin-bottom: 10px;padding: 10px">';
+                            dom += '<div class="card-body" style="padding: 0;">';
                             dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0;">';
                             dom += value.content;
+                            dom += '</div>';
+                            dom += '<div class="card-body" style="letter-spacing: 1px;line-height: 1.5;text-indent:1em;padding: 0;margin-top: 5px">';
+                            dom += '发布于 --' + created_at;
                             dom += '</div>';
                             dom += '</div>';
                             dom += '</div>';
@@ -121,16 +121,6 @@
                         $('.body-content').append(dom);
                         flag = false;
                     }
-                    layer.photos({
-                        photos: '.img'
-                        ,anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
-                        ,area:['800px','800px']
-                        ,offset: '20px'
-                        ,maxWidth:400
-                        ,tab: function(pic, layero){
-
-                        }
-                    });
                 }
             });
         } else if (page === totalPage) {

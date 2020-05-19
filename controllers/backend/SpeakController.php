@@ -6,7 +6,6 @@ namespace app\controllers\backend;
 
 use app\commands\BaseController;
 use app\service\SpeakService;
-use yii\db\StaleObjectException;
 
 /**
  * 说点什么控制器

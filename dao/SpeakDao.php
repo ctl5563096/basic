@@ -6,6 +6,7 @@ namespace app\dao;
 
 use app\models\Speak;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 
 /**
  * 数据提供层
@@ -45,9 +46,9 @@ class SpeakDao extends Speak
      * 新增记录
      *
      * Date: 2020/5/18
-     * @author chentulin
      * @param string $content
      * @return bool
+     * @author chentulin
      */
     public function createRecord(string $content): bool
     {
@@ -61,11 +62,38 @@ class SpeakDao extends Speak
      * 获取最新吐槽
      *
      * Date: 2020/5/18
-     * @author chentulin
      * @return string
+     * @author chentulin
      */
     public function getNewSpeak(): string
     {
         return self::find()->orderBy(['created_at' => SORT_DESC])->limit(1)->one()->content;
+    }
+
+    /**
+     * 获取前端接口
+     *
+     * Date: 2020/5/19
+     * @return array
+     * @author chentulin
+     */
+    public function getFrontList(): array
+    {
+        $query = new Query();
+        $query->from(self::tableName());
+        $query->select('*');
+
+        $dataProvider = new ActiveDataProvider([
+            'query'      => $query,
+            'pagination' => [
+                'pageSize' => 1
+            ]
+        ]);
+
+        return [
+            'dataList' => $dataProvider->getModels(),
+            'pageInfo' => $dataProvider->getPagination(),
+            'totalPage' => (int)ceil($dataProvider->totalCount / 1),
+        ];
     }
 }

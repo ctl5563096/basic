@@ -94,6 +94,6 @@ class SpeakService extends BaseService
      */
     public function getFrontList(): array
     {
-
+        return $this->speakDao->getFrontList();
     }
 }
