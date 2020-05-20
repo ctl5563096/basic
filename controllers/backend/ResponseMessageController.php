@@ -24,11 +24,15 @@ class ResponseMessageController extends Controller
     {
         $app = Factory::officialAccount(Yii::$app->params['testWeChat']);
         $response = $app->server->serve();
-        $response->send();exit;
         $app->server->push(function ($message) {
             if ($message['MsgType'] === 'event'){
                 Yii::info('接收到事件');
             }
+            return "您好！欢迎使用 EasyWeChat!";
         });
+
+        $response = $app->server->serve();
+        $response->send();exit;
+
     }
 }
