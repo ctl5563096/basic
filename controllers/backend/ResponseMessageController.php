@@ -26,7 +26,7 @@ class ResponseMessageController extends Controller
         $response = $app->server->serve();
         $app->server->push(function ($message) {
             if ($message['MsgType'] === 'event'){
-                Yii::info('接收到事件');
+                Yii::info(json_encode($message));
             }
         });
 
