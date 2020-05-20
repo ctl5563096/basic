@@ -15,6 +15,7 @@ return [
         'protect' => 'SMixGqyyO1Htih8qU',
     ],
     'testWeChat'  => [
+        'debug'         => false,
         'app_id'        => 'wxc439cbfe9ee8140e', // AppID
         'secret'        => 'b2bf1b59f797e4c0cea4c44b4bfe81f9', // AppSecret
         'token'         => 'chentulin', // Token
