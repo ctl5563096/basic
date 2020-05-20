@@ -28,7 +28,6 @@ class ResponseMessageController extends Controller
             if ($message['MsgType'] === 'event'){
                 Yii::info('接收到事件');
             }
-            return "您好！欢迎使用 EasyWeChat!";
         });
 
         $response = $app->server->serve();
