@@ -22,16 +22,19 @@ class ResponseMessageController extends Controller
      */
     public function actionIndex()
     {
-        $app = Factory::officialAccount(Yii::$app->params['testWeChat']);
+        $app   = Factory::officialAccount(Yii::$app->params['testWeChat']);
+        $cache = Yii::$app->cache;
+        // 替换easyWeChat的的缓存
+        $app->rebind('cache',$cache);
         $response = $app->server->serve();
         $app->server->push(function ($message) {
-            if ($message['MsgType'] === 'event'){
+            if ($message['MsgType'] === 'event') {
                 Yii::info(json_encode($message));
             }
         });
 
         $response = $app->server->serve();
-        $response->send();exit;
-
+        $response->send();
+        exit;
     }
 }

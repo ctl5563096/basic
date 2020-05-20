@@ -7,12 +7,13 @@ use EasyWeChat\Factory;
 class EasyWechat
 {
     /**
-     * 获取基础客户端
-     * @param $config
-     * @return \EasyWeChat\OfficialAccount\Application
+     * Notes: 获取access_token
+     * @author: chentulin
+     * Date: 2020/5/20
+     * Time: 19:45
      */
-    public static function getEasyWeChatOfficialAccount($config)
+    public static function getAccessToken()
     {
-        return Factory::officialAccount($config);
+
     }
 }
