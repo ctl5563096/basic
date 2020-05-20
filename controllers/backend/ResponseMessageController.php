@@ -1,0 +1,33 @@
+<?php declare(strict_types=1);
+
+namespace app\controllers\backend;
+
+use EasyWeChat\Factory;
+use Yii;
+use yii\web\Controller;
+
+/**
+ * 微信响应 入口
+ *
+ * Class ResponseMessageController
+ * @package app\controllers\backend
+ */
+class ResponseMessageController extends Controller
+{
+    /**
+     * Notes: 微信主入口
+     * @author: chentulin
+     * Date: 2020/5/20
+     * Time: 12:39
+     */
+    public function actionIndex()
+    {
+        $app = Factory::officialAccount(Yii::$app->params['testWeChat']);
+        $response = $app->server->serve();
+        $app->server->push(function ($message) {
+            if ($message['MsgType'] === 'event'){
+                Yii::info('接收到事件');
+            }
+        });
+    }
+}
