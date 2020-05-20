@@ -14,6 +14,7 @@ use yii\web\Response;
  */
 class LoginController extends Controller
 {
+    public $layout = false;
     /**
      * 修改默认访问的方法
      * @var string

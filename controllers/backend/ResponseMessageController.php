@@ -24,6 +24,7 @@ class ResponseMessageController extends Controller
     {
         $app   = Factory::officialAccount(Yii::$app->params['testWeChat']);
         $cache = Yii::$app->cache;
+        var_dump($cache);die();
         // 替换easyWeChat的的缓存
         $app->rebind('cache',$cache);
         $response = $app->server->serve();

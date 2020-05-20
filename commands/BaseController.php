@@ -20,6 +20,8 @@ use yii\web\Response;
 class BaseController extends Controller
 {
 
+    public $layout = false;
+
     public $request;
 
     public $response;

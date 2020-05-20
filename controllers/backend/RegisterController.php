@@ -14,6 +14,7 @@ use yii\web\Response;
  */
 class RegisterController extends Controller
 {
+    public $layout = false;
     /**
      * 渲染视图或者是注册接口
      * Date: 2019/12/11

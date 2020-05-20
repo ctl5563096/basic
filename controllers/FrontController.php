@@ -21,6 +21,7 @@ use yii\web\Response;
  */
 class FrontController extends Controller
 {
+    public $layout = false;
     /** @var  */
     public $request;
 
