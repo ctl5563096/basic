@@ -29,6 +29,7 @@ $config = [
         ],
         'cache'        => [
             'class' => 'yii\redis\Cache',
+            'keyPrefix' => 'blog',
             'redis' => [
                 'hostname' => '127.0.0.1',//这里Windows可以更换为127.0.0.1
                 'password' => 'A5563096z', //没有密码，这行注意注释，不然报错密码错误
