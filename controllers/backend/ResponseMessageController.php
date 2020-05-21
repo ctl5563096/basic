@@ -28,6 +28,8 @@ class ResponseMessageController extends Controller
         $cache  = new EasyWeChatCache($config['host'], $config['port'], $config['password']);
         // 替换easyWeChat的的缓存
         $app->rebind('cache', $cache);
+        $accessToken = $app->access_token;
+        $token = $accessToken->getToken(); // token 数组  token['access_token'] 字符串
         $response = $app->server->serve();
         $app->server->push(static function ($message) {
             if ($message['MsgType'] === 'event') {
