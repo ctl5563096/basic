@@ -35,3 +35,5 @@ tests/_support/_generated
 /web/index.php
 /web/upload
 /config/web.php
+
+/config/web_local.php

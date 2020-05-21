@@ -16,6 +16,11 @@ defined('YII_ENV') or define('YII_ENV', 'dev');
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/yiisoft/yii2/Yii.php';
 
-$config = require __DIR__ . '/../config/web.php';
+// 判断加载是加载本地的还是线上的
+if(file_exists(__DIR__ . '/../config/web_local.php')){
+    $config = require __DIR__ . '/../config/web_local.php';
+}else{
+    $config = require __DIR__ . '/../config/web.php';
+}
 
 (new yii\web\Application($config))->run();
