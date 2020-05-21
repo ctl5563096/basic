@@ -29,7 +29,7 @@ class ResponseMessageController extends Controller
         // 替换easyWeChat的的缓存
         $app->rebind('cache', $cache);
         $response = $app->server->serve();
-        $app->server->push(function ($message) {
+        $app->server->push(static function ($message) {
             if ($message['MsgType'] === 'event') {
                 Yii::info(json_encode($message));
             }
