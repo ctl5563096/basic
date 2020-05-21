@@ -1,6 +1,6 @@
 <?php 
 
-namespace yii\components\MyClass;
+namespace yii\components;
 
 
 use yii\base\BaseObject;

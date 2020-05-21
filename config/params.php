@@ -20,5 +20,11 @@ return [
         'secret'        => '85717a0434fd11a199590620e0be5648', // AppSecret
         'token'         => 'chentulin', // Token
         'response_type' => 'array',//返回类型
+    ],
+    'redis'       => [
+        'host'     => '127.0.0.1',
+        'port'     => 6379,
+        'password' => 'A5563096z',
+        'database' => 0
     ]
 ];

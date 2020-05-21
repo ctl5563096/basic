@@ -1,15 +1,20 @@
 <?php
 
-use yii\redis\Cache;
 use yii\swiftmailer\Mailer;
 use app\components\TestComponent;
 use app\components\ExceptionHandler;
 use yii\redis\Session;
 use EasyWeChat\Factory;
 
-$params = require __DIR__ . '/params.php';
-$db     = require __DIR__ . '/db.php';
+$db = require __DIR__ . '/db.php';
 //require_once __DIR__.'/di.php';
+
+// 判断加载是加载本地的还是线上的参数数据
+if (file_exists(__DIR__ . '/params_local.php')) {
+    $params = require __DIR__ . '/params_local.php';
+} else {
+    $params = require __DIR__ . '/params.php';
+}
 
 $config = [
     'id'           => 'basic',
@@ -28,12 +33,13 @@ $config = [
             'enableCsrfValidation' => false,
         ],
         'cache'        => [
-            'class' => 'yii\redis\Cache',
-            'keyPrefix' => 'blog',
-            'redis' => [
-                'hostname' => '127.0.0.1',//这里Windows可以更换为127.0.0.1
+            'class'           => 'yii\redis\Cache',
+            'keyPrefix'       => 'blog',
+            'defaultDuration' => 7200,
+            'redis'           => [
+                'hostname' => '127.0.0.1',
                 'password' => 'A5563096z', //没有密码，这行注意注释，不然报错密码错误
-                'port' => 6379,
+                'port'     => 6379,
                 'database' => 0,
             ]
         ],
@@ -114,12 +120,12 @@ $config = [
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
-/*    $config['bootstrap'][]      = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-        // uncomment the following to              add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
-    ];*/
+    /*    $config['bootstrap'][]      = 'debug';
+        $config['modules']['debug'] = [
+            'class' => 'yii\debug\Module',
+            // uncomment the following to              add your IP if you are not connecting from localhost.
+            //'allowedIPs' => ['127.0.0.1', '::1'],
+        ];*/
 
     $config['bootstrap'][]    = 'gii';
     $config['modules']['gii'] = [

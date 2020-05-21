@@ -4,6 +4,7 @@ namespace app\controllers\backend;
 
 use EasyWeChat\Factory;
 use Yii;
+use app\components\EasyWeChatCache;
 use yii\web\Controller;
 
 /**
@@ -22,10 +23,11 @@ class ResponseMessageController extends Controller
      */
     public function actionIndex()
     {
-        $app   = Factory::officialAccount(Yii::$app->params['testWeChat']);
-        $cache = Yii::$app->cache;
+        $app    = Factory::officialAccount(Yii::$app->params['testWeChat']);
+        $config = Yii::$app->params['redis'];
+        $cache  = new EasyWeChatCache($config['host'], $config['port'], $config['password']);
         // 替换easyWeChat的的缓存
-        $app->rebind('cache',$cache);
+        $app->rebind('cache', $cache);
         $response = $app->server->serve();
         $app->server->push(function ($message) {
             if ($message['MsgType'] === 'event') {
