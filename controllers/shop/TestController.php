@@ -14,6 +14,6 @@ class TestController extends ShopBaseController
 
     public function  actionTest()
     {
-        var_dump(\Yii::$app->cache->get('openid'));die();
+        var_dump(\Yii::$app->session->get('openid'));die();
     }
 }

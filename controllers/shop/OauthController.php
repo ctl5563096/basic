@@ -29,7 +29,9 @@ class OauthController extends Controller
         $openid = $oauth->user()->getId();
         // 存储用户的openid
         Yii::$app->session->set('openid',$openid);
+        // 重定向url
+        $url = Yii::$app->session->get('oauth_url');
         // 回调成功后重新访问原页面
-        header('location:' . Yii::$app->session->get('oauth_url'));
+        return $this->redirect($url);
     }
 }
