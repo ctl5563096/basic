@@ -30,11 +30,11 @@ class ShopBaseController extends Controller
             die();
         }
         // 判断是否存在了openid 如果不存在
-        if (empty(Yii::$app->cache->get('openid'))) {
+        if (empty(Yii::$app->session->get('openid'))) {
             $url   = Yii::$app->request->getHostInfo() . Yii::$app->request->getUrl();
             $app   = Factory::officialAccount(Yii::$app->params['testWeChat']);
             $oauth = $app->oauth;
-            Yii::$app->cache->set('oauth_url', $url);
+            Yii::$app->session->set('oauth_url',$url);
             $res = $oauth->redirect();
             $res->send();
         }

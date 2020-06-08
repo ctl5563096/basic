@@ -28,8 +28,8 @@ class OauthController extends Controller
         $oauth = $app->oauth;
         $openid = $oauth->user()->getId();
         // 存储用户的openid
-        Yii::$app->cache->set('openid',$openid);
+        Yii::$app->session->set('openid',$openid);
         // 回调成功后重新访问原页面
-        header('location:' . Yii::$app->cache->get('oauth_url'));
+        header('location:' . Yii::$app->session->get('oauth_url'));
     }
 }
