@@ -9,6 +9,11 @@ class TestController extends ShopBaseController
 {
     public function  actionIndex()
     {
-        var_dump(2222);die();
+        var_dump('1');die();
+    }
+
+    public function  actionTest()
+    {
+        var_dump(\Yii::$app->cache->get('openid'));die();
     }
 }

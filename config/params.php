@@ -20,6 +20,10 @@ return [
         'secret'        => '85717a0434fd11a199590620e0be5648', // AppSecret
         'token'         => 'chentulin', // Token
         'response_type' => 'array',//返回类型
+        'oauth' => [
+            'scopes'   => ['snsapi_base'],
+            'callback' => '/shop/oauth/oauth',
+        ],
     ],
     'redis'       => [
         'host'     => '127.0.0.1',

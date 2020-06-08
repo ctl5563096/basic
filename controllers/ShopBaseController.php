@@ -34,8 +34,9 @@ class ShopBaseController extends Controller
             $url   = Yii::$app->request->getHostInfo() . Yii::$app->request->getUrl();
             $app   = Factory::officialAccount(Yii::$app->params['testWeChat']);
             $oauth = $app->oauth;
-            $oauth->scopes(['snsapi_base']);
-            var_dump($oauth->user()->getId());die();
+            Yii::$app->cache->set('oauth_url', $url);
+            $res = $oauth->redirect();
+            $res->send();
         }
     }
 }
