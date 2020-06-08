@@ -2,7 +2,6 @@
 
 namespace app\controllers\backend;
 
-use Yii;
 use app\commands\BaseController;
 
 /**
