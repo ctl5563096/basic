@@ -2,7 +2,9 @@
 
 namespace app\controllers\backend;
 
+use app\components\handle\EventHandler;
 use EasyWeChat\Factory;
+use EasyWeChat\Kernel\Messages\Message;
 use Yii;
 use app\components\EasyWeChatCache;
 use yii\web\Controller;
@@ -30,12 +32,17 @@ class ResponseMessageController extends Controller
         $app->rebind('cache', $cache);
         $accessToken = $app->access_token;
         $token = $accessToken->getToken(); // token 数组  token['access_token'] 字符串
-        $response = $app->server->serve();
-        $app->server->push(static function ($message) {
-            if ($message['MsgType'] === 'event') {
-                Yii::info(json_encode($message));
-            }
-        });
+        Yii::info($token);
+//        $app->server->push(static function ($message) {
+//            if ($message['MsgType'] === 'event') {
+//                // 关注之后,新增用户
+//                if ($message['Event'] === 'subscribe'){
+//
+//                }
+//            }
+//        });
+        // 注册消息事件处理器
+        $app->server->push(EventHandler::class,Message::EVENT);
 
         $response = $app->server->serve();
         $response->send();
