@@ -40,13 +40,14 @@ class ShopUserDao extends ShopUser
      * @return void | bool
      * @author chentulin
      */
-    public function createShopUser(array $userInfo): void
+    public function createShopUser(array $userInfo)
     {
         $dao = new self();
         $dao->openid = $userInfo['FromUserName'];
         $dao->created_at = time();
         $dao->sub_time = $userInfo['CreateTime'];
         $res = $dao->save();
+        \Yii::info($res);
         if (!$res){
             return current($dao->getFirstErrors());
         }else{
