@@ -32,9 +32,9 @@ class EventHandler implements EventHandlerInterface
         // 关注之后新建用户
         if ($event === 'subscribe'){
             if (!$dao->createShopUser($this->message)){
-                return $dao->createShopUser($this->message);
-//                \Yii::info('新增用户失败');
-//                return null;
+//                return $dao->createShopUser($this->message);
+                \Yii::info('新增用户失败');
+                return null;
             }
             return '欢迎关注';
         }
