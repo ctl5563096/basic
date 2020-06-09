@@ -30,20 +30,9 @@ class ResponseMessageController extends Controller
         $cache  = new EasyWeChatCache($config['host'], $config['port'], $config['password']);
         // 替换easyWeChat的的缓存
         $app->rebind('cache', $cache);
-        $accessToken = $app->access_token;
-        $token = $accessToken->getToken(); // token 数组  token['access_token'] 字符串
-        Yii::info('用户openid' . $token['access_token']);
-//        $app->server->push(static function ($message) {
-//            if ($message['MsgType'] === 'event') {
-//                // 关注之后,新增用户
-//                if ($message['Event'] === 'subscribe'){
-//
-//                }
-//            }
-//        });
         // 注册消息事件处理器
         $app->server->push(EventHandler::class,Message::EVENT);
-
+        // 推送消息
         $response = $app->server->serve();
         $response->send();
         exit;

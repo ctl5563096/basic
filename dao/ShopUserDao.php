@@ -47,11 +47,26 @@ class ShopUserDao extends ShopUser
         $dao->created_at = time();
         $dao->sub_time = $userInfo['CreateTime'];
         $res = $dao->save();
-        \Yii::info($res);
         if (!$res){
             return current($dao->getFirstErrors());
         }else{
             return true;
         }
+    }
+
+    /**
+     * 取关事件
+     *
+     * Date: 2020/6/9
+     * @param string $openid
+     * @return bool
+     * @author chentulin
+     */
+    public function unSubscribeStatus(string $openid): bool
+    {
+        $dao = self::findOne(['openid' => $openid]);
+        $dao->is_sub = 0;
+        $dao->un_sub_time = time();
+        return $dao->save();
     }
 }
