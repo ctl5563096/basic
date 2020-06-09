@@ -32,7 +32,7 @@ class ResponseMessageController extends Controller
         $app->rebind('cache', $cache);
         $accessToken = $app->access_token;
         $token = $accessToken->getToken(); // token 数组  token['access_token'] 字符串
-        Yii::info('用户openid' . $token);
+        Yii::info('用户openid' . $token['access_token']);
 //        $app->server->push(static function ($message) {
 //            if ($message['MsgType'] === 'event') {
 //                // 关注之后,新增用户
