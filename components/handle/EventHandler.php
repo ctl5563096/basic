@@ -31,11 +31,18 @@ class EventHandler implements EventHandlerInterface
 
         // 关注之后新建用户
         if ($event === 'subscribe'){
-            if (!$dao->createShopUser($this->message)){
-                \Yii::info($dao->createShopUser($this->message));
-                return null;
+            // 判断用户是否曾经关注过
+            $dao = ShopUserDao::findOne(['openid' => $this->message['FromUserName']]);
+            if (!$dao){
+                if (!$dao->createShopUser($this->message)){
+                    \Yii::info($dao->createShopUser($this->message));
+                    return null;
+                }
+                return '欢迎关注';
             }
-            return '欢迎关注';
+            $dao->is_sub = 1;
+            $dao->save();
+            return '欢迎再次关注';
         }elseif ($event === 'unsubscribe'){
             // 取关事件
             $dao->unSubscribeStatus($this->message['FromUserName']);
