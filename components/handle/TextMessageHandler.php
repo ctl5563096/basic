@@ -43,6 +43,9 @@ class TextMessageHandler implements EventHandlerInterface
                     ]
                 );
                 Yii::info(json_encode($res));
+                if ($res['result'] === false){
+                    return '小客不在线哦,上线之后马上回复客官您';
+                }
                 break;
             case 'image':
                 return '收到了您反馈的图片';
