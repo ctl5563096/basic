@@ -30,5 +30,9 @@ return [
         'port'     => 6379,
         'password' => 'A5563096z',
         'database' => 0
+    ],
+    'rpc'         => [
+        'host'    => '127.0.0.1',
+        'port'    => '18309'
     ]
 ];

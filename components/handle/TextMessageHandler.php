@@ -3,6 +3,9 @@
 
 namespace app\components\handle;
 
+use app\dao\ShopUserDao;
+use Yii;
+use app\components\rpcClient;
 use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
 
 /**
@@ -19,6 +22,7 @@ class TextMessageHandler implements EventHandlerInterface
 
     /**
      * @inheritDoc
+     * @throws \Exception
      */
     public function handle($payload = null)
     {
@@ -26,7 +30,19 @@ class TextMessageHandler implements EventHandlerInterface
         // 处理事件
         switch ($this->message['MsgType']){
             case 'text':
-                return $this->message['Content'];
+                $customId = ShopUserDao::findByOpenId($this->message['FromUserName'])['custom_id'];
+                $res = rpcClient::rpcClient(
+                    'tcp://' . Yii::$app->params['rpc']['host'] . ':' . Yii::$app->params['rpc']['port'],
+                    '\App\Rpc\Lib\CustomInterface',
+                    'send',
+                    [
+                        $customId,
+                        'text',
+                        $this->message['Content'],
+                        $this->message['FromUserName']
+                    ]
+                );
+                Yii::info(json_encode($res));
                 break;
             case 'image':
                 return '收到了您反馈的图片';

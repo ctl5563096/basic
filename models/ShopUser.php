@@ -14,6 +14,7 @@ use Yii;
  * @property int $is_black 是否为黑名单
  * @property int $sub_time 用户关注时间
  * @property int $created_at 创建时间
+ * @property int $custom_id 客服id
  */
 class ShopUser extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class ShopUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_sub', 'un_sub_time', 'is_black', 'sub_time', 'created_at'], 'integer'],
+            [['is_sub', 'un_sub_time', 'is_black', 'sub_time', 'created_at', 'custom_id'], 'integer'],
             [['openid'], 'string', 'max' => 255],
         ];
     }
@@ -42,13 +43,14 @@ class ShopUser extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'openid' => 'Openid',
-            'is_sub' => 'Is Sub',
+            'id'          => 'ID',
+            'openid'      => 'Openid',
+            'is_sub'      => 'Is Sub',
             'un_sub_time' => 'Un Sub Time',
-            'is_black' => 'Is Black',
-            'sub_time' => 'Sub Time',
-            'created_at' => 'Created At',
+            'is_black'    => 'Is Black',
+            'sub_time'    => 'Sub Time',
+            'created_at'  => 'Created At',
+            'custom_id'   => '客服id',
         ];
     }
 }
