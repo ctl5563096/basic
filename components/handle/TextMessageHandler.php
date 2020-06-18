@@ -33,7 +33,7 @@ class TextMessageHandler implements EventHandlerInterface
                 $customId = ShopUserDao::findByOpenId($this->message['FromUserName'])['custom_id'];
                 $res = rpcClient::rpcClient(
                     'tcp://' . Yii::$app->params['rpc']['host'] . ':' . Yii::$app->params['rpc']['port'],
-                    '\App\Rpc\Lib\CustomInterface',
+                    'App\Rpc\Lib\CustomInterface',
                     'send',
                     [
                         $customId,
