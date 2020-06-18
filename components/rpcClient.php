@@ -13,7 +13,7 @@ use Exception;
  */
 class rpcClient
 {
-    public static function rpcClient(string $host,string $class,string $method,array $param, $version = '1.0', $ext = []): array
+    public static function rpcClient(string $host,string $class,string $method,array $param, $version = "1.0", $ext = []): array
     {
         $fp = stream_socket_client($host, $errno, $errstr);
         if (!$fp) {
