@@ -51,8 +51,13 @@ class ShopUserDao extends ShopUser
         $dao->sub_time = $userInfo['CreateTime'];
         // 获取用户其他信息
         $app = Factory::officialAccount(\Yii::$app->params['testWeChat']);
-        $user = $app->user->get($userInfo['FromUserName']);
-        \Yii::info($user);
+        $user = json_decode($app->user->get($userInfo['FromUserName']));
+        $dao->nickname = $user['nickname'];
+        $dao->sex = $user['sex'];
+        $dao->city = $user['city'];
+        $dao->province = $user['province'];
+        $dao->country = $user['country'];
+        $dao->head_img_url = $user['headimgurl'];
         $res = $dao->save();
         if (!$res){
             return current($dao->getFirstErrors());

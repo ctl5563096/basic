@@ -15,6 +15,12 @@ use Yii;
  * @property int $sub_time 用户关注时间
  * @property int $created_at 创建时间
  * @property int $custom_id 客服id
+ * @property string $nickname 粉丝昵称
+ * @property int $sex 性别
+ * @property string $city 城市
+ * @property string $province 省份
+ * @property string $country 国家
+ * @property string $head_img_url 头像地址
  */
 class ShopUser extends \yii\db\ActiveRecord
 {
@@ -32,8 +38,9 @@ class ShopUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_sub', 'un_sub_time', 'is_black', 'sub_time', 'created_at', 'custom_id'], 'integer'],
-            [['openid'], 'string', 'max' => 255],
+            [['is_sub', 'un_sub_time', 'is_black', 'sub_time', 'created_at', 'custom_id' ,'sex'], 'integer'],
+            [['openid' ,'city' ,'province' ,'country'], 'string', 'max' => 255],
+            [['nickname' ,'head_img_url'], 'string', 'max' => 1024],
         ];
     }
 
@@ -51,6 +58,12 @@ class ShopUser extends \yii\db\ActiveRecord
             'sub_time'    => 'Sub Time',
             'created_at'  => 'Created At',
             'custom_id'   => '客服id',
+            'nickname'    => '粉丝昵称',
+            'sex'         => '性别',
+            'city'        => '城市',
+            'province'    => '省份',
+            'country'     => '国家',
+            'head_img_url' => '头像地址'
         ];
     }
 }
