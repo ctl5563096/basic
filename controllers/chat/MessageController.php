@@ -14,6 +14,10 @@ use yii\web\Controller;
 class MessageController extends Controller
 {
     /**
+     * @var bool 关闭yii2自带布局
+     */
+    public $layout = false;
+    /**
      * 渲染聊天页面
      *
      * Date: 2020/6/19
