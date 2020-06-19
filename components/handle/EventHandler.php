@@ -32,8 +32,8 @@ class EventHandler implements EventHandlerInterface
         // 关注之后新建用户
         if ($event === 'subscribe'){
             // 判断用户是否曾经关注过
-            $dao = ShopUserDao::findOne(['openid' => $this->message['FromUserName']]);
-            if (!$dao){
+            $userInfo = ShopUserDao::findOne(['openid' => $this->message['FromUserName']]);
+            if (!$userInfo){
                 if (!$dao->createShopUser($this->message)){
                     \Yii::info($dao->createShopUser($this->message));
                     return null;
