@@ -5,6 +5,8 @@ namespace app\dao;
 
 
 use app\models\ShopUser;
+use EasyWeChat\Factory;
+use EasyWeChat\Kernel\Exceptions\InvalidConfigException;
 
 /**
  * 商城用户数据访问层
@@ -38,6 +40,7 @@ class ShopUserDao extends ShopUser
      * Date: 2020/6/9
      * @param array $userInfo
      * @return void | bool
+     * @throws InvalidConfigException
      * @author chentulin
      */
     public function createShopUser(array $userInfo)
@@ -46,6 +49,10 @@ class ShopUserDao extends ShopUser
         $dao->openid = $userInfo['FromUserName'];
         $dao->created_at = time();
         $dao->sub_time = $userInfo['CreateTime'];
+        // 获取用户其他信息
+        $app = Factory::officialAccount(\Yii::$app->params['testWeChat']);
+        $user = $app->user->get($userInfo['FromUserName']);
+        \Yii::info($user);
         $res = $dao->save();
         if (!$res){
             return current($dao->getFirstErrors());
