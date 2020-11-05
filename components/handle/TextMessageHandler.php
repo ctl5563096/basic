@@ -4,6 +4,7 @@
 namespace app\components\handle;
 
 use app\dao\ShopUserDao;
+use app\models\ChatMessage;
 use Yii;
 use app\components\rpcClient;
 use EasyWeChat\Kernel\Contracts\EventHandlerInterface;
@@ -28,10 +29,10 @@ class TextMessageHandler implements EventHandlerInterface
     {
         $this->message = $payload;
         // 处理事件
-        switch ($this->message['MsgType']){
+        switch ($this->message['MsgType']) {
             case 'text':
                 $customId = ShopUserDao::findByOpenId($this->message['FromUserName'])['custom_id'];
-                $res = rpcClient::rpcClient(
+                $res      = rpcClient::rpcClient(
                     'tcp://' . Yii::$app->params['rpc']['host'] . ':' . Yii::$app->params['rpc']['port'],
                     'App\Rpc\Lib\CustomInterface',
                     'send',
@@ -39,12 +40,19 @@ class TextMessageHandler implements EventHandlerInterface
                         $customId,
                         'text',
                         $this->message['Content'],
-                        $this->message['FromUserName']
+                        $this->message['FromUserName'],
                     ]
                 );
                 // 聊天记录暂时存到mysql 以保证聊天记录的对比
+                $messageModel            = new ChatMessage();
+                $messageModel->content   = $this->message['Content'];
+                $messageModel->openid    = $this->message['FromUserName'];
+                $messageModel->is_read   = 1;
+                $messageModel->custom_id = $customId;
+                $messageModel->type      = 'text';
+                $messageModel->save();
                 Yii::info(json_encode($res));
-                if ($res['result'] === false){
+                if ($res['result'] === false) {
                     return '小客不在线哦,上线之后马上回复客官您';
                 }
                 return '您的专属客服马上为你处理您的问题哦!';

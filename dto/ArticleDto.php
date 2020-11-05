@@ -3,7 +3,6 @@
 
 namespace app\dto;
 
-use yii\base\Model;
 
 /**
  * 文章数据验证层
