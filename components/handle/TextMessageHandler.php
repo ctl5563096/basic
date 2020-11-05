@@ -42,10 +42,12 @@ class TextMessageHandler implements EventHandlerInterface
                         $this->message['FromUserName']
                     ]
                 );
+                // 聊天记录暂时存到mysql 以保证聊天记录的对比
                 Yii::info(json_encode($res));
                 if ($res['result'] === false){
                     return '小客不在线哦,上线之后马上回复客官您';
                 }
+                return '您的专属客服马上为你处理您的问题哦!';
                 break;
             case 'image':
                 return '收到了您反馈的图片';

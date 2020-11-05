@@ -14,7 +14,7 @@ trait Singletons
 
     public static  function getInstance(int $database,string $password = ''){
         if(!isset(self::$instance)){
-            self::$instance = new static(1,'');
+            self::$instance = new static(1,$password);
         }
         return self::$instance;
     }

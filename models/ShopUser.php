@@ -38,9 +38,9 @@ class ShopUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_sub', 'un_sub_time', 'is_black', 'sub_time', 'created_at', 'custom_id' ,'sex'], 'integer'],
-            [['openid' ,'city' ,'province' ,'country'], 'string', 'max' => 255],
-            [['nickname' ,'head_img_url'], 'string', 'max' => 1024],
+            [['is_sub', 'un_sub_time', 'is_black', 'sub_time', 'created_at', 'custom_id', 'sex'], 'integer'],
+            [['openid', 'city', 'province', 'country'], 'string', 'max' => 255],
+            [['nickname', 'head_img_url'], 'string', 'max' => 1024],
         ];
     }
 
@@ -50,20 +50,20 @@ class ShopUser extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'          => 'ID',
-            'openid'      => 'Openid',
-            'is_sub'      => 'Is Sub',
-            'un_sub_time' => 'Un Sub Time',
-            'is_black'    => 'Is Black',
-            'sub_time'    => 'Sub Time',
-            'created_at'  => 'Created At',
-            'custom_id'   => '客服id',
-            'nickname'    => '粉丝昵称',
-            'sex'         => '性别',
-            'city'        => '城市',
-            'province'    => '省份',
-            'country'     => '国家',
-            'head_img_url' => '头像地址'
+            'id'           => 'ID',
+            'openid'       => 'Openid',
+            'is_sub'       => 'Is Sub',
+            'un_sub_time'  => 'Un Sub Time',
+            'is_black'     => 'Is Black',
+            'sub_time'     => 'Sub Time',
+            'created_at'   => 'Created At',
+            'custom_id'    => '客服id',
+            'nickname'     => '粉丝昵称',
+            'sex'          => '性别',
+            'city'         => '城市',
+            'province'     => '省份',
+            'country'      => '国家',
+            'head_img_url' => '头像地址',
         ];
     }
 }
