@@ -43,8 +43,7 @@ class LoginController extends Controller
             $password         = Yii::$app->request->post('password');
             $row              = (new Query())->select('*')->from('admin_user')->where('username = :username')->addParams([':username' => $username])->one();
             if (password_verify($password, $row['password'])) {
-                $redis = Redis::getInstance(1,Yii::$app->params['redis']['password'])->getRedis();
-                $redis->zAdd('custom',[],0,$row['id']);
+                Yii::$app->session->set('customId',$row['id']);
                 $response->data = ['code' => 200, 'msg' => '登陆成功'];
             } else {
                 $response->data = ['code' => 500, 'msg' => '密码错误'];
@@ -58,6 +57,7 @@ class LoginController extends Controller
      */
     public function actionLogout()
     {
+        Yii::$app->session->removeAll();
         $this->redirect('custom');
     }
 }

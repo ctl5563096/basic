@@ -57,24 +57,25 @@ class WeChatService extends BaseService
         $object  = new self();
         $message = new Text($content);
         try {
-           $object->app->customer_service->message($message)->to($openid)->send();
+            $object->app->customer_service->message($message)->to($openid)->send();
         } catch (InvalidArgumentException $e) {
-            Yii::info($e->getMessage().$openid);
+            Yii::info($e->getMessage() . $openid);
             return false;
         } catch (InvalidConfigException $e) {
-            Yii::info($e->getMessage().$openid);
+            Yii::info($e->getMessage() . $openid);
             return false;
         } catch (RuntimeException $e) {
-            Yii::info($e->getMessage().$openid);
+            Yii::info($e->getMessage() . $openid);
             return false;
         }
         // 保存客服聊天记录
-        $messageModel            = new ChatMessage();
-        $messageModel->content   = $content;
-        $messageModel->openid    = $openid;
-        $messageModel->is_read   = 2;
-        $messageModel->custom_id = $customId;
-        $messageModel->type      = 'text';
+        $messageModel              = new ChatMessage();
+        $messageModel->content     = $content;
+        $messageModel->openid      = $openid;
+        $messageModel->is_read     = 2;
+        $messageModel->custom_id   = $customId;
+        $messageModel->type        = 'text';
+        $messageModel->is_customer = 2;
         $messageModel->save();
         return true;
     }

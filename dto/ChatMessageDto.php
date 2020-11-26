@@ -12,6 +12,7 @@ namespace app\dto;
  * @property string $type 记录类型
  * @property int $is_read 是否已读,1/未读,2/已读
  * @property string $content 聊天内容
+ * @property int $is_customer 是否为客户消息,1/是,2/不是
  */
 class ChatMessageDto extends BaseDto
 {
@@ -32,10 +33,13 @@ class ChatMessageDto extends BaseDto
     /** @var string $content */
     public $content;
 
+    /** @var integer $is_customer */
+    public $is_customer;
+
     public function rules()
     {
         return [
-            [['openid','custom_id','type','is_read','content'],'required','on' => self::SCENARIO_CREATE],
+            [['openid','custom_id','type','is_read','content','is_customer'],'required','on' => self::SCENARIO_CREATE],
             [['label'],'safe','on' => self::SCENARIO_CREATE],
         ];
     }

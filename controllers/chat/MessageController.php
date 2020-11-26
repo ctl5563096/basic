@@ -3,8 +3,8 @@
 
 namespace app\controllers\chat;
 
+use app\dao\ChatMessageDao;
 use Yii;
-use yii\web\Controller;
 use yii\web\Response;
 use app\service\WeChatService;
 
@@ -13,13 +13,33 @@ use app\service\WeChatService;
  *
  * Class MessageController
  * @package app\controllers\chat
+ * @property ChatMessageDao $messageDao
  */
-class MessageController extends Controller
+class MessageController extends BaseChatController
 {
     /**
      * @var bool 关闭yii2自带布局
      */
     public $layout = false;
+
+    /**
+     * @var ChatMessageDao $messageDao
+     */
+    public $messageDao;
+
+    /**
+     * 初始化构造函数
+     *
+     * MessageController constructor.
+     * @param $id
+     * @param $module
+     * @param array $config
+     */
+    public function __construct($id, $module, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->messageDao = new ChatMessageDao();
+    }
 
     /**
      * 渲染聊天页面
@@ -29,7 +49,9 @@ class MessageController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        // 获取必要参数去前端连接websocket
+        $customId = Yii::$app->session->get('customId');
+        return $this->render('index', ['customId' => $customId]);
     }
 
     /**
@@ -48,16 +70,42 @@ class MessageController extends Controller
         $openid   = $request->post('openid');
         $customId = $request->post('customId');
         $content  = $request->post('content');
-        if (!$openid || !$customId || !$content){
-            $response->data = ['code' => '400' , 'msg' => '缺少参数'];
-        }else{
+        if (!$openid || !$customId || !$content) {
+            $response->data = ['code' => '400', 'msg' => '缺少参数'];
+        } else {
             // 获取发送内容
-            $weChatServiceRes = WeChatService::sendMessage($openid,(int)$customId,$content);
-                if ($weChatServiceRes){
-                    $response->data = ['code' => '200' , 'msg' => '发送成功'];
-                }else{
-                    $response->data = ['code' => '400' , 'msg' => '发送失败'];
+            $weChatServiceRes = WeChatService::sendMessage($openid, (int)$customId, $content);
+            if ($weChatServiceRes) {
+                $response->data = ['code' => '200', 'msg' => '发送成功'];
+            } else {
+                $response->data = ['code' => '400', 'msg' => '发送失败'];
             }
+        }
+        return $response;
+    }
+
+    /**
+     * Notes: 获取未读信息用户
+     *
+     * Author: chentulin
+     * DateTime: 2020/11/12 15:21
+     * E-MAIL: <chentulinys@163.com>
+     */
+    public function getUserForMessage()
+    {
+        $request          = Yii::$app->request;
+        $response         = Yii::$app->response;
+        $response->format = Response::FORMAT_JSON;
+        // 获取客服ID
+        $customId = $request->post('customId');
+        $params   = [];
+        if ($request->post('page')) {
+            $params['page'] = $request->post('page');
+        }
+        if (!$customId) {
+            $response->data = ['code' => '400', 'msg' => '缺少参数'];
+        } else {
+            $this->messageDao->getNotReadUserMessageRecord($customId, $params);
         }
         return $response;
     }

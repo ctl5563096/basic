@@ -14,6 +14,7 @@ use Yii;
  * @property string $type 记录类型
  * @property int $is_read 是否已读,1/未读,2/已读
  * @property string $content 聊天内容
+ * @property int $is_customer 是否为客户消息,1/是,2/不是
  */
 class ChatMessage extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class ChatMessage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['custom_id', 'is_read'], 'integer'],
+            [['custom_id', 'is_read', 'is_customer'], 'integer'],
             [['created_time'], 'safe'],
             [['content'], 'required'],
             [['content'], 'string'],
@@ -46,13 +47,14 @@ class ChatMessage extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'openid' => 'Openid',
-            'custom_id' => 'Custom ID',
+            'id'           => 'ID',
+            'openid'       => 'Openid',
+            'custom_id'    => 'Custom ID',
             'created_time' => 'Created Time',
-            'type' => 'Type',
-            'is_read' => 'Is Read',
-            'content' => 'Content',
+            'type'         => 'Type',
+            'is_read'      => 'Is Read',
+            'content'      => 'Content',
+            'is_customer'  => 'is_customer'
         ];
     }
 }

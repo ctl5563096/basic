@@ -44,12 +44,13 @@ class TextMessageHandler implements EventHandlerInterface
                     ]
                 );
                 // 聊天记录暂时存到mysql 以保证聊天记录的对比
-                $messageModel            = new ChatMessage();
-                $messageModel->content   = $this->message['Content'];
-                $messageModel->openid    = $this->message['FromUserName'];
-                $messageModel->is_read   = 1;
-                $messageModel->custom_id = $customId;
-                $messageModel->type      = 'text';
+                $messageModel              = new ChatMessage();
+                $messageModel->content     = $this->message['Content'];
+                $messageModel->openid      = $this->message['FromUserName'];
+                $messageModel->is_read     = 1;
+                $messageModel->custom_id   = $customId;
+                $messageModel->type        = 'text';
+                $messageModel->is_customer = 1;
                 $messageModel->save();
                 Yii::info(json_encode($res));
                 if ($res['result'] === false) {

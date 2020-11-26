@@ -9,7 +9,6 @@ use app\models\Article;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Query;
-use yii\debug\models\timeline\DataProvider;
 use yii\web\BadRequestHttpException;
 
 /**
