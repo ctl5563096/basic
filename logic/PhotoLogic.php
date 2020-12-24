@@ -13,19 +13,20 @@ class PhotoLogic
     /**
      * Notes: 获取每天的照片
      * @param array $list
+     * @param int $timeDay
      * @param int $page
      * @return array
      * @author: chentulin
      * Date: 2020/5/14
      * Time: 11:20
      */
-    public function getDayPhoto(array $list, int $page): array
+    public function getDayPhoto(array $list,int $timeDay,int $page): array
     {
         $time = [];
         $data = [];
         // 构建时间区间
         for ($i = 0; $i < 5; $i++) {
-            $end                                       = (strtotime(date('Y-m-d')) + 86400 - 1) - $page * 86400 * $i;
+            $end                                       = $timeDay - $page * 86400 * $i;
             $start                                     = $end - 86399;
             $time[date('Y-m-d', (int)$start)]['start'] = $start;
             $time[date('Y-m-d', (int)$start)]['end']   = $end;

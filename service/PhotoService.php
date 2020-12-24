@@ -56,7 +56,7 @@ class PhotoService extends BaseService
     public function getList(int $page): array
     {
         $list = $this->photoDao->getList($page);
-        return $this->photoLogic->getDayPhoto($list, $page);
+        return $this->photoLogic->getDayPhoto($list['list'], (int)$list['time'] ,$page);
     }
 
     /**

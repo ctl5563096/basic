@@ -32,15 +32,17 @@
                 <div class="card-body">出身中国大陆最南方--湛江</div>
                 <div class="card-body">大学在大连上学(不要问我为什么去北方,因为我想去看北方的海),大学专业电子男一枚</div>
                 <div class="card-body">大学主修电子专业,俗称电焊工,学过数字电路,C,C++,模拟电路等等....</div>
-                <div class="card-body">大学毕业回到深圳从事web开发(所以有点菜),目前在广州过着996靠着PHP维持一下生活,目前在自学GO</div>
-                <div class="card-body">喜欢看电影.听音乐,基本保持更新自己的网易云和自己的电影库,有想要互加网易好友的加YYCTL 分享一下各自的歌单~ o(￣▽￣)o</div>
+                <div class="card-body">大学毕业回到深圳从事web开发(所以有点菜)</div>
+                <div class="card-body">目前在深圳某外包公司靠着PHP维持一下生活,目前在自学GO(进程缓慢)</div>
+                <div class="card-body">喜欢看电影.听音乐,基本保持更新自己的网易云和自己的电影库,有想要互加网易好友的加YY_CTL 分享一下各自的歌单~ o(￣▽￣)o</div>
                 <div class="card-body">想学摄影 但是一直没时间没钱,最主要还是穷</div>
                 <div class="card-body">具有独立分析、解决问题的能力，良好的沟通能力，团队合作精神，高度的责任心，能承担工作压力,有强烈的上进心和求知欲，善于学习新事物</div>
             </div>
             <div class="card-body">
                 <span class="glyphicon glyphicon-road"></span> <span>工 作 经 历</span>
                 <div class="card-body">2018.09 ~ 2019.02 深圳市乐活电子商务公司</div>
-                <div class="card-body">2019.04 ~ 2020.05 广州市凡岛网络科技有限公司</div>
+                <div class="card-body">2019.04 ~ 2020.06 广州市凡岛网络科技有限公司</div>
+                <div class="card-body">2020.06 ~ 至今 某大型互联网公司外包人员</div>
             </div>
             <div class="card-body">
                 <span class="glyphicon glyphicon-tags"></span> <span>博 客 技 术</span>

@@ -42,15 +42,27 @@ class PhotoDao extends Photo
      */
     public function getList(int $page): array
     {
-        $endTime   = (strtotime(date('Y-m-d')) + 86400 - 1) - ($page - 1) * 86400 * 5;
-        $startTime = strtotime(date('Y-m-d')) - 86400 * $page * 5;
+        // 获取最后一张图片的上传时间 以那个时间为时间刻度倒推
+        $lastQuery =  new Query();
+        $lastQuery->from(self::tableName());
+        $lastQuery->select('upload_time');
+        $lastQuery->orderBy([
+            'upload_time' => SORT_DESC
+        ]);
+        $lastQuery->limit(1);
+        $lastRes = $lastQuery->all();
+        $endTime   = (strtotime(date("Y-m-d",(int)$lastRes[0]['upload_time'])) + 86400 - 1) - ($page - 1) * 86400 * 5;
+        $startTime = strtotime(date("Y-m-d",(int)$lastRes[0]['upload_time'])) - 86400 * $page * 5;
         $query     = new Query();
         $query->from(self::tableName());
         $query->select('*');
         $query->where(['>', 'upload_time', $startTime]);
         $query->andWhere(['<', 'upload_time', $endTime]);
         $query->orderBy('upload_time');
-        return $query->all();
+        $resArr = [];
+        $resArr['list'] = $query->all();
+        $resArr['time'] = strtotime(date("Y-m-d",(int)$lastRes[0]['upload_time'])) + 86400 - 1;
+        return $resArr;
     }
 
     /**
