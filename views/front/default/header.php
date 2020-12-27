@@ -11,8 +11,8 @@ use yii\helpers\Html;
     <meta name="keywords" content="YYCTL ctllys blog chentulin" />
 
     <!-- 引入 Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<!--    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <link href="/bs/css/337.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="/bs/css/bootstrap.css" rel="stylesheet">
     <link href="/css/layui/css/layui.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -20,6 +20,8 @@ use yii\helpers\Html;
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="/bs/js/bootstrap.js"></script>
     <script src="/clock/clock/js/clock-1.1.0.min.js"></script>
+<!--    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link href="/bootstrap/js/bootstrap.js" rel="stylesheet">-->
 </head>
 <style>
     body {
