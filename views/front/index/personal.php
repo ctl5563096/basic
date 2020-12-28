@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="title border" style="height: 1100px;margin: 30px;">
+    <div class="title border" style="height: 1200px;margin: 30px;">
         <div class="card border-0">
             <h2 class="card-body" style="text-align: center;">
                 关 于 博 主
@@ -55,6 +55,9 @@
                 <div class="card-body">开发初衷：跟我首页写得一样，总想记录点什么</div>
                 <div class="card-body">长期维护博客,编写新模块</div>
                 <div class="card-body">联系博主邮箱：chentulinys@163.com</div>
+                <div class="card-body">博主微信:
+                    <img src="/header/qrcode.png" width="100px" height="100px">
+                </div>
             </div>
         </div>
     </div>
