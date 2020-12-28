@@ -35,7 +35,8 @@ require __DIR__ . '/../default/header.php'; ?>
         </button>
     </div>
 </div>
-<div style="width: 300px;position: fixed;bottom:77px;" class="card">
+<div style="width: 20px;position: fixed;right: 0px;bottom:345px;background-color:#007bff;text-align: center;color: white;border-top-left-radius:5px;border-bottom-left-radius:5px;cursor: pointer" id="set_room">在<br>线<br>聊<br>天<br>室</div>
+<div style="width: 300px;position: fixed;right: -300px;bottom:77px;" class="card" id="message_room">
 <!--    <p class="card-body">在线聊天室,想测试可以开两个页面哦~</p>-->
     <div class="card-body border message" style="margin: 10px;height: 200px;padding-bottom: 20px;overflow:auto;">
     </div>
@@ -456,16 +457,6 @@ require __DIR__ . '/../default/header.php'; ?>
         window.location.href = '/front/message/index';
     }
 
-    // 留言板缩进
-    function noneMessage() {
-        var dom = $('#message_broad').css('display')
-        if (dom === 'none') {
-            $('.weather').slideDown(1500)
-        } else {
-            $('.weather').slideUp(1500)
-        }
-    }
-
     // 留言板渐变
     $('#set_message').click(function () {
         var dom = $('#message_broad').css('right')
@@ -475,6 +466,18 @@ require __DIR__ . '/../default/header.php'; ?>
         } else {
             $('#message_broad').animate({ right:"-300px",opacity:1},1500)
             $('#set_message').animate({ right:"0px",opacity:1},1500)
+        }
+    })
+
+    // 聊天室缩进
+    $('#set_room').click(function () {
+        var dom = $('#message_room').css('right')
+        if (dom == '-300px') {
+            $('#message_room').animate({ right:"0px",opacity:1},1500)
+            $('#set_room').animate({ right:"300px",opacity:1},1500)
+        } else {
+            $('#message_room').animate({ right:"-300px",opacity:1},1500)
+            $('#set_room').animate({ right:"0px",opacity:1},1500)
         }
     })
 </script>
