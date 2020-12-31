@@ -41,27 +41,39 @@ class ChatMessageDao extends ChatMessage
     public function getNotReadUserMessageRecord(int $customId, array $params): array
     {
         // 页数
-        if (!isset($params['page'])){
+        if (!isset($params['page'])) {
             $page = 1;
-        }else{
+        } else {
             $page = $params['page'];
         }
-        $query    = self::find()->select('a.openid,b.head_img_url')
+        $query     = self::find()->select('a.openid,b.head_img_url,b.nickname')
             ->alias('a')
             ->join('LEFT JOIN', 'shop_user as b', 'a.openid = b.openid')
             ->where(['a.custom_id' => $customId])
             ->andWhere(['a.is_read' => 1])
             ->groupBy('a.openid')
             ->orderBy(['b.id' => SORT_DESC]);
-        $provider = new ActiveDataProvider([
+        $provider  = new ActiveDataProvider([
             'query'      => $query->asArray(),
             'pagination' => [
                 'pageSize' => 10,
                 'page'     => $page - 1,
             ],
         ]);
+        $dataList  = $provider->getModels();
+        $openidArr = array_column($dataList,'openid');
+        // 获取每个用户有多少条未读信息
+        $queryNotReadData = self::find()->select('count(*) as count ,openid')
+            ->where(['in', 'openid', $openidArr])
+            ->groupBy('openid')
+            ->asArray()
+            ->all();
+        $tempArr = array_column($queryNotReadData, null, 'openid');
+        foreach ($dataList as &$v){
+            $v['notRead'] = $tempArr[$v['openid']]['count'];
+        }
         return [
-            'dataList'   => $provider->getModels(),
+            'dataList'   => $dataList,
             'totalCount' => $provider->totalCount,
         ];
     }

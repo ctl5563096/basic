@@ -91,7 +91,7 @@ class MessageController extends BaseChatController
      * DateTime: 2020/11/12 15:21
      * E-MAIL: <chentulinys@163.com>
      */
-    public function getUserForMessage()
+    public function actionMessage()
     {
         $request          = Yii::$app->request;
         $response         = Yii::$app->response;
@@ -99,13 +99,14 @@ class MessageController extends BaseChatController
         // 获取客服ID
         $customId = $request->post('customId');
         $params   = [];
+        $res      = [];
         if ($request->post('page')) {
             $params['page'] = $request->post('page');
         }
         if (!$customId) {
             $response->data = ['code' => '400', 'msg' => '缺少参数'];
         } else {
-            $this->messageDao->getNotReadUserMessageRecord($customId, $params);
+            $response->data = ['code' => 200,'data' => $this->messageDao->getNotReadUserMessageRecord((int)$customId, $params) ,'msg' => '获取成功'];
         }
         return $response;
     }
