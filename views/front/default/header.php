@@ -15,7 +15,7 @@ use yii\helpers\Html;
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="/bs/css/bootstrap.css" rel="stylesheet">
     <link href="/css/layui/css/layui.css" rel="stylesheet">
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+<!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>-->
 <!--    <script src="https://code.jquery.com/jquery.js"></script>-->
     <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
     <script src="/bs/js/bootstrap.js"></script>

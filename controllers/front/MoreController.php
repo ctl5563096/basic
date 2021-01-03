@@ -24,4 +24,16 @@ class MoreController extends FrontController
     {
         return $this->render('index');
     }
+
+    /**
+     * Notes: 新页面首页
+     *
+     * @author: chentulin
+     * Date: 2021/1/3
+     * Time: 23:18
+     */
+    public function actionNewIndex()
+    {
+        return $this->render('page');
+    }
 }
