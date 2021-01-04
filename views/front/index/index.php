@@ -53,15 +53,15 @@ require __DIR__ . '/../default/header.php'; ?>
     </div>
     <div class="row title" style="height: 60px;margin-bottom: 30px;">
         <a href="front/index/index"
-           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">首页 </a>
+           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">首 页</a>
         <a href="/front/message/index"
-           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">留言板 </a>
+           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">足 迹</a>
         <a href="/front/speak/index"
-           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">碎碎念 </a>
+           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">心 情 圈</a>
         <a href="/front/photo/index"
-           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">生活圈子</a>
+           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">相 册</a>
         <a href="/front/more/index"
-           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">查看更多</a>
+           style="display: inline-block;width: 130px;height: 30px;font-size: 16px;text-align: center;padding-top: 25px;font-family: -apple-system, BlinkMacSystemFont, PingFang-SC-Regular, Hiragino Sans GB, Microsoft Yahei, Arial, sans-serif;text-transform:uppercase;">MORE</a>
         <div class="input-group" style="width: 300px;height: 32px;padding-top: 21px;margin-left: 50px">
             <input type="text" class="form-control" placeholder="文章关键字" style="height: 30px" id="title" name="title">
             <button type="button" class="btn btn-outline-secondary" style="height: 30px;width: 80px "

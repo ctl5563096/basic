@@ -82,6 +82,9 @@ class SpeakDao extends Speak
         $query = new Query();
         $query->from(self::tableName());
         $query->select('*');
+        $query->orderBy([
+            'id' => SORT_DESC
+        ]);
 
         $dataProvider = new ActiveDataProvider([
             'query'      => $query,

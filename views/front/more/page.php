@@ -19,17 +19,31 @@ use yii\helpers\Html;
     <div class="layui-carousel" id="test1">
         <div carousel-item>
             <div>
-                <img src="http://www.ctllys.top/upload/image/20210103224630.jpg" width="100px">
+                <img src="http://www.ctllys.top/upload/image/20210103224630.jpg" height="280px" width="1000px" style="margin: auto;margin-top: 20px;display: block;box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.20), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
             </div>
-            <div>条目2</div>
-            <div>条目3</div>
-            <div>条目4</div>
-            <div>条目5</div>
+            <div>
+                <img src="http://www.ctllys.top/upload/image/20210103224630.jpg" height="280px" width="1000px" style="margin: auto;margin-top: 20px;display: block;box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.20), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div>
+                <img src="http://www.ctllys.top/upload/image/20210103224630.jpg" height="280px" width="1000px" style="margin: auto;margin-top: 20px;display: block;box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.20), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div>
+                <img src="http://www.ctllys.top/upload/image/20210103224630.jpg" height="280px" width="1000px" style="margin: auto;margin-top: 20px;display: block;box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.20), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
+            </div>
+            <div>
+                <img src="http://www.ctllys.top/upload/image/20210103224630.jpg" height="280px" width="1000px" style="margin: auto;margin-top: 20px;display: block;box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.20), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);">
+            </div>
         </div>
     </div>
     <div>
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+        <div class="layui-row" style="height: 1000px;">
+            <div class="layui-col-md9" style="background-color: red;height: 1000px;">
+                你的内容 9/12
+            </div>
+            <div class="layui-col-md3" style="background-color: cadetblue;height: 1000px;">
+                你的内容 3/12
+            </div>
     </div>
     <div class="layui-footer" style="background-color: burlywood;text-align: center">
         <p class="text-muted credit" style="margin-top: 10px">
@@ -53,8 +67,9 @@ use yii\helpers\Html;
             elem: '#test1'
             ,width: '100%' //设置容器宽度
             ,arrow: 'always' //始终显示箭头
-            //,anim: 'updown' //切换动画方式
+            // ,anim: 'fade' //切换动画方式
             ,autoplay: true
+            ,height:350
         });
     });
 </script>
