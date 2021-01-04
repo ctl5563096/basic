@@ -110,4 +110,26 @@ class MessageController extends BaseChatController
         }
         return $response;
     }
+
+    /**
+     * Notes: 获取未读用户所有信息
+     *
+     * Author: chentulin
+     * DateTime: 2021/1/4 17:04
+     * E-MAIL: <chentulinys@163.com>
+     */
+    public function actionGetMessage()
+    {
+        $request          = Yii::$app->request;
+        $response         = Yii::$app->response;
+        $response->format = Response::FORMAT_JSON;
+        // 获取客服ID
+        $openid = $request->post('openid');
+        if (!$openid) {
+            $response->data = ['code' => '400', 'msg' => '缺少参数'];
+        }else{
+            $response->data = ['code' => 200,'data' => $this->messageDao->getUserNotReadMessage($openid) ,'msg' => '获取成功'];
+        }
+        return $response;
+    }
 }

@@ -61,20 +61,52 @@ class ChatMessageDao extends ChatMessage
             ],
         ]);
         $dataList  = $provider->getModels();
-        $openidArr = array_column($dataList,'openid');
+        $openidArr = array_column($dataList, 'openid');
         // 获取每个用户有多少条未读信息
         $queryNotReadData = self::find()->select('count(*) as count ,openid')
             ->where(['in', 'openid', $openidArr])
             ->groupBy('openid')
             ->asArray()
             ->all();
-        $tempArr = array_column($queryNotReadData, null, 'openid');
-        foreach ($dataList as &$v){
+        $tempArr          = array_column($queryNotReadData, null, 'openid');
+        foreach ($dataList as &$v) {
             $v['notRead'] = $tempArr[$v['openid']]['count'];
         }
         return [
             'dataList'   => $dataList,
             'totalCount' => $provider->totalCount,
         ];
+    }
+
+    /**
+     * Notes: 数据传输层获取未读用户信息
+     *
+     * Author: chentulin
+     * DateTime: 2021/1/4 17:06
+     * E-MAIL: <chentulinys@163.com>
+     * @param string $openid
+     */
+    public function getUserNotReadMessage(string $openid)
+    {
+        $result = self::find()->select('*')
+            ->where(['openid' => $openid])
+            ->orderBy(['created_time' => SORT_DESC])
+            ->limit(100)
+            ->asArray()
+            ->all();
+
+        //  获取用户基本信息
+        $userInfo = ShopUserDao::find()->select('*')
+            ->where(['openid' => $openid])
+            ->asArray()
+            ->one();
+
+        // 组装数据
+        $data = [
+            'message'   => $result,
+            'userName'  => $userInfo['nickname'],
+            'headerUrl' => $userInfo['head_img_url'],
+        ];
+        return $data;
     }
 }
