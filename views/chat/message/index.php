@@ -7,7 +7,7 @@
 <!--        </div>-->
     </div>
     <div class="layui-body" style="color: #0C0C0C;border-left: 1px solid #000000">
-        <div style="width: 100%;height: 80%;overflow-y:scroll;border-bottom: 2px solid #000000" id="main_content">
+        <div style="width: 100%;height: 80%;overflow-y:scroll;border-bottom: 2px solid #000000;padding: 5px" id="main_content">
 
         </div>
         <div id="sender" style="width: 100%;height: 20%;overflow-y:scroll">
@@ -136,21 +136,21 @@
                             result.data.message.map(function(item, index){
                                 // 判断是客服发送还是顾客发送
                                 if (item.is_customer == 1){
-                                    html += `<p>`
-                                    html += this.nickname
-                                    html += `&nbsp&nbsp&nbsp`
+                                    html += `<p align="right" style="margin-bottom: 5px;">`
                                     html += item.created_time
+                                    html += `&nbsp&nbsp&nbsp`
+                                    html += this.nickname
                                     html += `</p>`
-                                    html += `<p>`
+                                    html += `<p align="right" style="margin-bottom: 5px;">`
                                     html += item.content
                                     html += `</p>`
                                 }else{
-                                    html += `<p>`
+                                    html += `<p style="margin-bottom: 5px;">`
                                     html += `客服14`
                                     html += `&nbsp&nbsp&nbsp`
                                     html += item.created_time
                                     html += `</p>`
-                                    html += `<p>`
+                                    html += `<p style="margin-bottom: 5px;">`
                                     html += item.content
                                     html += `</p>`
                                 }
