@@ -1,4 +1,11 @@
 <?php require __DIR__ . '/../../backend/default/header.php'; ?>
+<style>
+    p{
+        word-wrap: break-word;
+        word-break: break-all;
+        overflow: hidden;
+    }
+</style>
     <div class="layui-side layui-bg-white" style="border-right: 1px" id="list">
 <!--        <div>-->
 <!--            <img src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1592552679&di=8230b33959f96a0fc09cf06c5b2d7aaa&src=http://pic1.win4000.com/wallpaper/4/5359c6695cdee.jpg" style="width: 50px;height: 50px;margin: 3px">-->
@@ -141,7 +148,7 @@
                                     html += `&nbsp&nbsp&nbsp`
                                     html += this.nickname
                                     html += `</p>`
-                                    html += `<p align="right" style="margin-bottom: 5px;">`
+                                    html += `<p align="right" style="margin-bottom: 20px;padding-left: 50%;">`
                                     html += item.content
                                     html += `</p>`
                                 }else{
@@ -150,7 +157,7 @@
                                     html += `&nbsp&nbsp&nbsp`
                                     html += item.created_time
                                     html += `</p>`
-                                    html += `<p style="margin-bottom: 5px;">`
+                                    html += `<p style="margin-bottom: 20px;padding-right: 50%">`
                                     html += item.content
                                     html += `</p>`
                                 }

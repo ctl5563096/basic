@@ -46,7 +46,7 @@ class ChatMessageDao extends ChatMessage
         } else {
             $page = $params['page'];
         }
-        $query     = self::find()->select('a.openid,b.head_img_url,b.nickname')
+        $query     = self::find()->select('a.id as id,a.openid,b.head_img_url,b.nickname')
             ->alias('a')
             ->join('LEFT JOIN', 'shop_user as b', 'a.openid = b.openid')
             ->where(['a.custom_id' => $customId])
@@ -85,6 +85,7 @@ class ChatMessageDao extends ChatMessage
      * DateTime: 2021/1/4 17:06
      * E-MAIL: <chentulinys@163.com>
      * @param string $openid
+     * @return array
      */
     public function getUserNotReadMessage(string $openid)
     {
