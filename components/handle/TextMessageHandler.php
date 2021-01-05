@@ -56,7 +56,16 @@ class TextMessageHandler implements EventHandlerInterface
                 if ($res['result'] === false) {
                     return '小客不在线哦,上线之后马上回复客官您';
                 }
-                return '您的专属客服马上为你处理您的问题哦!';
+                // redis实例化对象
+                // 记录在两小时内 是否发送过消息 如果没有就返回 否则就不返回
+                $redis = Yii::$app->redis;
+                $key = $this->message['FromUserName'];
+                if (!$redis->get($this->message['FromUserName'])) {
+                    $redis->set($key, 'yes');
+                    $redis->expire($key, 7200);
+
+                    return '您的专属客服马上为你处理您的问题哦!';
+                }
                 break;
             case 'image':
                 return '收到了您反馈的图片';
