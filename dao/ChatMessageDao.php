@@ -91,7 +91,7 @@ class ChatMessageDao extends ChatMessage
     {
         $result = self::find()->select('*')
             ->where(['openid' => $openid])
-            ->orderBy(['created_time' => SORT_DESC])
+            ->orderBy(['created_time' => SORT_ASC])
             ->limit(100)
             ->asArray()
             ->all();
