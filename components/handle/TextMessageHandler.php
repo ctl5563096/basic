@@ -63,7 +63,6 @@ class TextMessageHandler implements EventHandlerInterface
                 if (!$redis->get($this->message['FromUserName'])) {
                     $redis->set($key, 'yes');
                     $redis->expire($key, 7200);
-
                     return '您的专属客服马上为你处理您的问题哦!';
                 }
                 break;
