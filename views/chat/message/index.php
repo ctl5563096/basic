@@ -39,6 +39,7 @@
         var current_user;
         var current_name;
         var webSocket_status = false;
+        var customId = <?php echo $customId; ?>
 
         // 先执行对应数据初始化
         // 1.读取有未读消息的用户
@@ -70,7 +71,7 @@
             $.ajax({
                 url: "<?php echo yii\helpers\Url::to(['chat/message/message']); ?>",
                 type: 'post',
-                data: {customId: 14},
+                data: {customId: customId},
                 dataType: 'json',
                 async: false,
                 success: function (result) {
@@ -140,7 +141,7 @@
             $.ajax({
                 url: "<?php echo yii\helpers\Url::to(['chat/message/get-message']); ?>",
                 type: 'post',
-                data: {customId: 14, openid: openid},
+                data: {customId: customId, openid: openid},
                 dataType: 'json',
                 async: false,
                 success: function (result) {
@@ -167,7 +168,8 @@
                                     html += `</p>`
                                 } else {
                                     html += `<p style="margin-bottom: 5px;">`
-                                    html += `客服14`
+                                    html += `客服`
+                                    html += customId
                                     html += `&nbsp&nbsp&nbsp`
                                     html += item.created_time
                                     html += `</p>`
@@ -215,7 +217,8 @@
                                 let dom = $('#main_content');
                                 let time = "<?php echo date('Y-m-d H:i:s'); ?>"
                                 html += `<p style="margin-bottom: 5px;">`
-                                html += `客服14`
+                                html += `客服`
+                                html += customId
                                 html += `&nbsp&nbsp&nbsp`
                                 html += time
                                 html += `</p>`
@@ -285,5 +288,7 @@
                 }
             }
         });
+
+        // 改变是否已读状态
     });
 </script>

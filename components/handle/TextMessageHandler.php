@@ -28,10 +28,10 @@ class TextMessageHandler implements EventHandlerInterface
     public function handle($payload = null)
     {
         $this->message = $payload;
+        $customId = ShopUserDao::findByOpenId($this->message['FromUserName'])['custom_id'];
         // 处理事件
         switch ($this->message['MsgType']) {
             case 'text':
-                $customId = ShopUserDao::findByOpenId($this->message['FromUserName'])['custom_id'];
                 $res      = rpcClient::rpcClient(
                     'tcp://' . Yii::$app->params['rpc']['host'] . ':' . Yii::$app->params['rpc']['port'],
                     'App\Rpc\Lib\CustomInterface',
@@ -67,7 +67,30 @@ class TextMessageHandler implements EventHandlerInterface
 //                }
                 break;
             case 'image':
-                return '收到了您反馈的图片';
+                $res      = rpcClient::rpcClient(
+                    'tcp://' . Yii::$app->params['rpc']['host'] . ':' . Yii::$app->params['rpc']['port'],
+                    'App\Rpc\Lib\CustomInterface',
+                    'send',
+                    [
+                        $customId,
+                        'image',
+                        $this->message['PicUrl'],
+                        $this->message['FromUserName'],
+                    ]
+                );
+                // 聊天记录暂时存到mysql 以保证聊天记录的对比
+                $messageModel              = new ChatMessage();
+                $messageModel->content     = $this->message['PicUrl'];
+                $messageModel->openid      = $this->message['FromUserName'];
+                $messageModel->is_read     = 1;
+                $messageModel->custom_id   = $customId;
+                $messageModel->type        = 'image';
+                $messageModel->is_customer = 1;
+                $messageModel->save();
+                Yii::info(json_encode($res));
+                if ($res['result'] === false) {
+                    return '小客不在线哦,上线之后马上回复客官您';
+                }
                 break;
             default:
                 return '很高兴收到您的消息';
