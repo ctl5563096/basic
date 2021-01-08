@@ -22,6 +22,7 @@ class ChatMessageDao extends ChatMessage
      * DateTime: 2020/11/10 19:42
      * E-MAIL: <chentulinys@163.com>
      * @param array $data
+     * @return bool
      */
     public function createRecord(array $data): bool
     {
@@ -103,11 +104,24 @@ class ChatMessageDao extends ChatMessage
             ->one();
 
         // 组装数据
-        $data = [
+        return [
             'message'   => $result,
             'userName'  => $userInfo['nickname'],
             'headerUrl' => $userInfo['head_img_url'],
         ];
-        return $data;
+    }
+
+    /**
+     * Notes: 改变信息的已读状态
+     *
+     * Author: chentulin
+     * DateTime: 2021/1/7 17:33
+     * E-MAIL: <chentulinys@163.com>
+     * @param string $openId
+     * @return bool
+     */
+    public function changeStatus(string $openId): bool
+    {
+        return true;
     }
 }

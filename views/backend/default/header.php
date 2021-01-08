@@ -11,6 +11,7 @@ use yii\helpers\Html;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="referrer" content="never">
     <title>YYCTL博客后台</title>
 <!--    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">-->
 </head>
@@ -41,7 +42,7 @@ use yii\helpers\Html;
                     <?php echo Yii::$app->session->get('user') ?>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd><a href="">基本资料</a></dd>a
+                    <dd><a href="">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                 </dl>
             </li>
