@@ -46,8 +46,8 @@ use yii\helpers\Html;
             </div>
     </div>
     <div class="layui-footer" style="background-color: burlywood;text-align: center">
-        <p class="text-muted credit" style="margin-top: 10px">
-            粤ICP备19092236号-1 如有侵权请联系作者
+        <p class="text-muted credit" style="text-align: center;margin-top: 10px">
+            <a href="http://beian.miit.gov.cn/">备案号:粤ICP备19092236号-1 如有侵权请联系作者</a>
         </p>
         <p class="text-muted credit" style="margin-top: 10px">
             网站地址:www.ctllys.top

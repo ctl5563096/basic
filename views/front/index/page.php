@@ -94,7 +94,7 @@
     <nav class="navbar navbar-default navbar-fixed-bottom border border-0" style="background-color: #ffffff">
         <div class="navbar-inner navbar-content-center">
             <p class="text-muted credit" style="text-align: center;margin-top: 10px">
-                粤ICP备19092236号-1        如有侵权请联系作者
+                <a href="http://beian.miit.gov.cn/">备案号:粤ICP备19092236号-1 如有侵权请联系作者</a>
             </p>
             <p class="text-muted credit" style="text-align: center">
                 网站地址:www.ctllys.top
