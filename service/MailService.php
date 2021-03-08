@@ -25,6 +25,7 @@ class MailService
     {
         $mail = Yii::$app->mailer->compose();
         $mail->setTo('chentulinys@163.com');              //要发送给那个人的邮箱
+	$mail->setReplyTo('527716454@qq.com');
         $mail->setSubject('有人在博客给你留言了');                //邮件主题
         $mail->setTextBody($content);                           //发布纯文字文本
         return $mail->send();

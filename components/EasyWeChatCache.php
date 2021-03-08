@@ -25,7 +25,7 @@ class EasyWeChatCache implements CacheInterface
         $redis->connect($host, $port);
         $redis->auth($password);
         $redis->select(0);
-        $redis->setOption(Redis::OPT_SERIALIZER, Redis::SERIALIZER_PHP);
+        //$redis->setOption(Redis::OPT_SERIALIZER, Redis::SERIALIZER_PHP);
 
         $this->redis = $redis;
     }
