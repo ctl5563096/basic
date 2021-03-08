@@ -132,4 +132,30 @@ class MessageController extends BaseChatController
         }
         return $response;
     }
+
+    /**
+     * Notes: 改变信息的已读状态
+     *
+     * Author: chentulin
+     * DateTime: 2021/1/7 17:31
+     * E-MAIL: <chentulinys@163.com>
+     */
+    public function actionChangeStatus()
+    {
+        $request          = Yii::$app->request;
+        $response         = Yii::$app->response;
+        $response->format = Response::FORMAT_JSON;
+        // 获取客服ID
+        $openid = $request->post('openid');
+        if (!$openid) {
+            $response->data = ['code' => 400, 'msg' => '缺少参数'];
+        }else{
+            if ($this->messageDao->changeStatus($openid)){
+                $response->data = ['code' => 200,'data' => [] ,'msg' => '修改成功'];
+            }else{
+                $response->data = ['code' => 400,'data' => [] ,'msg' => '修改失败'];
+            }
+        }
+        return $response;
+    }
 }
